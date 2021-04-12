@@ -227,6 +227,9 @@ export default {
               return null;
             }
           });
+          if(typeof this.tabs[this.tab] === 'undefined') {
+            this.tab = 0;
+          }
           var key = this.tabs[this.tab].id;
           var storageData = window.localStorage.getItem('cb-build-' + key);
           if(storageData) {

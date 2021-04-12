@@ -586,5 +586,290 @@ export default [
     "effect": {
       "hp": 8
     }
+  },
+  
+  {
+    "cat": ["main"],
+    "name": "強力",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級強力",
+    "cost": 25,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級強力α",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級強力β",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級強力γ",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級強力",
+    "cost": 40,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級強力α",
+    "cost": 30,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級強力β",
+    "cost": 30,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級強力γ",
+    "cost": 30,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級強力",
+    "cost": 40,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級強力α",
+    "cost": 30,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級強力β",
+    "cost": 30,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級強力γ",
+    "cost": 30,
+    "effect": {}
+  },
+  
+  {
+    "cat": ["main"],
+    "name": "射程",
+    "cost": 5,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級射程",
+    "cost": 15,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級射程α",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級射程β",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級射程",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級射程α",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級射程β",
+    "cost": 20,
+    "effect": {}
+  },
+  
+  {
+    "cat": ["main"],
+    "name": "疾速",
+    "cost": 5,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級疾速",
+    "cost": 15,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級疾速α",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級疾速β",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級疾速",
+    "cost": 30,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級疾速α",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級疾速β",
+    "cost": 20,
+    "effect": {}
+  },
+  
+  {
+    "cat": ["main"],
+    "name": "補給",
+    "cost": 5,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級補給",
+    "cost": 15,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級補給α",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級補給β",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級補給",
+    "cost": 30,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級補給α",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "頂級補給β",
+    "cost": 20,
+    "effect": {}
+  },
+  
+  {
+    "cat": ["main"],
+    "name": "空戰",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級空戰",
+    "cost": 45,
+    "effect": {}
+  },
+  
+  {
+    "cat": ["main"],
+    "name": "射手",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["main"],
+    "name": "高級射手",
+    "cost": 45,
+    "effect": {}
+  },
+  
+  {
+    "cat": ["main"],
+    "name": "麻痺",
+    "cost": 25,
+    "effect": {}
+  },
+  
+  {
+    "cat": ["sub"],
+    "name": "劍鬥士",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["sub"],
+    "name": "高級劍鬥士",
+    "cost": 45,
+    "effect": {}
+  },
+  
+  {
+    "cat": ["sub"],
+    "name": "格鬥家",
+    "cost": 10,
+    "effect": {}
+  },
+  {
+    "cat": ["sub"],
+    "name": "高級格鬥家",
+    "cost": 25,
+    "effect": {}
+  },
+  {
+    "cat": ["sub"],
+    "name": "高級格鬥家α",
+    "cost": 20,
+    "effect": {}
+  },
+  {
+    "cat": ["sub"],
+    "name": "頂級格鬥家",
+    "cost": 40,
+    "effect": {}
+  },
+  {
+    "cat": ["sub"],
+    "name": "頂級格鬥家α",
+    "cost": 30,
+    "effect": {}
   }
 ];
