@@ -86,13 +86,30 @@
             </b-button>
             <b-row style="flex: 1;">
               <b-form-group
-                class="col-8"
+                class="col-3"
+                label="強化類別"
+                >
+                <b-select
+                  size="sm"
+                  v-model="mod[i].cat"
+                  :options="catOptions"
+                  />
+              </b-form-group>
+              <b-form-group
+                class="col-5"
                 label="強化項目"
                 >
                 <b-select
                   size="sm"
                   v-model="mod[i].key"
-                  :options="computedOptions"
+                  :options="options(mod[i].cat)"
+                  v-if="mod[i].cat"
+                  />
+                <b-form-input
+                  plaintext
+                  size="sm"
+                  value="<= 先選擇類別"
+                  v-else
                   />
               </b-form-group>
               <b-form-group
@@ -196,6 +213,21 @@ export default {
       })
       return data;
     },
+    catOptions() {
+      var arr = [];
+      options.forEach(op => {
+        op.cat.forEach(c => {
+          var index = arr.findIndex(k => k.value === c);
+          if(index === -1) {
+            arr.push({
+              text: this.cat[c],
+              value: c
+            })
+          }
+        });
+      });
+      return arr;
+    },
   },
   methods: {
     initData() {
@@ -273,8 +305,29 @@ export default {
       } else {
         return null;
       }
-    },options() {
-      var opts = [];
+    },
+    options(cat) {
+      if(cat === '' || cat === null) {
+        return [
+          {
+            text: "先選擇類別",
+            value: ''
+          }
+        ]
+      } else {
+        return options.filter(op => op.cat.includes(cat)).map(op => {
+          var arr = ['cost ' + op.cost];
+          Object.keys(op.effect).forEach(key => {
+            var ef = op.effect[key] < 0 ? op.effect[key] : '+' + op.effect[key];
+            arr.push(key + ef);
+          });
+          return {
+            text: op.name + ' (' + arr.join(' ,') + ')',
+            value: op.name
+          }
+        });
+      }
+      /*var opts = [];
       
       options.forEach(op => {
         op.cat.forEach(c => {
@@ -296,9 +349,10 @@ export default {
             text: op.name + ' (' + arr.join(' ,') + ')',
             value: op.name
           });
+        })  
         })
       })
-      return opts;
+      return opts;*/
     },
     onErrorStorage() {
       this.$bvToast.toast("你的瀏覽器不支持LocalStorage，無法儲存配置。", {
