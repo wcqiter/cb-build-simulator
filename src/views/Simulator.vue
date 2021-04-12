@@ -37,17 +37,29 @@
           <h5 class="mb-2">數值</h5>
           <small>1. 輸入機體數值</small>
           <table>
-            <tr v-for="(key, i) in Object.keys(defaultStat)" :key="i">
+            <tr v-for="(key, i) in Object.keys(defaultStat).filter(i => i !== 'cost')" :key="i">
               <td>{{cat[key]}}</td>
-              <td>
+              <td v-if="key === 'capa'">
+                <b-input-group>
+                <b-form-input
+                  type="number"
+                  v-model.number="defaultStat['cost']"
+                  />
+                <b-input-group-text>/</b-input-group-text>
+                <b-form-input
+                  type="number"
+                  v-model.number="defaultStat['capa']"
+                  />
+                </b-input-group>
+              </td>
+              <td v-else>
                 <b-form-input
                   type="number"
                   v-model.number="defaultStat[key]"
-                  size="sm"
                   />
               </td>
               <td>→</td>
-              <td class="td-result">{{finalData[key]}}</td>
+              <td class="td-result">{{finalData[key === 'capa' ? 'finalCapa' : key]}}</td>
             </tr>
           </table>
           <div class="mt-2" style="text-align: center" v-if="storageUsed">
@@ -99,10 +111,10 @@
                 class="col-5"
                 label="強化項目"
                 >
-                <b-select
-                  size="sm"
+                <b-form-select
                   v-model="mod[i].key"
-                  :options="options(mod[i].cat)"
+                  size="sm"
+                  :options="options[mod[i].cat]"
                   v-if="mod[i].cat"
                   />
                 <b-form-input
@@ -135,6 +147,7 @@
 import options from '@/data/options.js'
 import cat from '@/data/cat.js'
 import defaultModData from '@/data/mod.json'
+import defaultStat from '@/data/stat.json'
 
 export default {
   name: 'Simulator',
@@ -168,7 +181,7 @@ export default {
         // Save oldValue
         if(this.initialized) {
           window.localStorage.setItem('cb-build-' + this.tabs[oldValue].id, JSON.stringify({
-            stat: this.defaultStat,
+            stat: Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(this.defaultStat)),
             mod: this.mod,
             name: this.tabs[oldValue].name
           }))
@@ -181,7 +194,7 @@ export default {
           var temp = JSON.parse(storageData);
           var stat = temp.stat;
           var mod = temp.mod;
-          this.defaultStat = this.deepCopy(stat);
+          this.defaultStat = Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(stat));
           this.mod = this.deepCopy(mod);
           console.log("Loaded build " + this.tabs[newValue].name);
         }
@@ -200,7 +213,7 @@ export default {
     },
     
     finalData() {
-      var data = this.deepCopy(this.defaultStat);
+      var data = Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(this.defaultStat));
       this.mod.forEach(item => {
         var opt = this.findOptionByName(item.key);
         if(opt) {
@@ -211,6 +224,7 @@ export default {
           });
         }
       })
+      data['finalCapa'] = data['capa'] - data['cost'];
       return data;
     },
     catOptions() {
@@ -227,6 +241,26 @@ export default {
         });
       });
       return arr;
+    },
+    options() {
+      var obj = {};
+      this.catOptions.forEach(cat => {
+        obj[cat.value] = [];
+      })
+      options.forEach(op => {
+        var arr = ['cost ' + op.cost];
+        Object.keys(op.effect).forEach(key => {
+          var ef = op.effect[key] < 0 ? op.effect[key] : '+' + op.effect[key];
+          arr.push(key + ef);
+        });
+        op.cat.forEach(cat => {
+          obj[cat].push({
+            text: op.name + ' (' + arr.join(' ,') + ')',
+            value: op.name
+          });
+        })
+      });
+      return obj;
     },
   },
   methods: {
@@ -268,7 +302,7 @@ export default {
             var temp = JSON.parse(storageData);
             var stat = temp.stat;
             var mod = temp.mod;
-            this.defaultStat = this.deepCopy(stat);
+            this.defaultStat = Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(stat));
             this.mod = this.deepCopy(mod);
             console.log("Loaded build " + this.tabs[this.tab].name);
           }
@@ -306,54 +340,6 @@ export default {
         return null;
       }
     },
-    options(cat) {
-      if(cat === '' || cat === null) {
-        return [
-          {
-            text: "先選擇類別",
-            value: ''
-          }
-        ]
-      } else {
-        return options.filter(op => op.cat.includes(cat)).map(op => {
-          var arr = ['cost ' + op.cost];
-          Object.keys(op.effect).forEach(key => {
-            var ef = op.effect[key] < 0 ? op.effect[key] : '+' + op.effect[key];
-            arr.push(key + ef);
-          });
-          return {
-            text: op.name + ' (' + arr.join(' ,') + ')',
-            value: op.name
-          }
-        });
-      }
-      /*var opts = [];
-      
-      options.forEach(op => {
-        op.cat.forEach(c => {
-          var index = opts.findIndex(k => k.label === this.cat[c]);
-          if(index === -1) {
-            opts.push({
-              label: this.cat[c],
-              options: []
-            })
-          }
-          
-          var j = opts.findIndex(k => k.label === this.cat[c]);
-          var arr = ['cost ' + op.cost];
-          Object.keys(op.effect).forEach(key => {
-            var ef = op.effect[key] < 0 ? op.effect[key] : '+' + op.effect[key];
-            arr.push(key + ef);
-          });
-          opts[j].options.push({
-            text: op.name + ' (' + arr.join(' ,') + ')',
-            value: op.name
-          });
-        })  
-        })
-      })
-      return opts;*/
-    },
     onErrorStorage() {
       this.$bvToast.toast("你的瀏覽器不支持LocalStorage，無法儲存配置。", {
         variant: 'danger',
@@ -373,7 +359,7 @@ export default {
     onSave() {
       if(this.storageUsed) {
         window.localStorage.setItem('cb-build-' + this.tabs[this.tab].id, JSON.stringify({
-          stat: this.defaultStat,
+          stat: Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(this.defaultStat)),
           mod: this.mod,
           name: this.tabs[this.tab].name
         }))
@@ -411,7 +397,7 @@ export default {
         var temp = JSON.parse(storageData);
         var stat = temp.stat;
         var mod = temp.mod;
-        this.defaultStat = this.deepCopy(stat);
+        this.defaultStat = Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(stat));
         this.mod = this.deepCopy(mod);
         console.log("Loaded build " + this.tabs[newValue].name);
       }
@@ -420,7 +406,6 @@ export default {
   mounted() {
     this.initData();
     this.$nextTick(() => {
-      this.computedOptions = this.deepCopy(this.options());
       this.ready = true;
     })
   },

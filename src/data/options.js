@@ -698,7 +698,7 @@ export default [
   {
     "cat": ["main"],
     "name": "頂級射程",
-    "cost": 10,
+    "cost": 30,
     "effect": {}
   },
   {
