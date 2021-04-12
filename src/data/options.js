@@ -80,39 +80,43 @@ export default [
     }
   },
   {
-    "cat": ["tgh", "hp"],
+    "cat": ["str", "hp"],
     "name": "高級野獸",
-    "cost": 40,
+    "cost": 35,
     "effect": {
-      "hp": 25,
-      "str": 2
+      "hp": 20,
+      "str": 2,
+      "tec": -1
     }
   },
   {
     "cat": ["tec", "hp"],
     "name": "高級遊俠",
-    "cost": 40,
+    "cost": 35,
     "effect": {
-      "hp": 25,
-      "tec": 2
+      "hp": 20,
+      "tec": 2,
+      "str": -1
     }
   },
   {
     "cat": ["wlk", "hp"],
     "name": "高級坦克",
-    "cost": 40,
+    "cost": 35,
     "effect": {
-      "hp": 25,
-      "wlk": 2
+      "hp": 20,
+      "wlk": 2,
+      "fly": -1
     }
   },
   {
     "cat": ["fly", "hp"],
     "name": "高級飛鷹",
-    "cost": 40,
+    "cost": 35,
     "effect": {
-      "hp": 25,
-      "fly": 2
+      "hp": 20,
+      "fly": 2,
+      "wlk": -1
     }
   },
   
