@@ -50,16 +50,16 @@
               <td class="td-result">{{finalData[key]}}</td>
             </tr>
           </table>
-          <div class="mt-2" style="text-align: center">
+          <div class="mt-2" style="text-align: center" v-if="storageUsed">
             <b-button
               @click="onSave"
               variant="primary"
               >
               <i class="fa fa-save" /> 儲存
             </b-button>
-              <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(tab)">
-                <i class="fa fa-trash" /> 刪除配置
-              </b-button>
+            <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(tab)" v-if="tabs.length > 0">
+              <i class="fa fa-trash" /> 刪除配置
+            </b-button>
           </div>
         </b-card>
       </div>
