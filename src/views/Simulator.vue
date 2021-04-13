@@ -89,13 +89,14 @@
             </b-button>
           </div>
           <div v-for="(item, i) in mod" :key="i" style="display: flex">
-            <b-button
-              @click="onDeleteMod(i)"
-              variant="danger"
-              class="mr-2"
-              >
-              <i class="fa fa-trash" />
-            </b-button>
+            <div class="mr-2" style="padding: 0.25rem">
+              <b-button
+                @click="onDeleteMod(i)"
+                variant="danger"
+                >
+                <i class="fa fa-trash" />
+              </b-button>
+            </div>
             <b-row style="flex: 1;">
               <b-form-group
                 class="col-3"

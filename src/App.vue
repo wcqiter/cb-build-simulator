@@ -10,7 +10,7 @@
     </div>
     <div class="ml-2 mr-2">
       <div style="float: right">
-        <small>Power by <a target="_blank" href="https://github.com/wcqiter">天虹@BRD</a></small>
+        <small>Powered by <a target="_blank" href="https://github.com/wcqiter">天虹@BRD</a></small>
       </div>
       <div>
         <small><a href="javascript:void(0)" @click="modalShow = true;">{{latestVersion}}</a></small>

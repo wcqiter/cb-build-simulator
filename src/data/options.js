@@ -35,7 +35,7 @@ export default [
     }
   },
   {
-    "cat": ["tgh", "hp"],
+    "cat": ["str", "hp"],
     "name": "野獸",
     "cost": 15,
     "effect": {
