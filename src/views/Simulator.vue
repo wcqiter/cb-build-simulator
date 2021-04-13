@@ -173,21 +173,11 @@ export default {
       computedOptions: [],
       ready: false,
       storageUsed: false,
-      initialized: false,
     }
   },
   watch: {
-    tab(newValue, oldValue) {
+    tab(newValue) {
       if(this.storageUsed) {
-        // Save oldValue
-        if(this.initialized) {
-          window.localStorage.setItem('cb-build-' + this.tabs[oldValue].id, JSON.stringify({
-            stat: Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(this.defaultStat)),
-            mod: this.mod,
-            name: this.tabs[oldValue].name
-          }))
-          console.log("Loaded build " + this.tabs[oldValue].name);
-        }
         // Load newValue
         var key = this.tabs[newValue].id;
         var storageData = window.localStorage.getItem('cb-build-' + key);
@@ -201,7 +191,6 @@ export default {
         }
         
         window.localStorage.setItem('cb-build-tab-index', newValue);
-        this.initialized = true;
       } 
     },
   },
