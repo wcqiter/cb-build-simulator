@@ -34,9 +34,54 @@
                 />
             </b-form-group>
           </div>
+          <hr />
+          <h5 class="mb-2">基本資料</h5>
+          <small>1. 輸入機體基本資料</small>
+          <b-form-group>
+            <b-form-radio-group
+              size="sm"
+              v-model="defaultStat.type"
+              :options="typeOptions"
+              />
+          </b-form-group>
+          <b-form-group
+            label="戰力卡類別"
+            label-cols-md="4"
+            >
+            <b-form-select
+              size="sm"
+              v-model="defaultStat.capaType"
+              :options="capaTypeOptions"
+              />
+          </b-form-group>
+          <b-form-group>
+            <b-form-checkbox
+              size="sm"
+              v-model="defaultStat.weaponUsed"
+              :checked-value="true"
+              :unchecked-value="false"
+              >
+              有核心強化
+            </b-form-checkbox>
+          </b-form-group>
+          <b-form-group
+            label="核心卡類別"
+            label-cols-md="4"
+            v-if="defaultStat.weaponUsed"
+            >
+            <b-form-select
+              size="sm"
+              v-model="defaultStat.weaponType"
+              :options="weaponTypeOptions"
+              />
+          </b-form-group>
+          <hr />
           <h5 class="mb-2">數值</h5>
-          <small>1. 輸入機體數值</small>
+          <small>2. 輸入機體數值</small>
           <table>
+            <tr>
+            
+            </tr>
             <tr v-for="(key, i) in Object.keys(defaultStat).filter(i => i !== 'cost')" :key="i">
               <td>{{cat[key]}}</td>
               <td v-if="key === 'capa'">
@@ -78,7 +123,7 @@
       <div class="col-md-8">
         <b-card>
           <h5 class="mb-2">強化項目</h5>
-          <small>2. 添加機體強化項目</small>
+          <small>4. 添加機體強化項目</small>
           <div class="mb-2 mt-2">
             <b-button
               @click="onAddMod"
@@ -147,6 +192,8 @@
 
 import options from '@/data/options.js'
 import cat from '@/data/cat.js'
+import type from '@/data/type.js'
+import card from '@/data/cards.js'
 import defaultModData from '@/data/mod.json'
 import defaultStat from '@/data/stat.json'
 
@@ -157,16 +204,7 @@ export default {
   },
   data: function() {
     return {
-      defaultStat: {
-        hp: 0,
-        str: 0,
-        tec: 0,
-        wlk: 0,
-        fly: 0,
-        tgh: 0,
-        slot: 0,
-        capa: 0
-      },
+      defaultStat: this.deepCopy(defaultStat),
       tabs: [],
       tab: 0,
       mod: [],
@@ -200,6 +238,50 @@ export default {
     },
     flattenedOptions() {
       return options;
+    },
+    typeOptions() {
+      return Object.keys(type).map(i => {
+        return {
+          text: type[i],
+          value: i
+        }
+      })
+    },
+    capaTypeOptions() {
+      var arr = [];
+      var capaCard = this.findCardByType('capa');
+      if(capaCard) {
+        Object.keys(capaCard.effect).forEach(capaType => {
+          var strArr = [];
+          Object.keys(capaCard.effect[capaType]).forEach(key => {
+            var ef = capaCard.effect[capaType][key] < 0 ? capaCard.effect[capaType][key] : '+' + capaCard.effect[capaType][key];
+            strArr.push(key + ef);
+          });
+          arr.push({
+            text: strArr.join(', '),
+            value: capaType
+          })
+        })
+      }
+      return arr;
+    },
+    weaponTypeOptions() {
+      var arr = [];
+      var weaponCard = this.findCardByType('weapon');
+      if(weaponCard) {
+        Object.keys(weaponCard.effect).forEach(capaType => {
+          var strArr = [];
+          Object.keys(weaponCard.effect[capaType]).forEach(key => {
+            var ef = weaponCard.effect[capaType][key] < 0 ? weaponCard.effect[capaType][key] : '+' + weaponCard.effect[capaType][key];
+            strArr.push(key + ef);
+          });
+          arr.push({
+            text: strArr.join(', '),
+            value: capaType
+          })
+        })
+      }
+      return arr;
     },
     
     finalData() {
@@ -326,6 +408,14 @@ export default {
       var index = this.flattenedOptions.findIndex(i => i.name === name);
       if(index !== -1) {
         return this.flattenedOptions[index];
+      } else {
+        return null;
+      }
+    },
+    findCardByType(type) {
+      var index = card.findIndex(i => i.type === type);
+      if(index !== -1) {
+        return card[index];
       } else {
         return null;
       }
