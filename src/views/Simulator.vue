@@ -511,7 +511,7 @@ export default {
       data['finalCapa'] = data['capa'] + this.deltaData['capa'] - data['cost'] - this.deltaData['cost'];
       data['slot'] = data['slot'] - this.deltaData['slot'];
       this.basicStatKeys.forEach(key => {
-        data[key] += data[key] + this.deltaData[key]
+        data[key] = data[key] + this.deltaData[key]
       });
       return data;
     },
