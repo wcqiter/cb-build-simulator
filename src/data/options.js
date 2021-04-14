@@ -10,7 +10,7 @@ export default [
   },
   {
     "cat": ["hp"],
-    "name": "進化能量再生",
+    "name": "強化能量再生",
     "cost": 20,
     "effect": {
       "hp": 25
@@ -18,7 +18,7 @@ export default [
   },
   {
     "cat": ["hp"],
-    "name": "強化能量再生",
+    "name": "進化能量再生",
     "cost": 35,
     "effect": {
       "hp": 40

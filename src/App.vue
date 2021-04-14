@@ -4,17 +4,24 @@
       <b-navbar-brand href="#">CBU Simulator</b-navbar-brand>
     </b-navbar>
     <div style="flex: 1">
-      <b-container>
-        <Simulator />
-      </b-container>
+      <div style="overflow: auto; height: (100vh - )">
+        <b-container>
+          <Simulator />
+        </b-container>
+      </div>
     </div>
     <div class="ml-2 mr-2">
-      <div style="float: right">
-        <small>Powered by <a target="_blank" href="https://github.com/wcqiter">天虹@BRD</a></small>
-      </div>
-      <div>
-        <small><a href="javascript:void(0)" @click="modalShow = true;">{{latestVersion}}</a></small>
-      </div>
+      <b-row no-gutters>
+        <b-col>
+          <small><a href="javascript:void(0)" @click="modalShow = true;">{{latestVersion}}</a></small>
+        </b-col>
+        <b-col style="text-align: right">
+          <small class="mr-2">Powered by 天虹@BRD</small>
+          <a target="_blank" href="https://github.com/wcqiter/cb-build-simulator/issues" >
+            <i class="fab fa-github" />
+          </a>
+        </b-col>
+      </b-row>
     </div>
     <b-modal v-model="modalShow" hide-footer title="更新歷程">
       <div v-for="(row, i) in version" :key="i">
