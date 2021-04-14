@@ -308,7 +308,7 @@ export default [
         cost: 20
       }
     },
-    effectKey: null
+    effectKey: "type"
   },
   {
     type: "other",
