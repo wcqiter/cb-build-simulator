@@ -4,8 +4,8 @@
       <b-navbar-brand href="#">CBU Simulator</b-navbar-brand>
     </b-navbar>
     <div style="flex: 1">
-      <div style="overflow: auto; height: calc(100vh - 24px - 56px)">
-        <b-container>
+      <div style="overflow: hidden; height: calc(100vh - 24px - 56px)">
+        <b-container fluid>
           <Simulator />
         </b-container>
       </div>

@@ -120,6 +120,7 @@ export default [
     },
     effectKey: "type"
   },
+  
   {
     type: "move",
     name: "緊急迴避",
@@ -555,6 +556,146 @@ export default [
     effect: {
       air: {
         cost: 25
+      }
+    },
+    effectKey: "type"
+  },
+  
+  {
+    type: "extra-move",
+    name: "緊急迴避",
+    effect: {
+      lnd: {
+        cost: 30
+      },
+      art: {
+        cost: 30
+      },
+      msc: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "短距跳躍",
+    effect: {
+      lnd: {
+        cost: 30
+      },
+      air: {
+        cost: 30
+      },
+      art: {
+        cost: 30
+      },
+      msc: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "浮游衝刺",
+    effect: {
+      air: {
+        cost: 30
+      },
+      art: {
+        cost: 30
+      },
+      msc: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "突擊墊步",
+    effect: {
+      lnd: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "滑翔噴射",
+    effect: {
+      air: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "推進墊步",
+    effect: {
+      art: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "空中衝刺",
+    effect: {
+      lng: {
+        cost: 30
+      },
+      air: {
+        cost: 30
+      },
+      art: {
+        cost: 30
+      },
+      msc: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "空中翻轉",
+    effect: {
+      air: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "空中墊步",
+    effect: {
+      lng: {
+        cost: 30
+      },
+      air: {
+        cost: 30
+      },
+      art: {
+        cost: 30
+      },
+      msc: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
+  {
+    type: "extra-move",
+    name: "幻影迴避",
+    effect: {
+      air: {
+        cost: 30
       }
     },
     effectKey: "type"

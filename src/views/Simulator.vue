@@ -7,7 +7,7 @@
           v-for="(t, i) in tabs"
           :key="'tab-' + i"
           href="#" 
-          @click="onClickTab(i)"
+          @click="onClickTab(t.id)"
           :active="tab === t.id"
           >
           {{t.name}}
@@ -21,8 +21,8 @@
       </template>
     </b-tabs>
     <b-row>
-      <div class="col-md-6">
-        <b-card>
+      <div class="col-md-3 content-panel">
+        <b-card class="mb-2">
           <div>
             <b-form-group 
               v-if="storageUsed"
@@ -34,9 +34,20 @@
                 />
             </b-form-group>
           </div>
-          <hr />
-          <h5 class="mb-2">基本資料</h5>
-          <small>1. 輸入機體基本資料</small>
+          <div class="mt-2" style="text-align: center" v-if="storageUsed">
+            <b-button
+              @click="onSave"
+              variant="primary"
+              >
+              <i class="fa fa-save" /> 儲存
+            </b-button>
+            <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(findTabIndexById(tab))" v-if="tabs.length > 1">
+              <i class="fa fa-trash" /> 刪除配置
+            </b-button>
+          </div>
+        </b-card>
+        <b-card class="mb-2">
+          <h5 class="mb-2">機體基本資料</h5>
           <b-form-group>
             <b-form-radio-group
               size="sm"
@@ -75,63 +86,65 @@
               :options="weaponTypeOptions"
               />
           </b-form-group>
-          <hr />
-          <h5 class="mb-2">數值</h5>
-          <small>2. 輸入機體數值</small>
-          <table border="1">
-            <tr>
-              <td class="text-center">{{cat['capa']}}</td>
-              <td class="input-td" v-if="!hideStatDetails">
-                <b-form-input
-                  class="input-field"
-                  type="number"
-                  v-model.number="defaultStat['cost']"
-                  size="sm"
-                  :min="0"
-                  />
-              </td>
-              <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['cost']}} /</td>
-              <td class="input-td" v-if="!hideStatDetails">
-                <b-form-input
-                  class="input-field"
-                  type="number"
-                  v-model.number="defaultStat['capa']"
-                  size="sm"
-                  :min="0"
-                  />
-              </td>
-              <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['capa']}} /</td>
-              <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData['finalCapa']}}</b></td>
-            </tr>
-            <tr>
-              <td class="text-center">{{cat['slot']}}</td>
-              <td class="input-td" colspan="3" v-if="!hideStatDetails">
-                <b-form-input
-                  class="input-field"
-                  type="number"
-                  v-model.number="defaultStat['slot']"
-                  size="sm"
-                  :min="0"
-                  />
-              </td>
-              <td class="text-center" v-if="!hideStatDetails">− {{deltaData['slot']}}</td>
-              <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData['slot']}}</b></td>
-            </tr>
-            <tr v-for="(key, i) in basicStatKeys" :key="i">
-              <td class="text-center">{{cat[key]}}</td>
-              <td class="input-td" colspan="3" v-if="!hideStatDetails">
-                <b-form-input
-                  class="input-field"
-                  type="number"
-                  v-model.number="defaultStat[key]"
-                  size="sm"
-                  :min="0"
-                  />
-              </td>
-              <td class="text-center" v-if="!hideStatDetails">{{deltaData[key] >= 0 ? '+' : '-'}} {{Math.abs(deltaData[key])}}</td>
-              <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData[key]}}</b></td>
-            </tr>
-          </table>
+        </b-card>
+        <b-card class="mb-2">
+          <h5 class="mb-2">機體數值</h5>
+          <div style="overflow: auto">
+            <table border="1">
+              <tr>
+                <td class="text-center">{{cat['capa']}}</td>
+                <td class="input-td" v-if="!hideStatDetails">
+                  <b-form-input
+                    class="input-field"
+                    type="number"
+                    v-model.number="defaultStat['cost']"
+                    size="sm"
+                    :min="0"
+                    />
+                </td>
+                <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['cost']}} /</td>
+                <td class="input-td" v-if="!hideStatDetails">
+                  <b-form-input
+                    class="input-field"
+                    type="number"
+                    v-model.number="defaultStat['capa']"
+                    size="sm"
+                    :min="0"
+                    />
+                </td>
+                <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['capa']}} /</td>
+                <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData['finalCapa']}}</b></td>
+              </tr>
+              <tr>
+                <td class="text-center">{{cat['slot']}}</td>
+                <td class="input-td" colspan="3" v-if="!hideStatDetails">
+                  <b-form-input
+                    class="input-field"
+                    type="number"
+                    v-model.number="defaultStat['slot']"
+                    size="sm"
+                    :min="0"
+                    />
+                </td>
+                <td class="text-center" v-if="!hideStatDetails">− {{deltaData['slot']}}</td>
+                <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData['slot']}}</b></td>
+              </tr>
+              <tr v-for="(key, i) in basicStatKeys" :key="i">
+                <td class="text-center">{{cat[key]}}</td>
+                <td class="input-td" colspan="3" v-if="!hideStatDetails">
+                  <b-form-input
+                    class="input-field"
+                    type="number"
+                    v-model.number="defaultStat[key]"
+                    size="sm"
+                    :min="0"
+                    />
+                </td>
+                <td class="text-center" v-if="!hideStatDetails">{{deltaData[key] >= 0 ? '+' : '-'}} {{Math.abs(deltaData[key])}}</td>
+                <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData[key]}}</b></td>
+              </tr>
+            </table>
+          </div>
           <b-button
             size="sm"
             class="mt-1"
@@ -142,113 +155,9 @@
             <i class="fa" :class="hideStatDetails ? 'fa-plus' : 'fa-minus'" />
             {{hideStatDetails ? '顯示詳細' : '隱藏詳細'}}
           </b-button>
-          <div class="mt-2" style="text-align: center" v-if="storageUsed">
-            <b-button
-              @click="onSave"
-              variant="primary"
-              >
-              <i class="fa fa-save" /> 儲存
-            </b-button>
-            <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(tab)" v-if="tabs.length > 1">
-              <i class="fa fa-trash" /> 刪除配置
-            </b-button>
-          </div>
         </b-card>
       </div>
-      <div class="col-md-6">
-        <b-card class="mb-2">
-          <div class="pull-right">
-            <table>
-              <tr>
-                <td class="text-center td-small-padding">
-                  <small>機體等級</small>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center td-small-padding">{{level}} / 10</td>
-              </tr>
-            </table>
-          </div>
-          <h5 class="mb-2">強化卡片</h5>
-          <small>3. 添加機體強化卡片</small>
-          <div class="clearfix" />
-          <div>
-            <b-button
-              size="sm"
-              v-for="i in findCardByType('capa').num"
-              :key="'capa-' + i"
-              class="mr-1 mb-1 card-all"
-              :class="capaCards[i - 1] ? 'card-capa-active' : 'card-capa'"
-              @click="onClickCapaCards(i - 1)"
-              variant="success"
-              :disabled="isLevelMaxed && !capaCards[i - 1]"
-              >
-              {{findCardByType('capa').name}}
-            </b-button>
-            <div>
-              <small></small>
-            </div>
-          </div>
-          <div v-if="defaultStat.weaponUsed">
-            <b-button
-              size="sm"
-              v-for="i in findCardByType('weapon').num"
-              :key="'weapon-' + i"
-              class="mr-1 mb-1 card-all"
-              :class="weaponCards[i - 1] ? 'card-weapon-active' : 'card-weapon'"
-              @click="onClickWeaponCards(i - 1)"
-              variant="danger"
-              :disabled="isLevelMaxed && !weaponCards[i - 1]"
-              >
-              {{findCardByType('weapon').name}}
-            </b-button>
-          </div>
-          <div>
-            <b-button
-              size="sm"
-              v-for="(card, i) in defenseCardOptions"
-              :key="'card-' + i"
-              class="mr-1 mb-1 card-all"
-              :class="cards.includes(card.name) ? 'card-defense-active' : 'card-defense'"
-              @click="onClickCards(card.name)"
-              variant="primary"
-              :disabled="isLevelMaxed && !cards.includes(card.name)"
-              >
-              <div>{{card.name}}</div>
-              <small>COST {{card.effect[defaultStat['type']].cost}}</small>
-            </b-button>
-          </div>
-          <div>
-            <b-button
-              size="sm"
-              v-for="(card, i) in moveCardOptions"
-              :key="'card-' + i"
-              class="mr-1 mb-1 card-all"
-              :class="cards.includes(card.name) ? 'card-move-active' : 'card-move'"
-              @click="onClickCards(card.name)"
-              variant="warning"
-              :disabled="isLevelMaxed && !cards.includes(card.name)"
-              >
-              <div>{{card.name}}</div>
-              <small>COST {{card.effect[defaultStat['type']].cost}}</small>
-            </b-button>
-          </div>
-          <div>
-            <b-button
-              size="sm"
-              v-for="(card, i) in otherCardOptions"
-              :key="'card-' + i"
-              class="mr-1 mb-1 card-all"
-              :class="cards.includes(card.name) ? 'card-other-active' : 'card-other'"
-              @click="onClickCards(card.name)"
-              variant="secondary"
-              :disabled="isLevelMaxed && !cards.includes(card.name)"
-              >
-              <div>{{card.name}}</div>
-              <small>COST {{card.effect[defaultStat['type']].cost}}</small>
-            </b-button>
-          </div>
-        </b-card>
+      <div class="col-md-6 content-panel">
         <b-card>
           <h5 class="mb-2">強化項目</h5>
           <small>4. 添加機體強化項目</small>
@@ -312,6 +221,140 @@
           </div>
         </b-card>
       </div>
+      <div class="col-md-3 content-panel">
+        <b-card class="mb-2">
+          <div class="pull-right">
+            <table>
+              <tr>
+                <td class="text-center td-small-padding">
+                  <small>機體等級</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center td-small-padding">{{level}} / 10</td>
+              </tr>
+            </table>
+          </div>
+          <h5 class="mb-2">機體強化卡片</h5>
+          <div class="clearfix" />
+          <div>
+            <b-button
+              size="sm"
+              v-for="i in findCardByType('capa').num"
+              :key="'capa-' + i"
+              class="mr-1 mb-1 card-all"
+              :class="capaCards[i - 1] ? 'card-capa-active' : 'card-capa'"
+              @click="onClickCapaCards(i - 1)"
+              variant="success"
+              :disabled="isLevelMaxed && !capaCards[i - 1]"
+              block
+              >
+              <b-row no-gutters>
+                <small class="col-md-4 text-left">CAPA {{findCardByType('capa').effect[defaultStat['capaType']].capa}}, HP {{findCardByType('capa').effect[defaultStat['capaType']].hp}}</small>
+                <div class="col-md-4 text-center">{{findCardByType('capa').name}}</div>
+                <small class="col-md-4 text-right">COST {{findCardByType('capa').effect[defaultStat['capaType']].cost}}</small>
+              </b-row>
+            </b-button>
+            <div>
+              <small></small>
+            </div>
+          </div>
+          <div v-if="defaultStat.weaponUsed">
+            <b-button
+              size="sm"
+              v-for="i in findCardByType('weapon').num"
+              :key="'weapon-' + i"
+              class="mr-1 mb-1 card-all"
+              :class="weaponCards[i - 1] ? 'card-weapon-active' : 'card-weapon'"
+              @click="onClickWeaponCards(i - 1)"
+              variant="danger"
+              :disabled="isLevelMaxed && !weaponCards[i - 1]"
+              block
+              >
+              <b-row no-gutters>
+                <small class="col-md-4 text-left">CAPA {{findCardByType('weapon').effect[defaultStat['weaponType']].capa}}, HP {{findCardByType('weapon').effect[defaultStat['weaponType']].hp}}</small>
+                <div class="col-md-4 text-center">{{findCardByType('weapon').name}}</div>
+                <small class="col-md-4 text-right">COST {{findCardByType('weapon').effect[defaultStat['weaponType']].cost}}</small>
+              </b-row>
+            </b-button>
+          </div>
+          <div>
+            <b-button
+              size="sm"
+              v-for="(card, i) in defenseCardOptions"
+              :key="'card-' + i"
+              class="mr-1 mb-1 card-all"
+              :class="cards.includes(card.name) ? 'card-defense-active' : 'card-defense'"
+              @click="onClickCards(card.name)"
+              variant="primary"
+              :disabled="isLevelMaxed && !cards.includes(card.name)"
+              block
+              >
+              <b-row no-gutters>
+                <small class="col-md-4 text-left"></small>
+                <div class="col-md-4 text-center">{{card.name}}</div>
+                <small class="col-md-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
+              </b-row>
+            </b-button>
+          </div>
+          <div>
+            <b-button
+              size="sm"
+              v-for="(card, i) in moveCardOptions"
+              :key="'card-' + i"
+              class="mr-1 mb-1 card-all"
+              :class="cards.includes(card.name) ? 'card-move-active' : 'card-move'"
+              @click="onClickCards(card.name)"
+              variant="warning"
+              :disabled="isLevelMaxed && !cards.includes(card.name)"
+              block
+              >
+              <b-row no-gutters>
+                <small class="col-md-4 text-left"></small>
+                <div class="col-md-4 text-center">{{card.name}}</div>
+                <small class="col-md-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
+              </b-row>
+            </b-button>
+          </div>
+          <div>
+            <b-button
+              size="sm"
+              v-for="(card, i) in otherCardOptions"
+              :key="'card-' + i"
+              class="mr-1 mb-1 card-all"
+              :class="cards.includes(card.name) ? 'card-other-active' : 'card-other'"
+              @click="onClickCards(card.name)"
+              variant="secondary"
+              :disabled="isLevelMaxed && !cards.includes(card.name)"
+              block
+              >
+              <b-row no-gutters>
+                <small class="col-md-4 text-left"></small>
+                <div class="col-md-4 text-center">{{card.name}}</div>
+                <small class="col-md-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
+              </b-row>
+            </b-button>
+          </div>
+          <div>
+            <b-button
+              size="sm"
+              v-for="(card, i) in extraMoveCardOptions"
+              :key="'card-' + i"
+              class="mr-1 mb-1 card-all"
+              :class="extraCards.includes(card.name) ? 'card-move-active' : 'card-move'"
+              @click="onClickExtraCards(card.name)"
+              variant="warning"
+              block
+              >
+              <b-row no-gutters>
+                <small class="col-md-4 text-left">外置插卡</small>
+                <div class="col-md-4 text-center">{{card.name}}</div>
+                <small class="col-md-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
+              </b-row>
+            </b-button>
+          </div>
+        </b-card>
+      </div>
     </b-row>
   </div>
 </template>
@@ -337,6 +380,7 @@ export default {
       tab: 0,
       mod: [],
       cards: [],
+      extraCards: [],
       capaCards: [false, false, false, false, false, false],
       weaponCards: [false, false],
       computedOptions: [],
@@ -350,12 +394,14 @@ export default {
     tab(newValue) {
       if(this.storageUsed) {
         // Load newValue
-        var key = this.tabs[this.findTabIndexById(newValue)].id;
-        var storageData = window.localStorage.getItem('cb-build-' + key);
+        var storageData = window.localStorage.getItem('cb-build-' + newValue);
         if(storageData) {
           var temp = JSON.parse(storageData);
           this.onLoadData(temp);
           console.log("Loaded build " + this.tabs[this.findTabIndexById(newValue)].name);
+        } else {
+          this.onClearData();
+          console.log("Cannot found build " + this.tabs[this.findTabIndexById(newValue)].name + ", initialize new build.")
         }
         
         window.localStorage.setItem('cb-build-tab-index', this.tabs[this.findTabIndexById(newValue)].id);
@@ -448,6 +494,15 @@ export default {
         }
       })
     },
+    extraMoveCardOptions() {
+      return this.cardOptions.filter(c => c.type === 'extra-move').filter(c => {
+        if(Object.prototype.hasOwnProperty.call(c.effect, this.defaultStat[c.effectKey])) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    },
     level() {
       var capaCardsCount = this.capaCards.filter(c => c === true).length;
       var weaponCardsCount = 0;
@@ -496,6 +551,16 @@ export default {
       }
       this.cards.forEach(card => {
         var opt = this.findCardByName(card);
+        if(opt) {
+          if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
+            Object.keys(opt.effect[this.defaultStat[opt.effectKey]]).forEach(key => {
+              data[key] += opt.effect[this.defaultStat[opt.effectKey]][key];
+            })
+          }
+        }
+      });
+      this.extraCards.forEach(card => {
+        var opt = this.findExtraCardByName(card);
         if(opt) {
           if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
             Object.keys(opt.effect[this.defaultStat[opt.effectKey]]).forEach(key => {
@@ -625,12 +690,23 @@ export default {
       this.mod = this.deepCopy(mod);
       if(Object.prototype.hasOwnProperty.call(temp, 'weaponCards') && Array.isArray(temp.weaponCards)) {
         this.weaponCards = this.deepCopy(temp.weaponCards);
+      } else {
+        this.weaponCards = [false, false];
       }
       if(Object.prototype.hasOwnProperty.call(temp, 'capaCards') && Array.isArray(temp.capaCards)) {
         this.capaCards = this.deepCopy(temp.capaCards);
+      } else {
+        this.capaCards = [false, false, false, false, false, false];
+      }
+      if(Object.prototype.hasOwnProperty.call(temp, 'extraCards') && Array.isArray(temp.extraCards)) {
+        this.extraCards = this.deepCopy(temp.extraCards);
+      } else {
+        this.extraCards = [];
       }
       if(Object.prototype.hasOwnProperty.call(temp, 'cards') && Array.isArray(temp.cards)) {
         this.cards = this.deepCopy(temp.cards);
+      } else {
+        this.cards = [];
       }
     },
     deepCopy(ob) {
@@ -674,7 +750,15 @@ export default {
       }
     },
     findCardByName(name) {
-      var index = card.findIndex(i => i.name === name);
+      var index = card.findIndex(i => i.name === name && i.type !== 'extra-move');
+      if(index !== -1) {
+        return card[index];
+      } else {
+        return null;
+      }
+    },
+    findExtraCardByName(name) {
+      var index = card.findIndex(i => i.name === name && i.type === 'extra-move');
       if(index !== -1) {
         return card[index];
       } else {
@@ -687,14 +771,14 @@ export default {
         solid: true
       })
     },
-    onClickTab(index) {
-      this.tab = this.tabs[index].id;
+    onClickTab(id) {
+      this.tab = id;
     },
     onAddTab() {
       var uid = this.uuid();
       var name = "New Build " + (this.tabs.length + 1);
       this.tabs.splice(this.tabs.length, 0, { name: name, id: uid });
-      this.tab = this.tabs.length - 1;
+      this.tab = uid;
       this.onClearData();
     },
     onSave() {
@@ -705,7 +789,8 @@ export default {
           name: this.tabs[this.findTabIndexById(this.tab)].name,
           capaCards: this.capaCards,
           weaponCards: this.weaponCards,
-          cards: this.cards
+          cards: this.cards,
+          extraCards: this.extraCards,
         }))
         this.$bvToast.toast("已儲存配置", {
           variant: 'primary',
@@ -718,29 +803,24 @@ export default {
       }
     },
     onClearData() {
-      this.defaultStat = {
-        hp: 0,
-        str: 0,
-        tec: 0,
-        wlk: 0,
-        fly: 0,
-        tgh: 0,
-        slot: 0,
-        capa: 0
-      };
+      this.defaultStat = this.deepCopy(defaultStat);
       this.mod = [];
+      this.cards = [];
+      this.capaCards = [false, false, false, false, false, false];
+      this.weaponCards = [false, false];
+      this.extraCards = [];
     },
     onDeleteTab(index) {
       window.localStorage.removeItem('cb-build-' + this.tabs[index].id);
       this.tabs.splice(index, 1);
-      this.tab = 0;
+      this.tab = this.tabs[0].id;
       var newValue = 0;
       var key = this.tabs[newValue].id;
       var storageData = window.localStorage.getItem('cb-build-' + key);
       if(storageData) {
         var temp = JSON.parse(storageData);
         this.onLoadData(temp);
-        console.log("Loaded build " + this.tabs[index].name);
+        console.log("Loaded build " + this.tabs[0].name);
       }
     },
     onClickCapaCards(i) {
@@ -763,6 +843,14 @@ export default {
         this.cards.splice(index, 1);
       } else {
         this.cards.splice(this.cards.length, 0, name);
+      }
+    },
+    onClickExtraCards(name) {
+      var index = this.extraCards.findIndex(c => c === name);
+      if(index != -1) {
+        this.extraCards.splice(index, 1);
+      } else {
+        this.extraCards.splice(this.extraCards.length, 0, name);
       }
     },
   },
@@ -810,10 +898,7 @@ td {
   min-width: 50px;
 }
 .input-field {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border: none;
   border-radius: 0px;
   text-align: center;
   min-width: 50px;
@@ -841,8 +926,8 @@ td {
 }
 .card-capa:hover {
   border: 1px solid #00992e;
-  background-color: #00992e;
-  color: white;
+  background-color: transparent;
+  color: #00992e;
 }
 .card-capa-active {
   border: 1px solid #00992e;
@@ -856,8 +941,8 @@ td {
 }
 .card-capa-active:hover {
   border: 1px solid #00992e;
-  background-color: transparent;
-  color: #00992e;
+  background-color: #00992e;
+  color: white;
 }
 
 .card-weapon {
@@ -872,8 +957,8 @@ td {
 }
 .card-weapon:hover {
   border: 1px solid #bd0000;
-  background-color: #bd0000;
-  color: white;
+  background-color: transparent;
+  color: #bd0000;
 }
 .card-weapon-active {
   border: 1px solid #bd0000;
@@ -887,8 +972,8 @@ td {
 }
 .card-weapon-active:hover {
   border: 1px solid #bd0000;
-  background-color: transparent;
-  color: #bd0000;
+  background-color: #bd0000;
+  color: white;
 }
 
 .card-defense {
@@ -903,8 +988,8 @@ td {
 }
 .card-defense:hover {
   border: 1px solid #00abfa;
-  background-color: #00abfa;
-  color: white;
+  background-color: transparent;
+  color: #00abfa;
 }
 .card-defense-active {
   border: 1px solid #00abfa;
@@ -918,8 +1003,8 @@ td {
 }
 .card-defense-active:hover {
   border: 1px solid #00abfa;
-  background-color: transparent;
-  color: #00abfa;
+  background-color: #00abfa;
+  color: white;
 }
 
 .card-move {
@@ -933,9 +1018,9 @@ td {
   color: #807c00;
 }
 .card-move:hover {
-  border: 1px solid #ebeb00;
-  background-color: #ebeb00;
-  color: black;
+  border: 1px solid #807c00;
+  background-color: transparent;
+  color: #807c00;
 }
 .card-move-active {
   border: 1px solid #ebeb00;
@@ -948,9 +1033,9 @@ td {
   color: black;
 }
 .card-move-active:hover {
-  border: 1px solid #807c00;
-  background-color: transparent;
-  color: #807c00;
+  border: 1px solid #ebeb00;
+  background-color: #ebeb00;
+  color: black;
 }
 
 .card-other {
@@ -965,8 +1050,8 @@ td {
 }
 .card-other:hover {
   border: 1px solid #00abfa;
-  background-color: #00abfa;
-  color: white;
+  background-color: transparent;
+  color: #00abfa;
 }
 .card-other-active {
   border: 1px solid #00abfa;
@@ -980,12 +1065,16 @@ td {
 }
 .card-other-active:hover {
   border: 1px solid #00abfa;
-  background-color: transparent;
-  color: #00abfa;
+  background-color: #00abfa;
+  color: white;
 }
 .card-all:disabled {
-  border: none;
-  color: #F0F0F0;
+  border: 1px solid #E0E0E0;
+  color: #E0E0E0;
   background-color: transparent;
+}
+.content-panel {
+  overflow: auto; 
+  max-height: calc(100vh - 24px - 56px - 20px - 40px)
 }
 </style>
