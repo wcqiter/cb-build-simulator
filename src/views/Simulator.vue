@@ -118,7 +118,8 @@
                         />
                     </td>
                     <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['capa']}} /</td>
-                    <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData['finalCapa']}}</b></td>
+                    <td class="text-center" v-if="!hideStatDetails">= <b>{{finalData['finalCapa']}}</b></td>
+                    <td class="text-center" v-else><b>{{defaultStat['cost'] + deltaData['cost']}} / {{defaultStat['capa'] + deltaData['capa']}}</b></td>
                   </tr>
                   <tr>
                     <td class="text-center">{{cat['slot']}}</td>
@@ -907,7 +908,7 @@ export default {
       this.basicStatKeys.forEach(key => {
         content += this.cat[key] + '：' + this.finalData[key] + '\n';
       })
-      content += 'CAPA：' + (this.defaultStat['cost'] + this.finalData['cost']) + '/' + (this.defaultStat['capa'] + this.finalData['capa']) + '\n';
+      content += 'CAPA：' + (this.defaultStat['cost'] + this.deltaData['cost']) + '/' + (this.defaultStat['capa'] + this.deltaData['capa']) + '\n';
       content += '\n\n';
       
       content += '機體強化項目\n=================================\n';
