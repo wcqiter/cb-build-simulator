@@ -23,7 +23,7 @@
     <div class="whole-panel">
       <b-container fluid>
         <b-row class="mt-4 mb-2">
-          <div class="col-md-3 content-panel">
+          <div class="col-md-4 content-panel">
             <b-card class="mb-2">
               <div>
                 <b-form-group 
@@ -159,7 +159,7 @@
               </b-button>
             </b-card>
           </div>
-          <div class="col-md-6 content-panel">
+          <div class="col-md-5 content-panel">
             <b-card>
               <h5 class="mb-2">機體強化項目</h5>
               <div class="mb-2 mt-2">
