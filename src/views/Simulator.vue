@@ -43,6 +43,9 @@
                   >
                   <i class="fa fa-save" /> 儲存
                 </b-button>
+                <b-button variant="success" class="ml-2" @click.stop.prevent="onExportAsTxt()">
+                  <i class="fa fa-download" /> 儲存為TXT文件
+                </b-button>
                 <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(findTabIndexById(tab))" v-if="tabs.length > 1">
                   <i class="fa fa-trash" /> 刪除配置
                 </b-button>
@@ -532,7 +535,7 @@ export default {
       var data = Object.assign({}, this.deepCopy(defaultStat));
       this.mod.forEach(item => {
         var opt = this.findOptionByName(item.key);
-        if(opt) {
+        if(opt && opt.cat.includes(item.cat)) {
           data['cost'] += opt.cost * item.num;
           data['slot'] += item.num;
           Object.keys(opt.effect).forEach(ef => {
@@ -853,6 +856,72 @@ export default {
       } else {
         this.extraCards.splice(this.extraCards.length, 0, name);
       }
+    },
+    
+    onExportAsTxt() {
+      var content = '機體名稱：' + this.tabs[this.findTabIndexById(this.tab)].name + '\n';
+      
+      content += '=================================\n機體類別：';
+      var index = this.typeOptions.findIndex(t => t.value === this.defaultStat.type);
+      if(index != -1) {
+        content += this.typeOptions[index].text;
+      }
+      content += '\n機體等級：' + this.level + '/10\n';
+      
+      content += '\n戰力卡類別：';
+      index = this.capaTypeOptions.findIndex(t => t.value === this.defaultStat.capaType);
+      if(index != -1) {
+        content += this.capaTypeOptions[index].text;
+      }
+      
+      if(this.defaultStat.weaponUsed) {
+        content += '\n核心卡類別：';
+        index = this.weaponTypeOptions.findIndex(t => t.value === this.defaultStat.weaponType);
+        if(index != -1) {
+          content += this.weaponTypeOptions[index].text;
+        }
+        content += '\n';
+      }
+      content += '\n\n';
+      
+      var capaCardsCount = this.capaCards.filter(c => c === true).length;
+      var weaponCardsCount = this.weaponCards.filter(c => c === true).length;
+      content += '機體強化卡片\n=================================\n';
+      if(capaCardsCount > 0) {
+        content += this.findCardByType('capa').name + ' × ' + capaCardsCount + '\n';
+      }
+      if(this.defaultStat.weaponUsed) {
+        if(weaponCardsCount > 0) {
+          content += this.findCardByType('weapon').name + ' × ' + weaponCardsCount + '\n';
+        }
+      }
+      this.cards.forEach(card => {
+        content += this.findCardByName(card).name + '\n';
+      });
+      this.extraCards.forEach(card => {
+        content += this.findExtraCardByName(card).name + '（外置插卡）\n';
+      });
+      content += '\n\n';
+      
+      content += '機體數值\n=================================\n';
+      this.basicStatKeys.forEach(key => {
+        content += this.cat[key] + '：' + this.finalData[key] + '\n';
+      })
+      content += 'CAPA：' + (this.defaultStat['cost'] + this.finalData['cost']) + '/' + (this.defaultStat['capa'] + this.finalData['capa']) + '\n';
+      content += '\n\n';
+      
+      content += '機體強化項目\n=================================\n';
+      this.mod.forEach(m => {
+        content += m.key + ' × ' + m.num + '\n';
+      })
+      
+      var a = document.createElement("a");
+      var blob = new Blob([content], {type: "text/plain"}),
+        url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = this.tabs[this.findTabIndexById(this.tab)].name;
+      a.click();
+      window.URL.revokeObjectURL(url);
     },
   },
   mounted() {
