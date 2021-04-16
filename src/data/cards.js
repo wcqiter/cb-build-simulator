@@ -37,6 +37,11 @@ export default [
         cost: 20,
         capa: 80,
         hp: 10
+      },
+      type8: {
+        cost: 20,
+        capa: 90,
+        hp: 22
       }
     },
     effectKey: 'capaType',
