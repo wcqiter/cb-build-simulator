@@ -36,6 +36,19 @@
                     />
                 </b-form-group>
               </div>
+              <div>
+                <b-form-group 
+                  v-if="storageUsed"
+                  label="備註"
+                  label-cols="3"
+                  >
+                  <b-form-textarea
+                    v-model="tabs[findTabIndexById(tab)].remarks"
+                    max-rows="6"
+                    rows="3"
+                    />
+                </b-form-group>
+              </div>
               <div class="mt-2" style="text-align: center" v-if="storageUsed">
                 <b-button
                   @click="onSave"
@@ -166,63 +179,74 @@
           <div class="col-md-5 content-panel">
             <b-card>
               <h5 class="mb-2">機體強化項目</h5>
-              <div class="mb-2 mt-2">
-                <b-button
-                  @click="onAddMod"
-                  variant="primary"
-                  block
-                  >
-                  <i class="fa fa-plus" /> 新強化項目
-                </b-button>
+              <b-checkbox 
+                v-model="defaultStat.partsUsed"
+                >
+                使用零件強化方案
+              </b-checkbox>
+              <div class="clearfix" />
+              <div v-if="defaultStat.partsUsed">
+                <Part v-model="parts" />
               </div>
-              <div v-for="(item, i) in mod" :key="i" style="display: flex">
-                <div class="mr-2" style="padding: 0.25rem">
+              <div v-else>
+                <div class="mb-2 mt-2">
                   <b-button
-                    @click="onDeleteMod(i)"
-                    variant="danger"
+                    @click="onAddMod"
+                    variant="primary"
+                    block
                     >
-                    <i class="fa fa-trash" />
+                    <i class="fa fa-plus" /> 新強化項目
                   </b-button>
                 </div>
-                <b-row style="flex: 1;">
-                  <b-form-group
-                    class="col-3"
-                    label="強化類別"
-                    >
-                    <b-select
-                      size="sm"
-                      v-model="mod[i].cat"
-                      :options="catOptions"
-                      />
-                  </b-form-group>
-                  <b-form-group
-                    class="col-5"
-                    label="強化項目"
-                    >
-                    <b-form-select
-                      v-model="mod[i].key"
-                      size="sm"
-                      :options="options[mod[i].cat]"
-                      v-if="mod[i].cat"
-                      />
-                    <b-form-input
-                      plaintext
-                      size="sm"
-                      value="<= 先選擇類別"
-                      v-else
-                      />
-                  </b-form-group>
-                  <b-form-group
-                    class="col-4"
-                    label="數量"
-                    >
-                    <b-form-input
-                      size="sm"
-                      type="number"
-                      v-model.number="mod[i].num"
-                      />
-                  </b-form-group>
-                </b-row>
+                <div v-for="(item, i) in mod" :key="i" style="display: flex">
+                  <div class="mr-2" style="padding: 0.25rem">
+                    <b-button
+                      @click="onDeleteMod(i)"
+                      variant="danger"
+                      >
+                      <i class="fa fa-trash" />
+                    </b-button>
+                  </div>
+                  <b-row style="flex: 1;">
+                    <b-form-group
+                      class="col-3"
+                      label="強化類別"
+                      >
+                      <b-select
+                        size="sm"
+                        v-model="mod[i].cat"
+                        :options="catOptions"
+                        />
+                    </b-form-group>
+                    <b-form-group
+                      class="col-5"
+                      label="強化項目"
+                      >
+                      <b-form-select
+                        v-model="mod[i].key"
+                        size="sm"
+                        :options="options[mod[i].cat]"
+                        v-if="mod[i].cat"
+                        />
+                      <b-form-input
+                        plaintext
+                        size="sm"
+                        value="<= 先選擇類別"
+                        v-else
+                        />
+                    </b-form-group>
+                    <b-form-group
+                      class="col-4"
+                      label="數量"
+                      >
+                      <b-form-input
+                        size="sm"
+                        type="number"
+                        v-model.number="mod[i].num"
+                        />
+                    </b-form-group>
+                  </b-row>
+                </div>
               </div>
             </b-card>
           </div>
@@ -242,119 +266,190 @@
               </div>
               <h5 class="mb-2">機體強化卡片</h5>
               <div class="clearfix" />
+              <div class="pull-right">
+                <small>不計算數值</small>
+              </div>
+              <div class="clearfix" />
               <div class="mb-2">
-                <b-button
-                  size="sm"
+                <div
                   v-for="i in findCardByType('capa').num"
                   :key="'capa-' + i"
-                  class="mr-1 mb-1 card-all"
-                  :class="capaCards[i - 1] ? 'card-capa-active' : 'card-capa'"
-                  @click="onClickCapaCards(i - 1)"
-                  variant="success"
-                  :disabled="isLevelMaxed && !capaCards[i - 1]"
-                  block
+                  class="display-flex"
                   >
-                  <b-row no-gutters>
-                    <small class="col-4 text-left">CAPA {{findCardByType('capa').effect[defaultStat['capaType']].capa}}, HP {{findCardByType('capa').effect[defaultStat['capaType']].hp}}</small>
-                    <div class="col-4 text-center">{{findCardByType('capa').name}}</div>
-                    <small class="col-4 text-right">COST {{findCardByType('capa').effect[defaultStat['capaType']].cost}}</small>
-                  </b-row>
-                </b-button>
-                <div>
-                  <small></small>
+                  <div class="flex-item">
+                    <b-button
+                      size="sm"
+                      class="mr-1 mb-1 card-all"
+                      :class="capaCards[i - 1] ? 'card-capa-active' : 'card-capa'"
+                      @click="onClickCapaCards(i - 1)"
+                      variant="success"
+                      :disabled="isLevelMaxed && !capaCards[i - 1]"
+                      block
+                      >
+                      <b-row no-gutters>
+                        <small class="col-4 text-left">CAPA {{findCardByType('capa').effect[defaultStat['capaType']].capa}}, HP {{findCardByType('capa').effect[defaultStat['capaType']].hp}}</small>
+                        <div class="col-4 text-center">{{findCardByType('capa').name}}</div>
+                        <small class="col-4 text-right">COST {{findCardByType('capa').effect[defaultStat['capaType']].cost}}</small>
+                      </b-row>
+                    </b-button>
+                  </div>
+                  <b-checkbox
+                    class="ml-2"
+                    v-model="weaponCardsExcept[i - 1]"
+                    :value="true"
+                    :unchecked-value="false"
+                    />
                 </div>
               </div>
               <div v-if="defaultStat.weaponUsed" class="mb-2">
-                <b-button
-                  size="sm"
+                <div
                   v-for="i in findCardByType('weapon').num"
                   :key="'weapon-' + i"
-                  class="mr-1 mb-1 card-all"
-                  :class="weaponCards[i - 1] ? 'card-weapon-active' : 'card-weapon'"
-                  @click="onClickWeaponCards(i - 1)"
-                  variant="danger"
-                  :disabled="isLevelMaxed && !weaponCards[i - 1]"
-                  block
+                  class="display-flex"
                   >
-                  <b-row no-gutters>
-                    <small class="col-4 text-left">CAPA {{findCardByType('weapon').effect[defaultStat['weaponType']].capa}}, HP {{findCardByType('weapon').effect[defaultStat['weaponType']].hp}}</small>
-                    <div class="col-4 text-center">{{findCardByType('weapon').name}}</div>
-                    <small class="col-4 text-right">COST {{findCardByType('weapon').effect[defaultStat['weaponType']].cost}}</small>
-                  </b-row>
-                </b-button>
+                  <div class="flex-item">
+                    <b-button
+                      size="sm"
+                      class="mr-1 mb-1 card-all"
+                      :class="weaponCards[i - 1] ? 'card-weapon-active' : 'card-weapon'"
+                      @click="onClickWeaponCards(i - 1)"
+                      variant="danger"
+                      :disabled="isLevelMaxed && !weaponCards[i - 1]"
+                      block
+                      >
+                      <b-row no-gutters>
+                        <small class="col-4 text-left">CAPA {{findCardByType('weapon').effect[defaultStat['weaponType']].capa}}, HP {{findCardByType('weapon').effect[defaultStat['weaponType']].hp}}</small>
+                        <div class="col-4 text-center">{{findCardByType('weapon').name}}</div>
+                        <small class="col-4 text-right">COST {{findCardByType('weapon').effect[defaultStat['weaponType']].cost}}</small>
+                      </b-row>
+                    </b-button>
+                  </div>
+                  <b-checkbox
+                    class="ml-2"
+                    v-model="weaponCardsExcept[i - 1]"
+                    :value="true"
+                    :unchecked-value="false"
+                    />
+                </div>
               </div>
               <div class="mb-2">
-                <b-button
-                  size="sm"
+                <div
                   v-for="(card, i) in defenseCardOptions"
                   :key="'card-' + i"
-                  class="mr-1 mb-1 card-all"
-                  :class="cards.includes(card.name) ? 'card-defense-active' : 'card-defense'"
-                  @click="onClickCards(card.name)"
-                  variant="primary"
-                  :disabled="isLevelMaxed && !cards.includes(card.name)"
-                  block
+                  class="display-flex"
                   >
-                  <b-row no-gutters>
-                    <small class="col-4 text-left"></small>
-                    <div class="col-4 text-center">{{card.name}}</div>
-                    <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
-                  </b-row>
-                </b-button>
+                  <div class="flex-item">
+                    <b-button
+                      size="sm"
+                      class="mr-1 mb-1 card-all"
+                      :class="cards.includes(card.name) ? 'card-defense-active' : 'card-defense'"
+                      @click="onClickCards(card.name)"
+                      variant="primary"
+                      :disabled="isLevelMaxed && !cards.includes(card.name)"
+                      block
+                      >
+                      <b-row no-gutters>
+                        <small class="col-4 text-left"></small>
+                        <div class="col-4 text-center">{{card.name}}</div>
+                        <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
+                      </b-row>
+                    </b-button>
+                  </div>
+                  <b-checkbox
+                    class="ml-2"
+                    v-model="cardsExcept"
+                    :value="card.name"
+                    />
+                </div>
               </div>
               <div class="mb-2">
-                <b-button
-                  size="sm"
+                <div
                   v-for="(card, i) in moveCardOptions"
                   :key="'card-' + i"
-                  class="mr-1 mb-1 card-all"
-                  :class="cards.includes(card.name) ? 'card-move-active' : 'card-move'"
-                  @click="onClickCards(card.name)"
-                  variant="warning"
-                  :disabled="isLevelMaxed && !cards.includes(card.name)"
-                  block
+                  class="display-flex"
                   >
-                  <b-row no-gutters>
-                    <small class="col-4 text-left"></small>
-                    <div class="col-4 text-center">{{card.name}}</div>
-                    <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
-                  </b-row>
-                </b-button>
+                  <div class="flex-item">
+                    <b-button
+                      size="sm"
+                      class="mr-1 mb-1 card-all"
+                      :class="cards.includes(card.name) ? 'card-move-active' : 'card-move'"
+                      @click="onClickCards(card.name)"
+                      variant="warning"
+                      :disabled="isLevelMaxed && !cards.includes(card.name)"
+                      block
+                      >
+                      <b-row no-gutters>
+                        <small class="col-4 text-left"></small>
+                        <div class="col-4 text-center">{{card.name}}</div>
+                        <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
+                      </b-row>
+                    </b-button>
+                  </div>
+                  <b-checkbox
+                    class="ml-2"
+                    v-model="cardsExcept"
+                    :value="card.name"
+                    />
+                </div>
               </div>
               <div class="mb-2">
-                <b-button
-                  size="sm"
+                <div
                   v-for="(card, i) in otherCardOptions"
                   :key="'card-' + i"
-                  class="mr-1 mb-1 card-all"
-                  :class="cards.includes(card.name) ? 'card-other-active' : 'card-other'"
-                  @click="onClickCards(card.name)"
-                  variant="secondary"
-                  :disabled="isLevelMaxed && !cards.includes(card.name)"
-                  block
+                  class="display-flex"
                   >
-                  <b-row no-gutters>
-                    <small class="col-4 text-left"></small>
-                    <div class="col-4 text-center">{{card.name}}</div>
-                    <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
-                  </b-row>
-                </b-button>
-                <b-button
-                  size="sm"
+                  <div class="flex-item">
+                    <b-button
+                      size="sm"
+                      class="mr-1 mb-1 card-all"
+                      :class="cards.includes(card.name) ? 'card-other-active' : 'card-other'"
+                      @click="onClickCards(card.name)"
+                      variant="secondary"
+                      :disabled="isLevelMaxed && !cards.includes(card.name)"
+                      block
+                      >
+                      <b-row no-gutters>
+                        <small class="col-4 text-left"></small>
+                        <div class="col-4 text-center">{{card.name}}</div>
+                        <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
+                      </b-row>
+                    </b-button>
+                  </div>
+                  <b-checkbox
+                    class="ml-2"
+                    v-model="cardsExcept"
+                    :value="card.name"
+                    />
+                </div>
+              </div>
+              <div class="mb-2">
+                <div
                   v-for="(card, i) in extraMoveCardOptions"
                   :key="'card-' + i"
-                  class="mr-1 mb-1 card-all"
-                  :class="extraCards.includes(card.name) ? 'card-move-active' : 'card-move'"
-                  @click="onClickExtraCards(card.name)"
-                  variant="warning"
-                  block
+                  class="display-flex"
                   >
-                  <b-row no-gutters>
-                    <small class="col-4 text-left">外置插卡</small>
-                    <div class="col-4 text-center">{{card.name}}</div>
-                    <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
-                  </b-row>
-                </b-button>
+                  <div class="flex-item">
+                    <b-button
+                      size="sm"
+                      class="mr-1 mb-1 card-all"
+                      :class="extraCards.includes(card.name) ? 'card-move-active' : 'card-move'"
+                      @click="onClickExtraCards(card.name)"
+                      variant="warning"
+                      block
+                      >
+                      <b-row no-gutters>
+                        <small class="col-4 text-left">外置插卡</small>
+                        <div class="col-4 text-center">{{card.name}}</div>
+                        <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
+                      </b-row>
+                    </b-button>
+                  </div>
+                  <b-checkbox
+                    class="ml-2"
+                    v-model="extraCardsExcept"
+                    :value="card.name"
+                    />
+                </div>
               </div>
             </b-card>
           </div>
@@ -370,13 +465,20 @@ import options from '@/data/options.js'
 import cat from '@/data/cat.js'
 import type from '@/data/type.js'
 import card from '@/data/cards.js'
+import parts from '@/data/parts.js'
 import defaultModData from '@/data/mod.json'
 import defaultStat from '@/data/stat.json'
+import defaultPart from '@/data/part.json'
+
+import { common } from '@/mixins/common.js'
+
+import Part from '@/components/Part.vue'
 
 export default {
   name: 'Simulator',
+  mixins: [common],
   components: {
-    
+    Part,
   },
   data: function() {
     return {
@@ -385,12 +487,17 @@ export default {
       tab: 0,
       mod: [],
       cards: [],
+      cardsExcept: [],
       extraCards: [],
+      extraCardsExcept: [],
       capaCards: [false, false, false, false, false, false],
+      capaCardsExcept: [false, false, false, false, false, false],
       weaponCards: [false, false],
-      computedOptions: [],
+      weaponCardsExcept: [false, false, false, false, false, false],
+      
       ready: false,
       storageUsed: false,
+      parts: this.deepCopy(defaultPart),
       
       hideStatDetails: false,
     }
@@ -545,32 +652,38 @@ export default {
         }
       })
       var capaCardsCount = this.capaCards.filter(c => c === true).length;
+      var capaCardsExceptCount = this.capaCardsExcept.filter(c => c === true).length;
       Object.keys(this.capaCardEffect).forEach(key => {
-        data[key] += this.capaCardEffect[key] * capaCardsCount;
+        data[key] += this.capaCardEffect[key] * (capaCardsCount - capaCardsExceptCount);
       })
       if(this.defaultStat.weaponUsed) {
         var weaponCardsCount = this.weaponCards.filter(c => c === true).length;
+        var weaponCardsExceptCount = this.weaponCardsExcept.filter(c => c === true).length;
         Object.keys(this.weaponCardEffect).forEach(key => {
-          data[key] += this.weaponCardEffect[key] * weaponCardsCount;
+          data[key] += this.weaponCardEffect[key] * (weaponCardsCount - weaponCardsExceptCount);
         })
       }
       this.cards.forEach(card => {
-        var opt = this.findCardByName(card);
-        if(opt) {
-          if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
-            Object.keys(opt.effect[this.defaultStat[opt.effectKey]]).forEach(key => {
-              data[key] += opt.effect[this.defaultStat[opt.effectKey]][key];
-            })
+        if(!this.cardsExcept.include(card)) {
+          var opt = this.findCardByName(card);
+          if(opt) {
+            if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
+              Object.keys(opt.effect[this.defaultStat[opt.effectKey]]).forEach(key => {
+                data[key] += opt.effect[this.defaultStat[opt.effectKey]][key];
+              })
+            }
           }
         }
       });
       this.extraCards.forEach(card => {
-        var opt = this.findExtraCardByName(card);
-        if(opt) {
-          if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
-            Object.keys(opt.effect[this.defaultStat[opt.effectKey]]).forEach(key => {
-              data[key] += opt.effect[this.defaultStat[opt.effectKey]][key];
-            })
+        if(!this.extraCardsExcept.include(card)) {
+          var opt = this.findExtraCardByName(card);
+          if(opt) {
+            if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
+              Object.keys(opt.effect[this.defaultStat[opt.effectKey]]).forEach(key => {
+                data[key] += opt.effect[this.defaultStat[opt.effectKey]][key];
+              })
+            }
           }
         }
       });
@@ -619,6 +732,9 @@ export default {
         })
       });
       return obj;
+    },
+    partOptions() {
+      return parts;
     },
     
     capaCardEffect() {
@@ -698,31 +814,38 @@ export default {
       } else {
         this.weaponCards = [false, false];
       }
+      if(Object.prototype.hasOwnProperty.call(temp, 'weaponCardsExcept') && Array.isArray(temp.weaponCardsExcept)) {
+        this.weaponCardsExcept = this.deepCopy(temp.weaponCardsExcept);
+      } else {
+        this.weaponCardsExcept = [false, false];
+      }
       if(Object.prototype.hasOwnProperty.call(temp, 'capaCards') && Array.isArray(temp.capaCards)) {
         this.capaCards = this.deepCopy(temp.capaCards);
       } else {
         this.capaCards = [false, false, false, false, false, false];
+      }
+      if(Object.prototype.hasOwnProperty.call(temp, 'capaCardsExcept') && Array.isArray(temp.capaCardsExcept)) {
+        this.capaCardsExcept = this.deepCopy(temp.capaCardsExcept);
+      } else {
+        this.capaCardsExcept = [false, false, false, false, false, false];
       }
       if(Object.prototype.hasOwnProperty.call(temp, 'extraCards') && Array.isArray(temp.extraCards)) {
         this.extraCards = this.deepCopy(temp.extraCards);
       } else {
         this.extraCards = [];
       }
-      if(Object.prototype.hasOwnProperty.call(temp, 'cards') && Array.isArray(temp.cards)) {
-        this.cards = this.deepCopy(temp.cards);
+      if(Object.prototype.hasOwnProperty.call(temp, 'extraCardsExcept') && Array.isArray(temp.extraCardsExcept)) {
+        this.extraCardsExcept = this.deepCopy(temp.extraCardsExcept);
       } else {
-        this.cards = [];
+        this.extraCardsExcept = [];
+      }
+      if(Object.prototype.hasOwnProperty.call(temp, 'cardsExcept') && Array.isArray(temp.cardsExcept)) {
+        this.cardsExcept = this.deepCopy(temp.cardsExcept);
+      } else {
+        this.cardsExcept = [];
       }
     },
-    deepCopy(ob) {
-      return JSON.parse(JSON.stringify(ob));
-    },
-    uuid() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
-    },
+    
     findTabIndexById(id) {
       var index = this.tabs.findIndex(tab => tab.id === id);
       if(index != -1) {
@@ -738,6 +861,14 @@ export default {
     onDeleteMod(index) {
       this.mod.splice(index, 1);
     },
+    
+    onAddPart(parent = null) {
+      var data = this.deepCopy(defaultPart);
+      data['uid'] = this.uuid();
+      data['parent'] = parent;
+      this.parts.splice(this.parts.length, 0, data);
+    },
+    
     findOptionByName(name) {
       var index = this.flattenedOptions.findIndex(i => i.name === name);
       if(index !== -1) {
@@ -796,6 +927,10 @@ export default {
           weaponCards: this.weaponCards,
           cards: this.cards,
           extraCards: this.extraCards,
+          capaCardsExcept: this.capaCardsExcept,
+          weaponCardsExcept: this.weaponCardsExcept,
+          cardsExcept: this.cardsExcept,
+          extraCardsExcept: this.extraCardsExcept,
         }))
         this.$bvToast.toast("已儲存配置", {
           variant: 'primary',
@@ -814,6 +949,10 @@ export default {
       this.capaCards = [false, false, false, false, false, false];
       this.weaponCards = [false, false];
       this.extraCards = [];
+      this.capaCardsExcept = [false, false, false, false, false, false];
+      this.weaponCardsExcept = [false, false];
+      this.cardsExcept = [];
+      this.extraCardsExcept = [];
     },
     onDeleteTab(index) {
       window.localStorage.removeItem('cb-build-' + this.tabs[index].id);
@@ -935,6 +1074,14 @@ export default {
 </script>
 
 <style scoped>
+.display-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-item {
+  flex: 1;
+}
 .td-result {
   padding: 0.5rem;
   font-weight: bold;

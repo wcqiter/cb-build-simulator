@@ -11,5 +11,7 @@
   "type": "lnd",
   "capaType": "type1",
   "weaponUsed": false,
-  "weaponType": "type1"
+  "weaponType": "type1",
+  "remarks": "",
+  "partsUsed": true
 }
