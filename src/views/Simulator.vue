@@ -107,148 +107,152 @@
             </b-card>
             <b-card class="mb-2">
               <h5 class="mb-2">機體數值</h5>
-              <div style="overflow: auto">
-                <table border="1">
-                  <tr>
-                    <td class="text-center">{{cat['capa']}}</td>
-                    <td class="input-td" v-if="!hideStatDetails">
-                      <b-form-input
-                        class="input-field"
-                        type="number"
-                        v-model.number="defaultStat['cost']"
-                        size="sm"
-                        :min="0"
-                        />
-                    </td>
-                    <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['cost']}} /</td>
-                    <td class="input-td" v-if="!hideStatDetails">
-                      <b-form-input
-                        class="input-field"
-                        type="number"
-                        v-model.number="defaultStat['capa']"
-                        size="sm"
-                        :min="0"
-                        />
-                    </td>
-                    <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['capa']}} /</td>
-                    <td class="text-center" v-if="!hideStatDetails">= <b>{{finalData['finalCapa']}}</b></td>
-                    <td class="text-center" v-else><b>{{defaultStat['cost'] + deltaData['cost']}} / {{defaultStat['capa'] + deltaData['capa']}}</b></td>
-                  </tr>
-                  <tr>
-                    <td class="text-center">{{cat['slot']}}</td>
-                    <td class="input-td" colspan="3" v-if="!hideStatDetails">
-                      <b-form-input
-                        class="input-field"
-                        type="number"
-                        v-model.number="defaultStat['slot']"
-                        size="sm"
-                        :min="0"
-                        />
-                    </td>
-                    <td class="text-center" v-if="!hideStatDetails">− {{deltaData['slot']}}</td>
-                    <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData['slot']}}</b></td>
-                  </tr>
-                  <tr v-for="(key, i) in basicStatKeys" :key="i">
-                    <td class="text-center">{{cat[key]}}</td>
-                    <td class="input-td" colspan="3" v-if="!hideStatDetails">
-                      <b-form-input
-                        class="input-field"
-                        type="number"
-                        v-model.number="defaultStat[key]"
-                        size="sm"
-                        :min="0"
-                        />
-                    </td>
-                    <td class="text-center" v-if="!hideStatDetails">{{deltaData[key] >= 0 ? '+' : '-'}} {{Math.abs(deltaData[key])}}</td>
-                    <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData[key]}}</b></td>
-                  </tr>
-                </table>
+              <div v-if="!defaultStat.partsUsed">
+                <div style="overflow: auto">
+                  <table border="1">
+                    <tr>
+                      <td class="text-center">{{cat['capa']}}</td>
+                      <td class="input-td" v-if="!hideStatDetails">
+                        <b-form-input
+                          class="input-field"
+                          type="number"
+                          v-model.number="defaultStat['cost']"
+                          size="sm"
+                          :min="0"
+                          />
+                      </td>
+                      <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['cost']}} /</td>
+                      <td class="input-td" v-if="!hideStatDetails">
+                        <b-form-input
+                          class="input-field"
+                          type="number"
+                          v-model.number="defaultStat['capa']"
+                          size="sm"
+                          :min="0"
+                          />
+                      </td>
+                      <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['capa']}} /</td>
+                      <td class="text-center" v-if="!hideStatDetails">= <b>{{finalData['finalCapa']}}</b></td>
+                      <td class="text-center" v-else><b>{{defaultStat['cost'] + deltaData['cost']}} / {{defaultStat['capa'] + deltaData['capa']}}</b></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">{{cat['slot']}}</td>
+                      <td class="input-td" colspan="3" v-if="!hideStatDetails">
+                        <b-form-input
+                          class="input-field"
+                          type="number"
+                          v-model.number="defaultStat['slot']"
+                          size="sm"
+                          :min="0"
+                          />
+                      </td>
+                      <td class="text-center" v-if="!hideStatDetails">− {{deltaData['slot']}}</td>
+                      <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData['slot']}}</b></td>
+                    </tr>
+                    <tr v-for="(key, i) in basicStatKeys" :key="i">
+                      <td class="text-center">{{cat[key]}}</td>
+                      <td class="input-td" colspan="3" v-if="!hideStatDetails">
+                        <b-form-input
+                          class="input-field"
+                          type="number"
+                          v-model.number="defaultStat[key]"
+                          size="sm"
+                          :min="0"
+                          />
+                      </td>
+                      <td class="text-center" v-if="!hideStatDetails">{{deltaData[key] >= 0 ? '+' : '-'}} {{Math.abs(deltaData[key])}}</td>
+                      <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData[key]}}</b></td>
+                    </tr>
+                  </table>
+                </div>
+                <b-button
+                  size="sm"
+                  class="mt-1"
+                  @click="hideStatDetails = !hideStatDetails"
+                  :variant="hideStatDetails ? 'outline-primary' : 'outline-danger'"
+                  block
+                  >
+                  <i class="fa" :class="hideStatDetails ? 'fa-plus' : 'fa-minus'" />
+                  {{hideStatDetails ? '顯示詳細' : '隱藏詳細'}}
+                </b-button>
               </div>
-              <b-button
-                size="sm"
-                class="mt-1"
-                @click="hideStatDetails = !hideStatDetails"
-                :variant="hideStatDetails ? 'outline-primary' : 'outline-danger'"
-                block
-                >
-                <i class="fa" :class="hideStatDetails ? 'fa-plus' : 'fa-minus'" />
-                {{hideStatDetails ? '顯示詳細' : '隱藏詳細'}}
-              </b-button>
             </b-card>
           </div>
           <div class="col-md-5 content-panel">
-            <b-card>
-              <h5 class="mb-2">機體強化項目</h5>
-              <b-checkbox 
-                v-model="defaultStat.partsUsed"
-                >
-                使用零件強化方案
-              </b-checkbox>
-              <div class="clearfix" />
-              <div v-if="defaultStat.partsUsed">
-                <Part v-model="parts" />
-              </div>
-              <div v-else>
-                <div class="mb-2 mt-2">
-                  <b-button
-                    @click="onAddMod"
-                    variant="primary"
-                    block
-                    >
-                    <i class="fa fa-plus" /> 新強化項目
-                  </b-button>
+            <div>
+              <b-card>
+                <h5 class="mb-2">機體強化項目</h5>
+                <b-checkbox 
+                  v-model="defaultStat.partsUsed"
+                  >
+                  使用零件強化方案
+                </b-checkbox>
+                <div class="clearfix" />
+                <div v-if="defaultStat.partsUsed">
+                  <Part v-model="parts" />
                 </div>
-                <div v-for="(item, i) in mod" :key="i" style="display: flex">
-                  <div class="mr-2" style="padding: 0.25rem">
+                <div v-else>
+                  <div class="mb-2 mt-2">
                     <b-button
-                      @click="onDeleteMod(i)"
-                      variant="danger"
+                      @click="onAddMod"
+                      variant="primary"
+                      block
                       >
-                      <i class="fa fa-trash" />
+                      <i class="fa fa-plus" /> 新強化項目
                     </b-button>
                   </div>
-                  <b-row style="flex: 1;">
-                    <b-form-group
-                      class="col-3"
-                      label="強化類別"
-                      >
-                      <b-select
-                        size="sm"
-                        v-model="mod[i].cat"
-                        :options="catOptions"
-                        />
-                    </b-form-group>
-                    <b-form-group
-                      class="col-5"
-                      label="強化項目"
-                      >
-                      <b-form-select
-                        v-model="mod[i].key"
-                        size="sm"
-                        :options="options[mod[i].cat]"
-                        v-if="mod[i].cat"
-                        />
-                      <b-form-input
-                        plaintext
-                        size="sm"
-                        value="<= 先選擇類別"
-                        v-else
-                        />
-                    </b-form-group>
-                    <b-form-group
-                      class="col-4"
-                      label="數量"
-                      >
-                      <b-form-input
-                        size="sm"
-                        type="number"
-                        v-model.number="mod[i].num"
-                        />
-                    </b-form-group>
-                  </b-row>
+                  <div v-for="(item, i) in mod" :key="i" style="display: flex">
+                    <div class="mr-2" style="padding: 0.25rem">
+                      <b-button
+                        @click="onDeleteMod(i)"
+                        variant="danger"
+                        >
+                        <i class="fa fa-trash" />
+                      </b-button>
+                    </div>
+                    <b-row style="flex: 1;">
+                      <b-form-group
+                        class="col-3"
+                        label="強化類別"
+                        >
+                        <b-select
+                          size="sm"
+                          v-model="mod[i].cat"
+                          :options="catOptions"
+                          />
+                      </b-form-group>
+                      <b-form-group
+                        class="col-5"
+                        label="強化項目"
+                        >
+                        <b-form-select
+                          v-model="mod[i].key"
+                          size="sm"
+                          :options="options[mod[i].cat]"
+                          v-if="mod[i].cat"
+                          />
+                        <b-form-input
+                          plaintext
+                          size="sm"
+                          value="<= 先選擇類別"
+                          v-else
+                          />
+                      </b-form-group>
+                      <b-form-group
+                        class="col-4"
+                        label="數量"
+                        >
+                        <b-form-input
+                          size="sm"
+                          type="number"
+                          v-model.number="mod[i].num"
+                          />
+                      </b-form-group>
+                    </b-row>
+                  </div>
                 </div>
-              </div>
-            </b-card>
+              </b-card>
+            </div>
           </div>
           <div class="col-md-3 content-panel">
             <b-card class="mb-2">
@@ -497,7 +501,7 @@ export default {
       
       ready: false,
       storageUsed: false,
-      parts: this.deepCopy(defaultPart),
+      parts: Object.assign({}, this.deepCopy(defaultPart), { type: 'BD', uid: this.uuid(), children: new Array(6).fill(this.deepCopy(defaultPart)) }),
       
       hideStatDetails: false,
     }
