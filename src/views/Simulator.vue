@@ -892,6 +892,11 @@ export default {
       } else {
         this.capaCardsExcept = [false, false, false, false, false, false];
       }
+      if(Object.prototype.hasOwnProperty.call(temp, 'cards') && Array.isArray(temp.cards)) {
+        this.cards = this.deepCopy(temp.cards);
+      } else {
+        this.cards = [];
+      }
       if(Object.prototype.hasOwnProperty.call(temp, 'extraCards') && Array.isArray(temp.extraCards)) {
         this.extraCards = this.deepCopy(temp.extraCards);
       } else {
