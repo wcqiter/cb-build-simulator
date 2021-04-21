@@ -1027,6 +1027,7 @@ export default {
       this.weaponCardsExcept = [false, false];
       this.cardsExcept = [];
       this.extraCardsExcept = [];
+      this.parts = Object.assign({}, this.deepCopy(defaultPart), parts.find(part => part.type === 'BD'));
     },
     onDeleteTab(index) {
       window.localStorage.removeItem('cb-build-' + this.tabs[index].id);
