@@ -540,6 +540,9 @@ export default {
         } else {
           this.onClearData();
           console.log("Cannot found build " + this.tabs[this.findTabIndexById(newValue)].name + ", initialize new build.")
+          this.$nextTick(() => {
+            this.ready = true;
+          });
         }
         
         window.localStorage.setItem('cb-build-tab-index', this.tabs[this.findTabIndexById(newValue)].id);
