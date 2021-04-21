@@ -1160,7 +1160,9 @@ export default {
             }
             data[k] += opt.effect[k];
           })
-          data['cost'] += opt.cost;
+          if(opt.cost) {
+            data['cost'] += opt.cost;
+          }
         }
       })
       part.children.forEach(child => {
