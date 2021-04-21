@@ -259,7 +259,7 @@ export default [
     child: [],
     slot: 3,
     stat: {
-      capa: 0,
+      cost: 0,
       hp: 0,
       str: 0,
       tec: 0,
@@ -295,6 +295,7 @@ export default [
     child: [],
     slot: 1,
     stat: {
+      capa: 0,
       hp: 0,
       str: 0,
       tec: 0,
