@@ -3,7 +3,7 @@ export default [
     type: "BD",
     required: true, 
     name: "",
-    child: [["HD1", "HDJ1"], ["HD2", "HDJ2"], ["LG", "LGJ"], ["BS", "BSJ"], ["AM1", "AMJ1"], ["AM2", "AMJ2"], ["AC-T"], ["AC-F"]],
+    child: [["HD1", "HDJ1"], ["HD2", "HDJ2"], ["LG", "LGJ"], ["BS", "BSJ"], ["AM1", "AMJ1"], ["AM2", "AMJ2"], ["AC-T"], ["AC-F"], ["MEMORY1"], ["MEMORY2"], ["MEMORY3"]],
     slot: 0,
     stat: {
       cost: 0,
@@ -112,7 +112,7 @@ export default [
     required: true,
     root: false,
     name: "",
-    child: [],
+    child: [["BSJ", "BS"]],
     slot: 3,
     stat: {
       cost: 0,
@@ -249,7 +249,7 @@ export default [
       fly: 0,
       tgh: 0
     },
-    exceptCat: []
+    exceptCat: ['other']
   },
   {
     type: "SUB",
@@ -267,7 +267,7 @@ export default [
       fly: 0,
       tgh: 0
     },
-    exceptCat: []
+    exceptCat: ['other']
   },
   {
     type: "AC-T",
@@ -284,7 +284,7 @@ export default [
       fly: 0,
       tgh: 0
     },
-    exceptCat: []
+    exceptCat: ['other']
   },
   {
     type: "AC-F",
@@ -301,6 +301,36 @@ export default [
       fly: 0,
       tgh: 0
     },
-    exceptCat: []
+    exceptCat: ['other']
+  },
+  {
+    type: "MEMORY1",
+    required: false,
+    root: false,
+    name: "",
+    child: [],
+    slot: 3,
+    stat: {},
+    exceptCat: ['other']
+  },
+  {
+    type: "MEMORY2",
+    required: false,
+    root: false,
+    name: "",
+    child: [],
+    slot: 3,
+    stat: {},
+    exceptCat: ['other']
+  },
+  {
+    type: "MEMORY3",
+    required: false,
+    root: false,
+    name: "",
+    child: [],
+    slot: 3,
+    stat: {},
+    exceptCat: ['other']
   },
 ];

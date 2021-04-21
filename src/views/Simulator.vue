@@ -686,7 +686,7 @@ export default {
         })
       }
       this.cards.forEach(card => {
-        if(!this.cardsExcept.include(card)) {
+        if(!this.cardsExcept.includes(card)) {
           var opt = this.findCardByName(card);
           if(opt) {
             if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
@@ -698,7 +698,7 @@ export default {
         }
       });
       this.extraCards.forEach(card => {
-        if(!this.extraCardsExcept.include(card)) {
+        if(!this.extraCardsExcept.includes(card)) {
           var opt = this.findExtraCardByName(card);
           if(opt) {
             if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
@@ -736,7 +736,7 @@ export default {
         })
       }
       this.cards.forEach(card => {
-        if(!this.cardsExcept.include(card)) {
+        if(!this.cardsExcept.includes(card)) {
           var opt = this.findCardByName(card);
           if(opt) {
             if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
@@ -748,7 +748,7 @@ export default {
         }
       });
       this.extraCards.forEach(card => {
-        if(!this.extraCardsExcept.include(card)) {
+        if(!this.extraCardsExcept.includes(card)) {
           var opt = this.findExtraCardByName(card);
           if(opt) {
             if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
