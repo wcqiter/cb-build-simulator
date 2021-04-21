@@ -290,6 +290,16 @@ export default [
     },
     effectKey: "type"
   },
+  {
+    type: "move",
+    name: "終極翻滾",
+    effect: {
+      air: {
+        cost: 30
+      }
+    },
+    effectKey: "type"
+  },
   
   {
     type: "other",
