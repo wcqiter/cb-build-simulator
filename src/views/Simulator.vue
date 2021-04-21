@@ -527,12 +527,14 @@ export default {
   watch: {
     tab(newValue) {
       if(this.storageUsed) {
+        this.ready = false;
         // Load newValue
         var storageData = window.localStorage.getItem('cb-build-' + newValue);
         if(storageData) {
           var temp = JSON.parse(storageData);
           this.onLoadData(temp);
           console.log("Loaded build " + this.tabs[this.findTabIndexById(newValue)].name);
+          this.ready = true;
         } else {
           this.onClearData();
           console.log("Cannot found build " + this.tabs[this.findTabIndexById(newValue)].name + ", initialize new build.")
