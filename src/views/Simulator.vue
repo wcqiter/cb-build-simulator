@@ -56,9 +56,11 @@
                   >
                   <i class="fa fa-save" /> 儲存
                 </b-button>
+                <!--
                 <b-button variant="success" class="ml-2" @click.stop.prevent="onExportAsTxt()">
                   <i class="fa fa-download" /> 儲存為TXT文件
                 </b-button>
+                !-->
                 <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(findTabIndexById(tab))" v-if="tabs.length > 1">
                   <i class="fa fa-trash" /> 刪除配置
                 </b-button>
@@ -175,6 +177,22 @@
                   <i class="fa" :class="hideStatDetails ? 'fa-plus' : 'fa-minus'" />
                   {{hideStatDetails ? '顯示詳細' : '隱藏詳細'}}
                 </b-button>
+              </div>
+              <div v-else style="overflow: auto">
+                <table border="1">
+                  <tr>
+                    <td class="text-center">{{cat['cost']}}/{{cat['capa']}}</td>
+                    <td class="text-center">{{partsStat['cost']}} / {{partsStat['capa']}}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">{{cat['slot']}}</td>
+                    <td class="text-center">{{partsStat['modNo']}} / {{partsStat['slot']}}</td>
+                  </tr>
+                  <tr v-for="(key, i) in basicStatKeys" :key="i">
+                    <td class="text-center">{{cat[key]}}</td>
+                    <td class="text-center">{{partsStat[key]}}</td>
+                  </tr>
+                </table>
               </div>
             </b-card>
           </div>
@@ -501,7 +519,7 @@ export default {
       
       ready: false,
       storageUsed: false,
-      parts: Object.assign({}, this.deepCopy(defaultPart), { type: 'BD', uid: this.uuid(), children: new Array(6).fill(this.deepCopy(defaultPart)) }),
+      parts: Object.assign({}, this.deepCopy(defaultPart), parts.find(part => part.type === 'BD')),
       
       hideStatDetails: false,
     }
@@ -702,6 +720,47 @@ export default {
       });
       return data;
     },
+    partsStat() {
+      var data = this.recursiveStat(this.parts);
+      
+      var capaCardsCount = this.capaCards.filter(c => c === true).length;
+      var capaCardsExceptCount = this.capaCardsExcept.filter(c => c === true).length;
+      Object.keys(this.capaCardEffect).forEach(key => {
+        data[key] += this.capaCardEffect[key] * (capaCardsCount - capaCardsExceptCount);
+      })
+      if(this.defaultStat.weaponUsed) {
+        var weaponCardsCount = this.weaponCards.filter(c => c === true).length;
+        var weaponCardsExceptCount = this.weaponCardsExcept.filter(c => c === true).length;
+        Object.keys(this.weaponCardEffect).forEach(key => {
+          data[key] += this.weaponCardEffect[key] * (weaponCardsCount - weaponCardsExceptCount);
+        })
+      }
+      this.cards.forEach(card => {
+        if(!this.cardsExcept.include(card)) {
+          var opt = this.findCardByName(card);
+          if(opt) {
+            if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
+              Object.keys(opt.effect[this.defaultStat[opt.effectKey]]).forEach(key => {
+                data[key] += opt.effect[this.defaultStat[opt.effectKey]][key];
+              })
+            }
+          }
+        }
+      });
+      this.extraCards.forEach(card => {
+        if(!this.extraCardsExcept.include(card)) {
+          var opt = this.findExtraCardByName(card);
+          if(opt) {
+            if(Object.prototype.hasOwnProperty.call(opt.effect, this.defaultStat[opt.effectKey])) {
+              Object.keys(opt.effect[this.defaultStat[opt.effectKey]]).forEach(key => {
+                data[key] += opt.effect[this.defaultStat[opt.effectKey]][key];
+              })
+            }
+          }
+        }
+      });
+      return data;
+    },
     catOptions() {
       var arr = [];
       options.forEach(op => {
@@ -848,6 +907,11 @@ export default {
       } else {
         this.cardsExcept = [];
       }
+      if(Object.prototype.hasOwnProperty.call(temp, 'parts')) {
+        this.parts = this.deepCopy(temp.parts);
+      } else {
+        this.parts = Object.assign({}, this.deepCopy(defaultPart), parts.find(part => part.type === 'BD'));
+      }
     },
     
     findTabIndexById(id) {
@@ -935,6 +999,7 @@ export default {
           weaponCardsExcept: this.weaponCardsExcept,
           cardsExcept: this.cardsExcept,
           extraCardsExcept: this.extraCardsExcept,
+          parts: this.parts
         }))
         this.$bvToast.toast("已儲存配置", {
           variant: 'primary',
@@ -1066,6 +1131,47 @@ export default {
       a.download = this.tabs[this.findTabIndexById(this.tab)].name;
       a.click();
       window.URL.revokeObjectURL(url);
+    },
+    
+    recursiveStat(part) {
+      var data = {};
+      Object.keys(part.stat).forEach(statKey => {
+        if(typeof data[statKey] === 'undefined') {
+          data[statKey] = 0;
+        }
+        data[statKey] = part.stat[statKey];
+      })
+      if(part.slot) {
+        data['slot'] = parseInt(part.slot);
+      } else {
+        data['slot'] = 0;
+      }
+      if(Array.isArray(part.mod)) {
+        data['modNo'] = parseInt(part.mod.length);
+      } else {
+        data['modNo'] = 0;
+      }
+      part.mod.forEach(mod => {
+        var opt = this.findOptionByName(mod);
+        if(opt) {
+          Object.keys(opt.effect).forEach(k => {
+            if(typeof data[k] === 'undefined') {
+              data[k] = 0;
+            }
+            data[k] += opt.effect[k];
+          })
+        }
+      })
+      part.children.forEach(child => {
+        var childStat = this.recursiveStat(child);
+        Object.keys(childStat).forEach(statKey => {
+          if(typeof data[statKey] === 'undefined') {
+            data[statKey] = 0;
+          }
+          data[statKey] = data[statKey] + childStat[statKey];
+        })
+      });
+      return data;
     },
   },
   mounted() {

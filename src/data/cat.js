@@ -5,6 +5,7 @@ export default {
   wlk: "WLK",
   fly: "FLY",
   tgh: "TGH",
+  cost: "COST",
   capa: "CAPA",
   slot: "SLOT",
   other: "其他",
