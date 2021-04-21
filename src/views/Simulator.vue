@@ -1141,6 +1141,12 @@ export default {
         }
         data[statKey] = part.stat[statKey];
       })
+      if(!Object.prototype.hasOwnProperty.call(data, 'cost')) {
+        data['cost'] = 0;
+      }
+      if(!Object.prototype.hasOwnProperty.call(data, 'capa')) {
+        data['capa'] = 0;
+      }
       if(part.slot) {
         data['slot'] = parseInt(part.slot);
       } else {
