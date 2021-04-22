@@ -47,8 +47,11 @@
   "selectMod": "Select Tuning",
   "removeMod": "Remove Tuning",
   "history": "Update History",
+  "exportLink": "Share build by link",
   "toast": {
     "noLocalStorage": "Your browser does not support LocalStorage, cannot save build.",
-    "saved": "Build Saved."
+    "saved": "Build Saved.",
+    "copied": "Copied to clipboard",
+    "errorCopy": "Error occurred when copy to clipboard"
   }
 }

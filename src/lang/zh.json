@@ -47,8 +47,11 @@
   "selectMod": "選擇強化",
   "removeMod": "移除強化",
   "history": "更新歷程",
+  "exportLink": "分享配置",
   "toast": {
     "noLocalStorage": "你的瀏覽器不支持LocalStorage，無法儲存配置。",
-    "saved": "已儲存配置。"
+    "saved": "已儲存配置。",
+    "copied": "已複製鏈接",
+    "errorCopy": "複製時出現錯誤"
   }
 }

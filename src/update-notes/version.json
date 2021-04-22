@@ -1,6 +1,17 @@
 [
   {
     "date": "2021/4/22",
+    "version": "v1.4.1",
+    "content": [
+      {
+        "zh": "增加配置分享鏈接",
+        "en": "Add share link of build",
+        "jp": "ビルドの共有リンクを追加"
+      }
+    ]
+  },
+  {
+    "date": "2021/4/22",
     "version": "v1.4.0",
     "content": [
       {

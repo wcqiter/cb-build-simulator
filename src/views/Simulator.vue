@@ -57,12 +57,21 @@
                 <b-form-group 
                   v-if="storageUsed"
                   :label="$t('remarks')"
-                  label-cols="3"
                   >
                   <b-form-textarea
                     v-model="tabs[findTabIndexById(tab)].remarks"
                     max-rows="6"
                     rows="3"
+                    />
+                </b-form-group>
+              </div>
+              <div>
+                <b-form-group
+                  :label="$t('exportLink')"
+                  >
+                  <b-form-textarea
+                    @focus="onFocusExportLink"
+                    :value="exportLink"
                     />
                 </b-form-group>
               </div>
@@ -567,6 +576,28 @@ export default {
     },
   },
   computed: {
+    baseUrl() {
+      return process.env.VUE_APP_BASE_URL;
+    },
+    exportLink() {
+      var data = JSON.stringify({
+        stat: Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(this.defaultStat)),
+        mod: this.mod,
+        name: this.tabs[this.findTabIndexById(this.tab)].name,
+        id: this.tab,
+        capaCards: this.capaCards,
+        weaponCards: this.weaponCards,
+        cards: this.cards,
+        extraCards: this.extraCards,
+        capaCardsExcept: this.capaCardsExcept,
+        weaponCardsExcept: this.weaponCardsExcept,
+        cardsExcept: this.cardsExcept,
+        extraCardsExcept: this.extraCardsExcept,
+        parts: this.parts
+      });
+      var encoded = btoa(encodeURIComponent(data));
+      return this.baseUrl + '?build=' + encoded;
+    },
     cat() {
       return cat;
     },
@@ -842,8 +873,37 @@ export default {
     },
   },
   methods: {
+    onFocusExportLink() {
+      var textArea = document.createElement("textarea");
+      document.body.appendChild(textArea);
+      textArea.value = this.exportLink;
+      //textArea.focus();
+      textArea.select();
+
+      try {
+        document.execCommand('copy');
+        this.$bvToast.toast(this.$t('toast.copied'), {
+          variant: 'primary',
+          solid: true,
+          "auto-hide-delay": 1000,
+          toaster: 'b-toaster-bottom-right'
+        })
+      } catch (err) {
+        this.$bvToast.toast(this.$t('toast.errorCopy'), {
+          variant: 'danger',
+          solid: true,
+          "auto-hide-delay": 1000,
+          toaster: 'b-toaster-bottom-right'
+        })
+      }
+
+      document.body.removeChild(textArea);
+    },
     setLang(lang) {
       this.$i18n.set(lang);
+      if(window.localStorage) {
+        window.localStorage.setItem('cb-build-lang', lang);
+      }
     },
     initData() {
       if(window.localStorage) {
@@ -859,6 +919,26 @@ export default {
         }
         var keys = Object.keys(window.localStorage).filter(i => i.includes('cb-build') && i !== 'cb-build-tab-index' && i !== 'cb-build-lang');
         console.log('Found ' + keys.length + ' set of build in localStorage');
+        
+        var hasLinkData = false;
+        var data, index, decoded;
+        let getVars = {};
+        let uri = window.location.href.split('?');
+        if (uri.length == 2) {
+          let vars = uri[1].split('&');
+          let tmp = '';
+          vars.forEach(function(v){
+            tmp = v.split('=');
+            if(tmp.length == 2)
+            getVars[tmp[0]] = tmp[1];
+          });
+          hasLinkData = true;
+          data = getVars['build'];
+          decoded = JSON.parse(decodeURIComponent(window.atob(data)));
+          this.onLoadData(decoded);
+          window.localStorage.setItem('cb-build-' + decoded.id, JSON.stringify(decoded));
+          console.log('Found build ' + decoded.name + ' from url');
+        }
         if(keys.length > 0) {
           this.tabs = keys.map(key => {
             var storageData = window.localStorage.getItem(key);
@@ -874,21 +954,50 @@ export default {
               return null;
             }
           });
-          if(typeof this.tabs[this.findTabIndexById(this.tab)] === 'undefined') {
-            this.tab = this.tabs[0].id;
-          }
-          var key = this.tabs[this.findTabIndexById(this.tab)].id;
-          var storageData = window.localStorage.getItem('cb-build-' + key);
-          if(storageData) {
-            var temp = JSON.parse(storageData);
-            this.onLoadData(temp);
-            console.log("Loaded build " + this.tabs[this.findTabIndexById(this.tab)].name);
+          if(hasLinkData) {
+            index = this.tabs.findIndex(tab => tab.id === decoded.id);
+            if(index === -1) {
+              this.tabs.splice(this.tabs.length, 0, {
+                id: decoded.id,
+                name: decoded.name
+              })
+              console.log("Added build " + decoded.name + ' to tabs');
+            } else {
+              console.log("Updated build " + decoded.name + ' to tabs');
+            }
+            this.tab = decoded.id;
+          } else {
+            if(typeof this.tabs[this.findTabIndexById(this.tab)] === 'undefined') {
+              this.tab = this.tabs[0].id;
+            }
+            var key = this.tabs[this.findTabIndexById(this.tab)].id;
+            var storageData = window.localStorage.getItem('cb-build-' + key);
+            if(storageData) {
+              var temp = JSON.parse(storageData);
+              this.onLoadData(temp);
+              console.log("Loaded build " + this.tabs[this.findTabIndexById(this.tab)].name);
+            }
           }
         } else {
-          var uid = this.uuid();
-          this.tabs = [{ id: uid, name: "New Build 1"}];
-          this.tab = this.tabs[0].id;
+          if(hasLinkData) {
+            index = this.tabs.findIndex(tab => tab.id === decoded.id);
+            if(index === -1) {
+              this.tabs.splice(this.tabs.length, 0, {
+                id: decoded.id,
+                name: decoded.name
+              })
+              console.log("Added build " + decoded.name + ' to tabs');
+            } else {
+              console.log("Updated build " + decoded.name + ' in tabs');
+            }
+            this.tab = decoded.id;
+          } else {
+            var uid = this.uuid();
+            this.tabs = [{ id: uid, name: "New Build 1"}];
+            this.tab = this.tabs[0].id;
+          }
         }
+        
       } else {
         this.storageUsed = false;
         this.onErrorStorage();
