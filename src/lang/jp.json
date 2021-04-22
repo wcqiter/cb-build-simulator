@@ -11,6 +11,13 @@
     "art": "砲撃",
     "msc": "補助"
   },
+  "weapon": {
+    "force": "Force",
+    "ammo": "Ammo",
+    "range": "Range",
+    "speed": "Speed",
+    "int": "INT"
+  },
   "cat": {
     "hp": "HP",
     "str": "STR",

@@ -2,7 +2,8 @@
   <div>
     <div>
       <div class="node-wrapper">
-        <span class="node" @click.stop.prevent="onClickNode">{{data.type}}</span>
+        <span class="node" @click.stop.prevent="onClickNode"
+          :class="partClass">{{data.type}}</span>
         <b-button
           size="sm"
           variant="transparent"
@@ -30,13 +31,7 @@
         <table border="1" width="100%">
           <tr
             >
-            <td
-              rowspan="2"
-              class="text-center"
-              >
-              {{$t('partStat')}}
-            </td>
-            <td><small>SLOT</small></td>
+            <td class="text-center"><small>SLOT</small></td>
             <td
               v-for="(key, index) in Object.keys(data.stat)"
               :key="'stat-' + index"
@@ -65,6 +60,77 @@
                 type="number"
                 class="input-field"
                 min="0"
+                :step="['hp', 'cost', 'capa'].includes(key) ? 5 : 1"
+                />
+            </td>
+          </tr>
+        </table>
+        <table border="1" width="100%" class="mt-1">
+          <tr>
+            <td :colspan="Object.keys(data.main).length + 1">
+              <b-checkbox
+                v-model="data.tag"
+                value="main"
+                >
+                {{$t('cat.main')}}
+              </b-checkbox>
+            </td>
+          </tr>
+          <tr v-if="data.tag.includes('main')">
+            <td
+              v-for="(key, index) in Object.keys(data.main)"
+              :key="'main-stat-' + index"
+              >
+              {{$t('weapon.' + key, key)}}
+            </td>
+          </tr>
+          <tr v-if="data.tag.includes('main')">
+            <td
+              v-for="(key, index) in Object.keys(data.main)"
+              :key="'main-stat-' + index"
+              >
+              <b-form-input 
+                size="sm" 
+                v-model.number="data.main[key]" 
+                type="number"
+                class="input-field"
+                min="0"
+                step="10"
+                />
+            </td>
+          </tr>
+        </table>
+        <table border="1" width="100%" class="mt-1">
+          <tr>
+            <td :colspan="Object.keys(data.sub).length + 1">
+              <b-checkbox
+                v-model="data.tag"
+                value="sub"
+                >
+                {{$t('cat.sub')}}
+              </b-checkbox>
+            </td>
+          </tr>
+          <tr v-if="data.tag.includes('sub')">
+            <td
+              v-for="(key, index) in Object.keys(data.sub)"
+              :key="'sub-stat-' + index"
+              >
+              {{$t('weapon.' + key, key)}}
+            </td>
+          </tr>
+          <tr v-if="data.tag.includes('sub')">
+            <td
+              v-for="(key, index) in Object.keys(data.sub)"
+              :key="'sub-stat-' + index"
+              >
+              <b-form-input 
+                size="sm" 
+                v-model.number="data.sub[key]" 
+                type="number"
+                class="input-field"
+                min="0"
+                step="10"
                 />
             </td>
           </tr>
@@ -111,30 +177,35 @@
             </b-button>
           </div>
         </b-row>
-        <div 
+        <div
           v-for="(item, catName) in options"
           :key="catName"
           >
-          <h5>{{$t('cat.' + catName, catName)}}</h5>
-          <b-row>
-            <div 
-              class="col-md-3 mb-2"
-              v-for="(option, optionIndex) in item"
-              :key="optionIndex"
-              >
-              <b-button
-                block
-                variant="transparent"
-                class="mod"
-                :class="'mod-' + catName"
-                size="sm"
-                @click="onClickModOption(option.value)"
-                :disabled="(typeof data.mod[modIndex] !== 'undefined' && data.mod[modIndex] !== '') && data.mod[modIndex] === option.value"
+          <h5 block v-b-toggle="'mod-collapse-' + catName" class="mod-collapse">{{$t('cat.' + catName, catName)}}</h5>
+          <b-collapse 
+            accordion="mod-collapse"
+            :id="'mod-collapse-' + catName"
+            >
+            <b-row>
+              <div 
+                class="col-lg-3 mb-2"
+                v-for="(option, optionIndex) in item"
+                :key="optionIndex"
                 >
-                {{option.text}}
-              </b-button>
-            </div>
-          </b-row>
+                <b-button
+                  block
+                  variant="transparent"
+                  class="mod"
+                  :class="'mod-' + catName"
+                  size="sm"
+                  @click="onClickModOption(option.value)"
+                  :disabled="(typeof data.mod[modIndex] !== 'undefined' && data.mod[modIndex] !== '') && data.mod[modIndex] === option.value"
+                  >
+                  {{option.text}}
+                </b-button>
+              </div>
+            </b-row>
+          </b-collapse>
         </div>
       </b-modal>
     </div>
@@ -160,7 +231,7 @@ export default {
   },
   data: function() {
     return {
-      data: this.deepCopy(this.value),
+      data: Object.assign({}, defaultPart, this.deepCopy(this.value)),
       
       editing: false,
       modalMod: false,
@@ -192,6 +263,13 @@ export default {
       })
       return obj;
     },
+    partClass() {
+      if(Array.isArray(this.data.tag)) {
+        return this.data.tag.join('-');
+      } else {
+        return '';
+      }
+    },
     cat() {
       return cat;
     },
@@ -208,7 +286,18 @@ export default {
           }
         });
       });
-      return arr.filter(cat => !this.findPartByType(this.data.type).exceptCat.includes(cat.value));
+      var filtered = arr.filter(cat => !this.findPartByType(this.data.type).exceptCat.includes(cat.value));
+      if(Array.isArray(this.data.tag)) {
+        if(!this.data.tag.includes('main')) {
+          filtered = filtered.filter(cat => cat.value !== 'main');
+        }
+        if(!this.data.tag.includes('sub')) {
+          filtered = filtered.filter(cat => cat.value !== 'sub');
+        }
+      } else {
+        filtered = filtered.filter(cat => cat.value !== 'sub' && cat.value !== 'main');
+      }
+      return filtered;
     },
     options() {
       var obj = {};
@@ -447,5 +536,26 @@ span.arrow-after {
 .mod:hover {
   color: white;
   opacity: 0.8;
+}
+.mod-collapse:hover {
+  opacity: 0.5;
+}
+.main {
+  background-color: red;
+  color: white;
+}
+.sub {
+  background-color: blue;
+  color: white;
+}
+.main-sub {
+  background: rgb(255,0,0);
+  background: linear-gradient(135deg, rgba(255,0,0,1) 0%, rgba(0,0,255,1) 100%);
+  color: white;
+}
+.sub-main {
+  background: rgb(255,0,0);
+  background: linear-gradient(135deg, rgba(255,0,0,1) 0%, rgba(0,0,255,1) 100%);
+  color: white;
 }
 </style>

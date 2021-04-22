@@ -11,6 +11,13 @@
     "art": "炮",
     "msc": "輔"
   },
+  "weapon": {
+    "force": "威力",
+    "ammo": "彈數",
+    "range": "射程",
+    "speed": "速度",
+    "int": "間隔"
+  },
   "cat": {
     "hp": "HP",
     "str": "STR",

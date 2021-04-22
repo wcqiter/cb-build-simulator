@@ -6,5 +6,20 @@
   "name": "",
   "mod": [],
   "stat": {},
-  "children": []
+  "children": [],
+  "tag": [],
+  "main": {
+    "force": 0,
+    "ammo": 0,
+    "range": 0,
+    "speed": 0,
+    "int": 0
+  },
+  "sub": {
+    "force": 0,
+    "ammo": 0,
+    "range": 0,
+    "speed": 0,
+    "int": 0
+  }
 }

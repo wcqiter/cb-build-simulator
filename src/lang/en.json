@@ -11,6 +11,13 @@
     "art": "Art",
     "msc": "Sub"
   },
+  "weapon": {
+    "force": "Force",
+    "ammo": "Ammo",
+    "range": "Range",
+    "speed": "Speed",
+    "int": "INT"
+  },
   "cat": {
     "hp": "HP",
     "str": "STR",

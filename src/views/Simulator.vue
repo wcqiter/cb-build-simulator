@@ -147,6 +147,7 @@
                           v-model.number="defaultStat['cost']"
                           size="sm"
                           :min="0"
+                          step="5"
                           />
                       </td>
                       <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['cost']}} /</td>
@@ -157,6 +158,7 @@
                           v-model.number="defaultStat['capa']"
                           size="sm"
                           :min="0"
+                          step="5"
                           />
                       </td>
                       <td class="text-center" style="min-width: 50px;" v-if="!hideStatDetails">+ {{deltaData['capa']}} /</td>
@@ -186,6 +188,7 @@
                           v-model.number="defaultStat[key]"
                           size="sm"
                           :min="0"
+                          :step="key === 'hp' ? 5 : 1"
                           />
                       </td>
                       <td class="text-center" v-if="!hideStatDetails">{{deltaData[key] >= 0 ? '+' : '-'}} {{Math.abs(deltaData[key])}}</td>

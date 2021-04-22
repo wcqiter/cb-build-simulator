@@ -1,4 +1,8 @@
-# cb-build-simulator
+# CBU Build Simulator
+
+This is a gaming tool for [Cosmic Break Universe](https://cosmicbreak-universal.com/). It is used to simulate robot build. Vue2 is used and it is hosted on github page [here](https://wcqiter.github.io/cb-build-simulator/).
+
+Feel free to create issue!
 
 ## Project setup
 ```
