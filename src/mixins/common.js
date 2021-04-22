@@ -24,7 +24,7 @@ const common = {
         {
           value: 'jp',
           text: '日本語',
-          disabled: true
+          disabled: false
         }
       ]
     },

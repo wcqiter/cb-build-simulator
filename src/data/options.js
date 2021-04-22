@@ -915,7 +915,15 @@ export default [
       jp: ""
     },
     "cost": 10,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+3%"
+      },
+      effect: {
+        force: 1.03
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -926,7 +934,15 @@ export default [
       jp: ""
     },
     "cost": 25,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+6%"
+      },
+      effect: {
+        force: 0.06
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -937,7 +953,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+6%",
+        ammo: "-7%"
+      },
+      effect: {
+        force: 0.06,
+        ammo: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -948,7 +974,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+6%",
+        range: "-7%"
+      },
+      effect: {
+        force: 0.06,
+        range: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -959,7 +995,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+6%",
+        speed: "-7%"
+      },
+      effect: {
+        force: 0.06,
+        speed: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -970,7 +1016,15 @@ export default [
       jp: ""
     },
     "cost": 40,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+9%"
+      },
+      effect: {
+        force: 0.09
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -981,7 +1035,17 @@ export default [
       jp: ""
     },
     "cost": 30,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+9%",
+        speed: "-10%"
+      },
+      effect: {
+        force: 0.09,
+        speed: -0.10
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -992,7 +1056,17 @@ export default [
       jp: ""
     },
     "cost": 30,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+9%",
+        range: "-10%"
+      },
+      effect: {
+        force: 0.09,
+        range: -0.10
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1003,7 +1077,17 @@ export default [
       jp: ""
     },
     "cost": 30,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+9%",
+        speed: "-10%"
+      },
+      effect: {
+        force: 0.09,
+        speed: -0.10
+      }
+    }
   },
   
   {
@@ -1015,7 +1099,15 @@ export default [
       jp: ""
     },
     "cost": 5,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+5%"
+      },
+      effect: {
+        range: 0.05
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1026,7 +1118,15 @@ export default [
       jp: ""
     },
     "cost": 15,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+10%"
+      },
+      effect: {
+        range: 0.10
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1037,7 +1137,17 @@ export default [
       jp: ""
     },
     "cost": 10,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+10%",
+        ammo: "-7%"
+      },
+      effect: {
+        range: 0.10,
+        ammo: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1048,7 +1158,17 @@ export default [
       jp: ""
     },
     "cost": 10,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+10%",
+        speed: "-7%"
+      },
+      effect: {
+        range: 0.10,
+        speed: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1059,7 +1179,15 @@ export default [
       jp: ""
     },
     "cost": 30,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+15%"
+      },
+      effect: {
+        range: 0.15
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1070,7 +1198,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+15%",
+        ammo: "-10%"
+      },
+      effect: {
+        range: 0.15,
+        ammo: -0.10
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1081,7 +1219,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+15%",
+        speed: "-10%"
+      },
+      effect: {
+        range: 0.15,
+        speed: -0.10
+      }
+    }
   },
   
   {
@@ -1093,7 +1241,15 @@ export default [
       jp: ""
     },
     "cost": 5,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        speed: "+5%"
+      },
+      effect: {
+        speed: 0.05
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1104,7 +1260,15 @@ export default [
       jp: ""
     },
     "cost": 15,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        speed: "+10%"
+      },
+      effect: {
+        speed: 0.10
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1115,7 +1279,17 @@ export default [
       jp: ""
     },
     "cost": 10,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        speed: "+10%",
+        ammo: "-7%"
+      },
+      effect: {
+        speed: 0.10,
+        ammo: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1126,7 +1300,17 @@ export default [
       jp: ""
     },
     "cost": 10,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        speed: "+10%",
+        range: "-7%"
+      },
+      effect: {
+        speed: 0.10,
+        range: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1137,7 +1321,15 @@ export default [
       jp: ""
     },
     "cost": 30,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        speed: "+15%"
+      },
+      effect: {
+        speed: 0.15
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1148,7 +1340,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        speed: "+15%",
+        ammo: "-10%"
+      },
+      effect: {
+        speed: 0.15,
+        ammo: -0.10
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1159,7 +1361,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        speed: "+15%",
+        range: "-10%"
+      },
+      effect: {
+        speed: 0.15,
+        range: -0.10
+      }
+    }
   },
   
   {
@@ -1171,7 +1383,15 @@ export default [
       jp: ""
     },
     "cost": 5,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+5%"
+      },
+      effect: {
+        ammo: 0.05
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1182,7 +1402,15 @@ export default [
       jp: ""
     },
     "cost": 15,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+10%"
+      },
+      effect: {
+        ammo: 0.10
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1193,7 +1421,17 @@ export default [
       jp: ""
     },
     "cost": 10,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+10%",
+        range: "-7%"
+      },
+      effect: {
+        ammo: 0.10,
+        range: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1204,7 +1442,17 @@ export default [
       jp: ""
     },
     "cost": 10,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+10%",
+        speed: "-7%"
+      },
+      effect: {
+        ammo: 0.10,
+        speed: -0.07
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1215,7 +1463,15 @@ export default [
       jp: ""
     },
     "cost": 30,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+15%"
+      },
+      effect: {
+        ammo: 0.15
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1226,7 +1482,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+15%",
+        range: "-10%"
+      },
+      effect: {
+        ammo: 0.15,
+        range: -0.10
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1237,7 +1503,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+15%",
+        speed: "-10%"
+      },
+      effect: {
+        ammo: 0.15,
+        speed: -0.10
+      }
+    }
   },
   
   {
@@ -1249,7 +1525,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+5%",
+        speed: "+5%"
+      },
+      effect: {
+        ammo: 0.05,
+        speed: 0.05
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1260,7 +1546,17 @@ export default [
       jp: ""
     },
     "cost": 45,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        ammo: "+10%",
+        speed: "+10%"
+      },
+      effect: {
+        ammo: 0.10,
+        speed: 0.10
+      }
+    }
   },
   
   {
@@ -1272,7 +1568,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+5%",
+        speed: "+5%"
+      },
+      effect: {
+        range: 0.05,
+        speed: 0.05
+      }
+    }
   },
   {
     "cat": ["main"],
@@ -1283,7 +1589,17 @@ export default [
       jp: ""
     },
     "cost": 45,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+10%",
+        speed: "+10%"
+      },
+      effect: {
+        range: 0.10,
+        speed: 0.10
+      }
+    }
   },
   
   {
@@ -1307,7 +1623,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+5%",
+        speed: "+5%"
+      },
+      effect: {
+        range: 0.05,
+        speed: 0.05
+      }
+    }
   },
   {
     "cat": ["sub"],
@@ -1318,7 +1644,17 @@ export default [
       jp: ""
     },
     "cost": 45,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        range: "+10%",
+        speed: "+10%"
+      },
+      effect: {
+        range: 0.10,
+        speed: 0.10
+      }
+    }
   },
   
   {
@@ -1330,7 +1666,15 @@ export default [
       jp: ""
     },
     "cost": 10,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+3%"
+      },
+      effect: {
+        force: 0.03
+      }
+    }
   },
   {
     "cat": ["sub"],
@@ -1341,7 +1685,15 @@ export default [
       jp: ""
     },
     "cost": 25,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+6%"
+      },
+      effect: {
+        force: 0.06
+      }
+    }
   },
   {
     "cat": ["sub"],
@@ -1352,7 +1704,17 @@ export default [
       jp: ""
     },
     "cost": 20,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+6%",
+        speed: "-7%"
+      },
+      effect: {
+        force: 0.06,
+        speed: -0.07
+      }
+    }
   },
   {
     "cat": ["sub"],
@@ -1363,7 +1725,15 @@ export default [
       jp: ""
     },
     "cost": 40,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+9%"
+      },
+      effect: {
+        force: 0.09
+      }
+    }
   },
   {
     "cat": ["sub"],
@@ -1374,6 +1744,16 @@ export default [
       jp: ""
     },
     "cost": 30,
-    "effect": {}
+    "effect": {},
+    weaponStat: {
+      display: {
+        force: "+9%",
+        speed: "-10%"
+      },
+      effect: {
+        force: 0.09,
+        speed: -0.10
+      }
+    }
   }
 ];

@@ -67,7 +67,7 @@
         </table>
         <table border="1" width="100%" class="mt-1">
           <tr>
-            <td :colspan="Object.keys(data.main).length + 1">
+            <td :colspan="Object.keys(data.main).length + 2" class="text-center">
               <b-checkbox
                 v-model="data.tag"
                 value="main"
@@ -77,17 +77,21 @@
             </td>
           </tr>
           <tr v-if="data.tag.includes('main')">
+            <td class="text-center"></td>
             <td
               v-for="(key, index) in Object.keys(data.main)"
               :key="'main-stat-' + index"
+              class="text-center"
               >
               {{$t('weapon.' + key, key)}}
             </td>
           </tr>
           <tr v-if="data.tag.includes('main')">
+            <td class="text-center">{{$t('weapon.init')}}</td>
             <td
               v-for="(key, index) in Object.keys(data.main)"
               :key="'main-stat-' + index"
+              class="text-center"
               >
               <b-form-input 
                 size="sm" 
@@ -99,10 +103,21 @@
                 />
             </td>
           </tr>
+          <tr v-if="data.tag.includes('main')">
+            <td class="text-center">{{$t('weapon.final')}}</td>
+            <td
+              v-for="(key, index) in Object.keys(data.main)"
+              :key="'main-stat-' + index"
+              class="text-center"
+              :class="Math.round(mainStat[key]) > data.main[key] ? 'buff' : (Math.round(mainStat[key]) < data.main[key] ? 'debuff' : '')"
+              >
+              {{Math.round(mainStat[key])}}
+            </td>
+          </tr>
         </table>
         <table border="1" width="100%" class="mt-1">
           <tr>
-            <td :colspan="Object.keys(data.sub).length + 1">
+            <td :colspan="Object.keys(data.sub).length + 2" class="text-center">
               <b-checkbox
                 v-model="data.tag"
                 value="sub"
@@ -112,17 +127,21 @@
             </td>
           </tr>
           <tr v-if="data.tag.includes('sub')">
+            <td class="text-center"></td>
             <td
               v-for="(key, index) in Object.keys(data.sub)"
               :key="'sub-stat-' + index"
+              class="text-center"
               >
               {{$t('weapon.' + key, key)}}
             </td>
           </tr>
           <tr v-if="data.tag.includes('sub')">
+            <td class="text-center">{{$t('weapon.init')}}</td>
             <td
               v-for="(key, index) in Object.keys(data.sub)"
               :key="'sub-stat-' + index"
+              class="text-center"
               >
               <b-form-input 
                 size="sm" 
@@ -134,13 +153,24 @@
                 />
             </td>
           </tr>
+          <tr v-if="data.tag.includes('sub')">
+            <td class="text-center">{{$t('weapon.final')}}</td>
+            <td
+              v-for="(key, index) in Object.keys(data.sub)"
+              :key="'sub-stat-' + index"
+              class="text-center"
+              :class="Math.round(subStat[key]) > data.sub[key] ? 'buff' : (Math.round(subStat[key]) < data.sub[key] ? 'debuff' : '')"
+              >
+              {{Math.round(subStat[key])}}
+            </td>
+          </tr>
         </table>
       </div>
       <div v-for="(types, index) in avaliableChild" :key="index" class="child-wrapper">
-        <div class="arrow-wrapper">
+        <div class="arrow-wrapper" v-if="(simpleMode && childHasTypes(types)) || !simpleMode">
           <span class="arrow-before"></span><span class="arrow-after" ></span>
         </div>
-        <div class="child-part-wrapper">
+        <div class="child-part-wrapper" v-if="(simpleMode && childHasTypes(types)) || !simpleMode">
           <b-dropdown 
             :text="types.join('/')" 
             v-if="!childHasTypes(types)" 
@@ -156,6 +186,7 @@
             v-model="data.children[index]" 
             v-else
             @delete="onDelete(index)"
+            :simpleMode="simpleMode"
             />
         </div>
       </div>
@@ -227,6 +258,10 @@ export default {
     value: {
       type: Object,
       required: true
+    },
+    simpleMode: {
+      type: Boolean,
+      default: false
     }
   },
   data: function() {
@@ -310,10 +345,18 @@ export default {
           var ef = op.effect[key] < 0 ? op.effect[key] : '+' + op.effect[key];
           arr.push(key + ef);
         });
+        if(op.cat.includes('main') || op.cat.includes('sub')) {
+          if(Object.prototype.hasOwnProperty.call(op, 'weaponStat') && Object.prototype.hasOwnProperty.call(op.weaponStat, 'display')) {
+            Object.keys(op.weaponStat.display).forEach(key => {
+              var ef = op.weaponStat.display[key];
+              arr.push(this.$t('weapon.' + key, key) + ef);
+            });
+          }
+        }
         op.cat.forEach(cat => {
           if(typeof obj[cat] !== 'undefined') {
             obj[cat].push({
-              text: op.display[this.$i18n.locale()] + ' (' + arr.join(' ,') + ')',
+              text: op.display[this.$i18n.locale()] + ' (' + arr.join(', ') + ')',
               value: op.name
             });
           }
@@ -346,6 +389,38 @@ export default {
       } else {
         return str;
       }
+    },
+    mainStat() {
+      var stat = this.deepCopy(this.data.main);
+      this.data.mod.forEach(mod => {
+        var modObj = this.findModByName(mod);
+        if(modObj) {
+          if(modObj.cat.includes('main')) {
+            if(Object.prototype.hasOwnProperty.call(modObj, 'weaponStat') && Object.prototype.hasOwnProperty.call(modObj.weaponStat, 'effect')) {
+              Object.keys(modObj.weaponStat.effect).forEach(statKey => {
+                stat[statKey] = stat[statKey] + this.data.main[statKey] * modObj.weaponStat.effect[statKey];
+              })
+            }
+          }
+        }
+      })
+      return stat;
+    },
+    subStat() {
+      var stat = this.deepCopy(this.data.sub);
+      this.data.mod.forEach(mod => {
+        var modObj = this.findModByName(mod);
+        if(modObj) {
+          if(modObj.cat.includes('sub')) {
+            if(Object.prototype.hasOwnProperty.call(modObj, 'weaponStat') && Object.prototype.hasOwnProperty.call(modObj.weaponStat, 'effect')) {
+              Object.keys(modObj.weaponStat.effect).forEach(statKey => {
+                stat[statKey] = stat[statKey] + this.data.sub[statKey] * modObj.weaponStat.effect[statKey];
+              })
+            }
+          }
+        }
+      })
+      return stat;
     },
   },
   methods: {
@@ -498,7 +573,8 @@ span.arrow-after {
 }
 .input-field {
   max-width: 80px;
-  border-width: 0px
+  border-width: 0px;
+  text-align: center;
 }
 .mod-slot {
   width: 20px;
@@ -556,6 +632,14 @@ span.arrow-after {
 .sub-main {
   background: rgb(255,0,0);
   background: linear-gradient(135deg, rgba(255,0,0,1) 0%, rgba(0,0,255,1) 100%);
+  color: white;
+}
+.buff {
+  background-color: green;
+  color: white;
+}
+.debuff {
+  background-color: red;
   color: white;
 }
 </style>

@@ -234,9 +234,15 @@
                   >
                   {{$t('partsUsed')}}
                 </b-checkbox>
+                <b-checkbox
+                  class="pull-right"
+                  v-model="simpleMode"
+                  >
+                  {{$t('simpleMode')}}
+                </b-checkbox>
                 <div class="clearfix" />
                 <div v-if="defaultStat.partsUsed">
-                  <Part v-model="parts" />
+                  <Part v-model="parts" :simpleMode="simpleMode"/>
                 </div>
                 <div v-else>
                   <div class="mb-2 mt-2">
@@ -551,6 +557,7 @@ export default {
       parts: Object.assign({}, this.deepCopy(defaultPart), parts.find(part => part.type === 'BD')),
       
       hideStatDetails: false,
+      simpleMode: false,
     }
   },
   watch: {
@@ -845,6 +852,14 @@ export default {
           var ef = op.effect[key] < 0 ? op.effect[key] : '+' + op.effect[key];
           arr.push(key + ef);
         });
+        if(op.cat.includes('main') || op.cat.includes('sub')) {
+          if(Object.prototype.hasOwnProperty.call(op, 'weaponStat') && Object.prototype.hasOwnProperty.call(op.weaponStat, 'display')) {
+            Object.keys(op.weaponStat.display).forEach(key => {
+              var ef = op.weaponStat.display[key];
+              arr.push(this.$t('weapon.' + key, key) + ef);
+            });
+          }
+        }
         op.cat.forEach(cat => {
           obj[cat].push({
             text: op.name + ' (' + arr.join(' ,') + ')',

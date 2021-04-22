@@ -1,6 +1,42 @@
 [
   {
     "date": "2021/4/22",
+    "version": "v1.4.3",
+    "content": [
+      {
+        "zh": "提供更多零件選項",
+        "en": "Provide more part slots",
+        "jp": "Provide more part slots"
+      },
+      {
+        "zh": "提供隱藏沒有使用零件的功能",
+        "en": "Provide hiding part that not used",
+        "jp": "Provide hiding part that not used"
+      },
+      {
+        "zh": "零件可選擇主武器/副武器，和能輸入武器數值",
+        "en": "Parts can now select main / sub weapon and statistics of weapon can be inputted",
+        "jp": "Parts can now select main / sub weapon and statistics of weapon can be inputted"
+      },
+      {
+        "zh": "零件上的主武器/副武器會跟隨強化項目計算數值",
+        "en": "Main / Sub Weapon statistics will be calculated according to tuning",
+        "jp": "Main / Sub Weapon statistics will be calculated according to tuning"
+      },
+      {
+        "zh": "調整某些數字輸入位置的間距",
+        "en": "Adjust the interval of values of same of the number input such as HP and capa",
+        "jp": "Adjust the interval of values of same of the number input such as HP and capa"
+      },
+      {
+        "zh": "增加更多的記憶體欄位",
+        "en": "Add more memory slots",
+        "jp": "Add more memory slots"
+      }
+    ]
+  },
+  {
+    "date": "2021/4/22",
     "version": "v1.4.2",
     "content": [
       {

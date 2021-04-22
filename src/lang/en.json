@@ -16,7 +16,9 @@
     "ammo": "Ammo",
     "range": "Range",
     "speed": "Speed",
-    "int": "INT"
+    "int": "INT",
+    "init": "Initial",
+    "final": "Final"
   },
   "cat": {
     "hp": "HP",
@@ -60,5 +62,6 @@
     "saved": "Build Saved.",
     "copied": "Copied to clipboard",
     "errorCopy": "Error occurred when copy to clipboard"
-  }
+  },
+  "simpleMode": "Hide not used parts"
 }

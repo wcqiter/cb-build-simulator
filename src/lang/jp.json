@@ -16,7 +16,9 @@
     "ammo": "Ammo",
     "range": "Range",
     "speed": "Speed",
-    "int": "INT"
+    "int": "INT",
+    "init": "Initial",
+    "final": "Final"
   },
   "cat": {
     "hp": "HP",
@@ -60,5 +62,6 @@
     "saved": "保存されたビルド。",
     "copied": "クリップボードにコピー",
     "errorCopy": "クリップボードにコピーするときにエラーが発生しました"
-  }
+  },
+  "simpleMode": "Hide not used parts"
 }
