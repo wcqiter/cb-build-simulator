@@ -9,7 +9,26 @@ const common = {
         return v.toString(16);
       });
     },
-  }
+  },
+  computed: {
+    lang() {
+      return [
+        {
+          value: 'zh',
+          text: '繁中'
+        },
+        {
+          value: 'en',
+          text: 'ENG'
+        },
+        {
+          value: 'jp',
+          text: '日本語',
+          disabled: true
+        }
+      ]
+    },
+  },
 }
 
 export {common}

@@ -34,7 +34,7 @@
               rowspan="2"
               class="text-center"
               >
-              零件數值
+              {{$t('partStat')}}
             </td>
             <td><small>SLOT</small></td>
             <td
@@ -96,7 +96,7 @@
       <b-modal 
         v-model="modalMod"
         hide-footer
-        title="選擇強化"
+        :title="$t('selectMod')"
         size="xl"
         >
         <b-row v-if="typeof data.mod[modIndex] !== 'undefined' && data.mod[modIndex] !== ''">
@@ -107,7 +107,7 @@
               size="sm"
               @click="onRemoveModOption"
               >
-              移除強化
+              {{$t('removeMod')}}
             </b-button>
           </div>
         </b-row>
@@ -115,7 +115,7 @@
           v-for="(item, catName) in options"
           :key="catName"
           >
-          <h5>{{cat[catName]}}</h5>
+          <h5>{{$t('cat.' + catName, catName)}}</h5>
           <b-row>
             <div 
               class="col-md-3 mb-2"
@@ -202,7 +202,7 @@ export default {
           var index = arr.findIndex(k => k.value === c);
           if(index === -1) {
             arr.push({
-              text: this.cat[c],
+              text: this.$t('cat.' + c, c),
               value: c
             })
           }
@@ -224,7 +224,7 @@ export default {
         op.cat.forEach(cat => {
           if(typeof obj[cat] !== 'undefined') {
             obj[cat].push({
-              text: op.name + ' (' + arr.join(' ,') + ')',
+              text: op.display[this.$i18n.locale()] + ' (' + arr.join(' ,') + ')',
               value: op.name
             });
           }
@@ -235,7 +235,7 @@ export default {
     statDisplay() {
       var str = Object.keys(this.data.stat).filter(k => this.data.stat[k] !== 0).map(k => k.toUpperCase() + (this.data.stat[k] > 0 ? '+' : '') + this.data.stat[k]).join(' ');
       if(str == '') {
-        return '點擊零件修改數值'
+        return this.$t('clickOnPart')
       } else {
         return str;
       }
@@ -322,7 +322,7 @@ export default {
           var ef = op.effect[key] < 0 ? op.effect[key] : '+' + op.effect[key];
           arr.push(key + ef);
         });
-        return op.name + ' (' + arr.join(' ,') + ')';
+        return op.display[this.$i18n.locale()] + ' (' + arr.join(' ,') + ')';
       } else {
         return '';
       }

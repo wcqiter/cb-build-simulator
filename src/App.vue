@@ -18,7 +18,7 @@
         </b-col>
       </b-row>
     </div>
-    <b-modal v-model="modalShow" hide-footer title="更新歷程">
+    <b-modal v-model="modalShow" hide-footer :title="$t('history')">
       <div v-for="(row, i) in version" :key="i">
         <h5>{{row.version}}</h5>
         <small>{{row.date}}</small>
@@ -29,21 +29,51 @@
         </ul>
       </div>
     </b-modal>
+    <b-modal v-model="langModal" hide-footer hide-header no-close-on-backdrop no-close-on-esc>
+      <div class="text-center">
+        <div>
+          選擇語言
+        </div>
+        <div>
+          Select Your Preferred Language
+        </div>
+        <div>
+          ご希望の言語を選択してください
+        </div>
+      </div>
+      <b-row>
+        <b-col v-for="(row, i) in lang" :key="i">
+          <b-button
+            @click="setLang(row.value)"
+            variant="primary"
+            class="mt-2"
+            block
+            :disabled="row.disabled"
+            >
+            {{row.text}}
+          </b-button>
+        </b-col>
+      </b-row>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import { common } from '@/mixins/common.js'
+
 import version from '@/update-notes/version.json'
 import Simulator from '@/views/Simulator.vue'
 
 export default {
   name: 'App',
+  mixins: [common],
   components: {
     Simulator,
   },
   data: function() {
     return {
       modalShow: false,
+      langModal: false,
     }
   },
   computed: {
@@ -52,6 +82,33 @@ export default {
     },
     latestVersion() {
       return version[0].version;
+    },
+  },
+  created() {
+    this.initLang();
+  },
+  mounted() {
+  
+  },
+  methods: {
+    initLang() {
+      if(window.localStorage) {
+        var savedLang = window.localStorage.getItem('cb-build-lang');
+        if(savedLang) {
+          this.setLang(savedLang)
+        } else {
+          this.langModal = true;
+        }
+      } else {
+        this.langModal = true;
+      }
+    },
+    setLang(lang) {
+      this.langModal = false;
+      this.$i18n.set(lang);
+      if(window.localStorage) {
+        window.localStorage.setItem('cb-build-lang', lang);
+      }
     },
   },
 }

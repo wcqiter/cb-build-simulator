@@ -19,6 +19,23 @@
           <i class="fa fa-plus" />
         </b-nav-item>
       </b-navbar-nav>
+      <b-navbar-nav class="ml-auto">
+
+        <b-nav-item-dropdown right>
+          <template #button-content>
+            <i class="fa fa-globe" /> {{lang.find(i => i.value === $i18n.locale()).text}}
+          </template>
+          <b-dropdown-item
+            v-for="item in lang"
+            :key="item.value"
+            @click="setLang(item.value)"
+            :disabled="item.disabled"
+            >
+            {{item.text}}
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+
+      </b-navbar-nav>
     </b-navbar>
     <div class="whole-panel">
       <b-container fluid>
@@ -28,7 +45,7 @@
               <div>
                 <b-form-group 
                   v-if="storageUsed"
-                  label="配置名稱"
+                  :label="$t('name')"
                   label-cols="3"
                   >
                   <b-form-input
@@ -39,7 +56,7 @@
               <div>
                 <b-form-group 
                   v-if="storageUsed"
-                  label="備註"
+                  :label="$t('remarks')"
                   label-cols="3"
                   >
                   <b-form-textarea
@@ -54,7 +71,7 @@
                   @click="onSave"
                   variant="primary"
                   >
-                  <i class="fa fa-save" /> 儲存
+                  <i class="fa fa-save" /> {{$t('save')}}
                 </b-button>
                 <!--
                 <b-button variant="success" class="ml-2" @click.stop.prevent="onExportAsTxt()">
@@ -62,12 +79,12 @@
                 </b-button>
                 !-->
                 <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(findTabIndexById(tab))" v-if="tabs.length > 1">
-                  <i class="fa fa-trash" /> 刪除配置
+                  <i class="fa fa-trash" /> {{$t('delete')}}
                 </b-button>
               </div>
             </b-card>
             <b-card class="mb-2">
-              <h5 class="mb-2">機體基本資料</h5>
+              <h5 class="mb-2">{{$t('info')}}</h5>
               <b-form-group>
                 <b-form-radio-group
                   size="sm"
@@ -76,7 +93,7 @@
                   />
               </b-form-group>
               <b-form-group
-                label="戰力卡類別"
+                :label="$t('capaType')"
                 label-cols-md="4"
                 >
                 <b-form-select
@@ -92,11 +109,11 @@
                   :checked-value="true"
                   :unchecked-value="false"
                   >
-                  有核心強化
+                  {{$t('weaponUsed')}}
                 </b-form-checkbox>
               </b-form-group>
               <b-form-group
-                label="核心卡類別"
+                :label="$t('weaponType')"
                 label-cols-md="4"
                 v-if="defaultStat.weaponUsed"
                 >
@@ -108,12 +125,12 @@
               </b-form-group>
             </b-card>
             <b-card class="mb-2">
-              <h5 class="mb-2">機體數值</h5>
+              <h5 class="mb-2">{{$t('stat')}}</h5>
               <div v-if="!defaultStat.partsUsed">
                 <div style="overflow: auto">
                   <table border="1">
                     <tr>
-                      <td class="text-center">{{cat['capa']}}</td>
+                      <td class="text-center">{{$t('cat.capa')}}</td>
                       <td class="input-td" v-if="!hideStatDetails">
                         <b-form-input
                           class="input-field"
@@ -138,7 +155,7 @@
                       <td class="text-center" v-else><b>{{defaultStat['cost'] + deltaData['cost']}} / {{defaultStat['capa'] + deltaData['capa']}}</b></td>
                     </tr>
                     <tr>
-                      <td class="text-center">{{cat['slot']}}</td>
+                      <td class="text-center">{{$t('cat.slot')}}</td>
                       <td class="input-td" colspan="3" v-if="!hideStatDetails">
                         <b-form-input
                           class="input-field"
@@ -152,7 +169,7 @@
                       <td class="text-center"><span v-if="!hideStatDetails">= </span><b>{{finalData['slot']}}</b></td>
                     </tr>
                     <tr v-for="(key, i) in basicStatKeys" :key="i">
-                      <td class="text-center">{{cat[key]}}</td>
+                      <td class="text-center">{{$t('cat.' + key, key)}}</td>
                       <td class="input-td" colspan="3" v-if="!hideStatDetails">
                         <b-form-input
                           class="input-field"
@@ -175,21 +192,21 @@
                   block
                   >
                   <i class="fa" :class="hideStatDetails ? 'fa-plus' : 'fa-minus'" />
-                  {{hideStatDetails ? '顯示詳細' : '隱藏詳細'}}
+                  {{hideStatDetails ? $t('showStatDetails') : $t('hideStatDetails')}}
                 </b-button>
               </div>
               <div v-else style="overflow: auto">
                 <table border="1">
                   <tr>
-                    <td class="text-center">{{cat['cost']}}/{{cat['capa']}}</td>
+                    <td class="text-center">{{cat['cost']}}/{{$t('cat.capa')}}</td>
                     <td class="text-center">{{partsStat['cost']}} / {{partsStat['capa']}}</td>
                   </tr>
                   <tr>
-                    <td class="text-center">{{cat['slot']}}</td>
+                    <td class="text-center">{{$t('cat.slot')}}</td>
                     <td class="text-center">{{partsStat['modNo']}} / {{partsStat['slot']}}</td>
                   </tr>
                   <tr v-for="(key, i) in basicStatKeys" :key="i">
-                    <td class="text-center">{{cat[key]}}</td>
+                    <td class="text-center">{{$t('cat.' + key, key)}}</td>
                     <td class="text-center">{{partsStat[key]}}</td>
                   </tr>
                 </table>
@@ -199,11 +216,11 @@
           <div class="col-md-5 content-panel">
             <div>
               <b-card>
-                <h5 class="mb-2">機體強化項目</h5>
+                <h5 class="mb-2">{{$t('mod')}}</h5>
                 <b-checkbox 
                   v-model="defaultStat.partsUsed"
                   >
-                  使用零件強化方案
+                  {{$t('partsUsed')}}
                 </b-checkbox>
                 <div class="clearfix" />
                 <div v-if="defaultStat.partsUsed">
@@ -216,7 +233,7 @@
                       variant="primary"
                       block
                       >
-                      <i class="fa fa-plus" /> 新強化項目
+                      <i class="fa fa-plus" /> {{$t('addMod')}}
                     </b-button>
                   </div>
                   <div v-for="(item, i) in mod" :key="i" style="display: flex">
@@ -231,7 +248,7 @@
                     <b-row style="flex: 1;">
                       <b-form-group
                         class="col-3"
-                        label="強化類別"
+                        :label="$t('modType')"
                         >
                         <b-select
                           size="sm"
@@ -241,7 +258,7 @@
                       </b-form-group>
                       <b-form-group
                         class="col-5"
-                        label="強化項目"
+                        :label="$t('modOption')"
                         >
                         <b-form-select
                           v-model="mod[i].key"
@@ -252,13 +269,13 @@
                         <b-form-input
                           plaintext
                           size="sm"
-                          value="<= 先選擇類別"
+                          :value="$t('selectModTypeFirst')"
                           v-else
                           />
                       </b-form-group>
                       <b-form-group
                         class="col-4"
-                        label="數量"
+                        :label="$t('num')"
                         >
                         <b-form-input
                           size="sm"
@@ -278,7 +295,7 @@
                 <table>
                   <tr>
                     <td class="text-center td-small-padding">
-                      <small>機體等級</small>
+                      <small>{{$t('level')}}</small>
                     </td>
                   </tr>
                   <tr>
@@ -286,10 +303,10 @@
                   </tr>
                 </table>
               </div>
-              <h5 class="mb-2">機體強化卡片</h5>
+              <h5 class="mb-2">{{$t('card')}}</h5>
               <div class="clearfix" />
               <div class="pull-right">
-                <small>不計算數值</small>
+                <small>{{$t('exceptCard')}}</small>
               </div>
               <div class="clearfix" />
               <div class="mb-2">
@@ -310,7 +327,7 @@
                       >
                       <b-row no-gutters>
                         <small class="col-4 text-left">CAPA {{findCardByType('capa').effect[defaultStat['capaType']].capa}}, HP {{findCardByType('capa').effect[defaultStat['capaType']].hp}}</small>
-                        <div class="col-4 text-center">{{findCardByType('capa').name}}</div>
+                        <div class="col-4 text-center">{{findCardByType('capa').display[$i18n.locale()]}}</div>
                         <small class="col-4 text-right">COST {{findCardByType('capa').effect[defaultStat['capaType']].cost}}</small>
                       </b-row>
                     </b-button>
@@ -341,7 +358,7 @@
                       >
                       <b-row no-gutters>
                         <small class="col-4 text-left">CAPA {{findCardByType('weapon').effect[defaultStat['weaponType']].capa}}, HP {{findCardByType('weapon').effect[defaultStat['weaponType']].hp}}</small>
-                        <div class="col-4 text-center">{{findCardByType('weapon').name}}</div>
+                        <div class="col-4 text-center">{{findCardByType('weapon').display[$i18n.locale()]}}</div>
                         <small class="col-4 text-right">COST {{findCardByType('weapon').effect[defaultStat['weaponType']].cost}}</small>
                       </b-row>
                     </b-button>
@@ -372,7 +389,7 @@
                       >
                       <b-row no-gutters>
                         <small class="col-4 text-left"></small>
-                        <div class="col-4 text-center">{{card.name}}</div>
+                        <div class="col-4 text-center">{{card.display[$i18n.locale()]}}</div>
                         <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
                       </b-row>
                     </b-button>
@@ -402,7 +419,7 @@
                       >
                       <b-row no-gutters>
                         <small class="col-4 text-left"></small>
-                        <div class="col-4 text-center">{{card.name}}</div>
+                        <div class="col-4 text-center">{{card.display[$i18n.locale()]}}</div>
                         <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
                       </b-row>
                     </b-button>
@@ -432,7 +449,7 @@
                       >
                       <b-row no-gutters>
                         <small class="col-4 text-left"></small>
-                        <div class="col-4 text-center">{{card.name}}</div>
+                        <div class="col-4 text-center">{{card.display[$i18n.locale()]}}</div>
                         <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
                       </b-row>
                     </b-button>
@@ -460,8 +477,8 @@
                       block
                       >
                       <b-row no-gutters>
-                        <small class="col-4 text-left">外置插卡</small>
-                        <div class="col-4 text-center">{{card.name}}</div>
+                        <small class="col-4 text-left">{{$t('extraCard')}}</small>
+                        <div class="col-4 text-center">{{card.display[$i18n.locale()]}}</div>
                         <small class="col-4 text-right">COST {{card.effect[defaultStat['type']].cost}}</small>
                       </b-row>
                     </b-button>
@@ -562,7 +579,7 @@ export default {
     typeOptions() {
       return Object.keys(type).map(i => {
         return {
-          text: type[i],
+          text: this.$t('type.' + i, type[i]),
           value: i
         }
       })
@@ -825,6 +842,9 @@ export default {
     },
   },
   methods: {
+    setLang(lang) {
+      this.$i18n.set(lang);
+    },
     initData() {
       if(window.localStorage) {
         console.log('localStorage enabled.')
@@ -837,7 +857,7 @@ export default {
           this.tab = null;
           console.log('Tab index not detected, changed to 0');
         }
-        var keys = Object.keys(window.localStorage).filter(i => i.includes('cb-build') && i !== 'cb-build-tab-index');
+        var keys = Object.keys(window.localStorage).filter(i => i.includes('cb-build') && i !== 'cb-build-tab-index' && i !== 'cb-build-lang');
         console.log('Found ' + keys.length + ' set of build in localStorage');
         if(keys.length > 0) {
           this.tabs = keys.map(key => {
@@ -982,7 +1002,7 @@ export default {
       }
     },
     onErrorStorage() {
-      this.$bvToast.toast("你的瀏覽器不支持LocalStorage，無法儲存配置。", {
+      this.$bvToast.toast(this.$t('toast.noLocalStorage'), {
         variant: 'danger',
         solid: true
       })
@@ -1013,7 +1033,7 @@ export default {
           extraCardsExcept: this.extraCardsExcept,
           parts: this.parts
         }))
-        this.$bvToast.toast("已儲存配置", {
+        this.$bvToast.toast(this.$t('toast.saved'), {
           variant: 'primary',
           solid: true,
           "auto-hide-delay": 1000,
