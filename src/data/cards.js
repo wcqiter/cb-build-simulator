@@ -5,7 +5,7 @@ export default [
     display: {
       zh: "提升戰力值上限",
       en: "Raise cost capacitiy",
-      jp: ""
+      jp: "キャパシティアップ"
     },
     effect: {
       type1: {
@@ -47,6 +47,11 @@ export default [
         cost: 20,
         capa: 90,
         hp: 22
+      },
+      type9: {
+        cost: 20,
+        capa: 85,
+        hp: 18
       }
     },
     effectKey: 'capaType',
@@ -58,7 +63,7 @@ export default [
     display: {
       zh: "強化武器",
       en: "Enhance internal weapon",
-      jp: ""
+      jp: "内蔵武器の強化"
     },
     effect: {
       type1: {
@@ -91,7 +96,7 @@ export default [
     display: {
       zh: "近戰防護",
       en: "Sword Guard",
-      jp: ""
+      jp: "ソードガード"
     },
     effect: {
       lnd: {
@@ -109,7 +114,7 @@ export default [
     display: {
       zh: "裝甲防護",
       en: "Shell Guard",
-      jp: ""
+      jp: "シェルガード"
     },
     effect: {
       lnd: {
@@ -130,7 +135,7 @@ export default [
     display: {
       zh: "光束防護",
       en: "Beam Guard",
-      jp: ""
+      jp: "ビームガード"
     },
     effect: {
       air: {
@@ -148,7 +153,7 @@ export default [
     display: {
       zh: "暴風防護",
       en: "Blast Guard",
-      jp: ""
+      jp: "ブラストガード"
     },
     effect: {
       lnd: {
@@ -167,7 +172,7 @@ export default [
     display: {
       zh: "緊急迴避",
       en: "Sway",
-      jp: ""
+      jp: "スウェー"
     },
     effect: {
       lnd: {
@@ -188,7 +193,7 @@ export default [
     display: {
       zh: "高速移動",
       en: "Boost Run",
-      jp: ""
+      jp: "ブーストランニング"
     },
     effect: {
       lnd: {
@@ -209,7 +214,7 @@ export default [
     display: {
       zh: "浮游衝刺",
       en: "Float Dash",
-      jp: ""
+      jp: "フロートダッシュ"
     },
     effect: {
       air: {
@@ -230,7 +235,7 @@ export default [
     display: {
       zh: "短距跳躍",
       en: "Short Boost",
-      jp: ""
+      jp: "ショートブースト"
     },
     effect: {
       lnd: {
@@ -251,7 +256,7 @@ export default [
     display: {
       zh: "安定降落",
       en: "Quick Land",
-      jp: ""
+      jp: "クイックランディング"
     },
     effect: {
       lnd: {
@@ -275,7 +280,7 @@ export default [
     display: {
       zh: "高速爬升",
       en: "Quick Jump",
-      jp: ""
+      jp: "クイックジャンプ"
     },
     effect: {
       air: {
@@ -296,7 +301,7 @@ export default [
     display: {
       zh: "突擊步伐",
       en: "Assault Step",
-      jp: ""
+      jp: "アサルトステップ"
     },
     effect: {
       lnd: {
@@ -311,7 +316,7 @@ export default [
     display: {
       zh: "噴射步伐",
       en: "Boost Step",
-      jp: ""
+      jp: "ブーストステップ"
     },
     effect: {
       art: {
@@ -326,7 +331,7 @@ export default [
     display: {
       zh: "滑翔噴射",
       en: "Glide Boost",
-      jp: ""
+      jp: "グライドブースト"
     },
     effect: {
       air: {
@@ -341,7 +346,7 @@ export default [
     display: {
       zh: "水中步行",
       en: "Aqua Walk",
-      jp: ""
+      jp: "アクアウォーキング"
     },
     effect: {
       lnd: {
@@ -356,7 +361,7 @@ export default [
     display: {
       zh: "空中衝刺",
       en: "Accele Roll",
-      jp: ""
+      jp: "アクセルロール"
     },
     effect: {
       air: {
@@ -371,7 +376,7 @@ export default [
     display: {
       zh: "空中翻轉",
       en: "Air Loop",
-      jp: ""
+      jp: "エアループ"
     },
     effect: {
       air: {
@@ -386,7 +391,7 @@ export default [
     display: {
       zh: "終極翻滾",
       en: "Ultimate Roll",
-      jp: ""
+      jp: "アルティメットロール"
     },
     effect: {
       air: {
@@ -402,7 +407,7 @@ export default [
     display: {
       zh: "推進燃料",
       en: "Quick Boost",
-      jp: ""
+      jp: "ブーストチューン"
     },
     effect: {
       lnd: {
@@ -426,7 +431,7 @@ export default [
     display: {
       zh: "爬升之力",
       en: "Ascending Force",
-      jp: ""
+      jp: "上昇力"
     },
     effect: {
       air: {
@@ -441,7 +446,7 @@ export default [
     display: {
       zh: "強硬突擊",
       en: "Tough Runner",
-      jp: ""
+      jp: "タフランナー"
     },
     effect: {
       lnd: {
@@ -459,7 +464,7 @@ export default [
     display: {
       zh: "硬直回復",
       en: "Stun Regain",
-      jp: ""
+      jp: "スタンリゲイン"
     },
     effect: {
       lnd: {
@@ -483,7 +488,7 @@ export default [
     display: {
       zh: "EX防護",
       en: "Tough Wonder Bit",
-      jp: ""
+      jp: "ワンダータフネス"
     },
     effect: {
       lnd: {
@@ -507,7 +512,7 @@ export default [
     display: {
       zh: "突擊移動",
       en: "Moving Burst",
-      jp: ""
+      jp: "ムービングバースト"
     },
     effect: {
       lnd: {
@@ -531,7 +536,7 @@ export default [
     display: {
       zh: "狙擊精準器",
       en: "Sniper Sight",
-      jp: ""
+      jp: "スナイパーサイト"
     },
     effect: {
       lnd: {
@@ -555,7 +560,7 @@ export default [
     display: {
       zh: "反偵測系統",
       en: "Stealth System",
-      jp: ""
+      jp: "ステルスシステム"
     },
     effect: {
       lnd: {
@@ -579,7 +584,7 @@ export default [
     display: {
       zh: "強化雷達",
       en: "Broad Radar",
-      jp: ""
+      jp: "ブロードレーダー"
     },
     effect: {
       lnd: {
@@ -603,7 +608,7 @@ export default [
     display: {
       zh: "狀態異常抵抗",
       en: "Fast Recovery",
-      jp: ""
+      jp: "ファストリカバリー"
     },
     effect: {
       lnd: {
@@ -627,7 +632,7 @@ export default [
     display: {
       zh: "緩速抵抗",
       en: "Anti Slow",
-      jp: ""
+      jp: "アンチスロー"
     },
     effect: {
       lnd: {
@@ -645,7 +650,7 @@ export default [
     display: {
       zh: "燃燒抵抗",
       en: "Anti Burning",
-      jp: ""
+      jp: "アンチバーニング"
     },
     effect: {
       lnd: {
@@ -660,7 +665,7 @@ export default [
     display: {
       zh: "超效能散熱器",
       en: "Hyper Radiator",
-      jp: ""
+      jp: "ハイパーラジレーター"
     },
     effect: {
       lnd: {
@@ -675,7 +680,7 @@ export default [
     display: {
       zh: "緩衝撞擊",
       en: "Absorb Bump",
-      jp: ""
+      jp: "バンプアブソーバー"
     },
     effect: {
       lnd: {
@@ -699,7 +704,7 @@ export default [
     display: {
       zh: "復仇槍擊",
       en: "Revenge Shot",
-      jp: ""
+      jp: "リベンジショット"
     },
     effect: {
       air: {
@@ -720,7 +725,7 @@ export default [
     display: {
       zh: "必殺值增加",
       en: "Wonder Rate Up",
-      jp: ""
+      jp: "レイジングワンダー"
     },
     effect: {
       lnd: {
@@ -741,7 +746,7 @@ export default [
     display: {
       zh: "必殺回復",
       en: "Growing Wonder",
-      jp: ""
+      jp: "Growing Wonder"
     },
     effect: {
       msc: {
@@ -756,7 +761,7 @@ export default [
     display: {
       zh: "落下充能",
       en: "Fall Charge",
-      jp: ""
+      jp: "フォールチャージ"
     },
     effect: {
       air: {
@@ -772,7 +777,7 @@ export default [
     display: {
       zh: "緊急迴避",
       en: "Sway",
-      jp: ""
+      jp: "スウェー"
     },
     effect: {
       lnd: {
@@ -793,7 +798,7 @@ export default [
     display: {
       zh: "短距跳躍",
       en: "Short Boost",
-      jp: ""
+      jp: "ショートブースト"
     },
     effect: {
       lnd: {
@@ -817,7 +822,7 @@ export default [
     display: {
       zh: "浮游衝刺",
       en: "Float Dash",
-      jp: ""
+      jp: "フロートダッシュ"
     },
     effect: {
       air: {
@@ -838,7 +843,7 @@ export default [
     display: {
       zh: "突擊墊步",
       en: "Assault Step",
-      jp: ""
+      jp: "アサルトステップ"
     },
     effect: {
       lnd: {
@@ -853,7 +858,7 @@ export default [
     display: {
       zh: "滑翔噴射",
       en: "Glide Boost",
-      jp: ""
+      jp: "グライドブースト"
     },
     effect: {
       air: {
@@ -868,7 +873,7 @@ export default [
     display: {
       zh: "推進墊步",
       en: "Boost Step",
-      jp: ""
+      jp: "ブーストステップ"
     },
     effect: {
       art: {
@@ -883,7 +888,7 @@ export default [
     display: {
       zh: "空中衝刺",
       en: "Accele Roll",
-      jp: ""
+      jp: "アクセルロール"
     },
     effect: {
       lng: {
@@ -907,7 +912,7 @@ export default [
     display: {
       zh: "空中翻轉",
       en: "Air Loop",
-      jp: ""
+      jp: "エアループ"
     },
     effect: {
       air: {
@@ -922,7 +927,7 @@ export default [
     display: {
       zh: "空中墊步",
       en: "Air Step",
-      jp: ""
+      jp: "Air Step"
     },
     effect: {
       lng: {
@@ -946,7 +951,7 @@ export default [
     display: {
       zh: "幻影迴避",
       en: "Slide Boost",
-      jp: ""
+      jp: "スライドブースト"
     },
     effect: {
       air: {

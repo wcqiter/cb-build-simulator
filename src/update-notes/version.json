@@ -1,6 +1,32 @@
 [
   {
     "date": "2021/4/22",
+    "version": "v1.4.2",
+    "content": [
+      {
+        "zh": "增加戰力卡類型(capa +85 cost +20 hp+18)",
+        "en": "Add capa card for (capa +85 cost +20 hp+18)",
+        "jp": "キャパシティアップ(capa +85 cost +20 hp+18)追加"
+      },
+      {
+        "zh": "增加顏色顯示",
+        "en": "Add color highlight to over cost, invalid slot number and stat that smaller than or equal to 0",
+        "jp": "色のハイライトを追加"
+      },
+      {
+        "zh": "修復移除強化，孔數沒有跟隨改變的錯誤",
+        "en": "Fix when remove tuning, the slot number won't change",
+        "jp": "チューニングを削除するときに修正します。スロット番号は変更されません。"
+      },
+      {
+        "zh": "零件顯示數值會根據強化項目改變",
+        "en": "Statistics of part will change according to initial statistics and tuning",
+        "jp": "パーツの統計は、初期統計とチューニングに応じて変化します"
+      }
+    ]
+  },
+  {
+    "date": "2021/4/22",
     "version": "v1.4.1",
     "content": [
       {

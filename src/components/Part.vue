@@ -233,7 +233,25 @@ export default {
       return obj;
     },
     statDisplay() {
-      var str = Object.keys(this.data.stat).filter(k => this.data.stat[k] !== 0).map(k => k.toUpperCase() + (this.data.stat[k] > 0 ? '+' : '') + this.data.stat[k]).join(' ');
+      var stat = this.deepCopy(this.data.stat);
+      this.data.mod.forEach(mod => {
+        var modObj = this.findModByName(mod);
+        if(modObj) {
+          if(!Object.prototype.hasOwnProperty.call(stat, 'cost')) {
+            stat['cost'] = 0;
+          }
+          Object.keys(modObj.effect).forEach(key => {
+            if(!Object.prototype.hasOwnProperty.call(stat, key)) {
+              stat[key] = 0;
+            }
+            stat[key] += modObj.effect[key];
+            if(Object.prototype.hasOwnProperty.call(modObj, 'cost')) {
+              stat['cost'] += modObj.cost;
+            }
+          })
+        }
+      })
+      var str = Object.keys(stat).filter(k => stat[k] !== 0).map(k => k.toUpperCase() + (stat[k] > 0 ? '+' : '') + stat[k]).join(' ');
       if(str == '') {
         return this.$t('clickOnPart')
       } else {
@@ -325,6 +343,14 @@ export default {
         return op.display[this.$i18n.locale()] + ' (' + arr.join(' ,') + ')';
       } else {
         return '';
+      }
+    },
+    findModByName(value) {
+      var index = options.findIndex(opt => opt.name === value);
+      if(index !== -1) {
+        return options[index];
+      } else {
+        return null;
       }
     },
   }

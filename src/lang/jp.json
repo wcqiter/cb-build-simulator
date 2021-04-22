@@ -1,3 +1,57 @@
 {
-  
+  "lang": "言語",
+  "save": "ストレージ構成",
+  "delete": "構成を削除する",
+  "name": "構成名",
+  "remarks": "備考",
+  "info": "基本情報",
+  "type": {
+    "lnd": "陸",
+    "air": "空",
+    "art": "砲撃",
+    "msc": "補助"
+  },
+  "cat": {
+    "hp": "HP",
+    "str": "STR",
+    "tec": "TEC",
+    "wlk": "WLK",
+    "fly": "FLY",
+    "tgh": "TGH",
+    "cost": "COST",
+    "capa": "CAPA",
+    "slot": "SLOT",
+    "other": "その他",
+    "main": "主な武器",
+    "sub": "サブウェポン"
+  },
+  "showStatDetails": "詳細を表示",
+  "hideStatDetails": "詳細を非表示",
+  "capaType": "容量カートリッジタイプ",
+  "weaponUsed": "内部武器カートリッジを強化しています",
+  "weaponType": "内部武器カートリッジタイプを強化する",
+  "stat": "ビルド統計",
+  "mod": "チューニング",
+  "partsUsed": "パーツチューニングモードを使用する",
+  "card": "カートリッジ",
+  "level": "レベル",
+  "exceptCard": "統計にカウントされません",
+  "addMod": "新しいチューニング",
+  "modType": "Tuning Type",
+  "modOption": "Tuning Option",
+  "selectModTypeFirst": "<= Select Tuning Type",
+  "num": "Count",
+  "extraCard": "Extra Cartridge",
+  "clickOnPart": "統計を変更するには、パーツをクリックしてください",
+  "partStat": "部品統計",
+  "selectMod": "Select Tuning",
+  "removeMod": "Remove Tuning",
+  "history": "更新履歴",
+  "exportLink": "リンクでビルドを共有",
+  "toast": {
+    "noLocalStorage": "お使いのブラウザはLocalStorageをサポートしておらず、ビルドを保存できません。",
+    "saved": "保存されたビルド。",
+    "copied": "クリップボードにコピー",
+    "errorCopy": "クリップボードにコピーするときにエラーが発生しました"
+  }
 }

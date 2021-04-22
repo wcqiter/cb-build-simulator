@@ -138,7 +138,7 @@
               <div v-if="!defaultStat.partsUsed">
                 <div style="overflow: auto">
                   <table border="1">
-                    <tr>
+                    <tr :class="finalData['finalCapa'] < 0 ? 'over-cost' : (finalData['finalCapa'] === 0 ? 'ok-cost' : '')">
                       <td class="text-center">{{$t('cat.capa')}}</td>
                       <td class="input-td" v-if="!hideStatDetails">
                         <b-form-input
@@ -163,7 +163,7 @@
                       <td class="text-center" v-if="!hideStatDetails">= <b>{{finalData['finalCapa']}}</b></td>
                       <td class="text-center" v-else><b>{{defaultStat['cost'] + deltaData['cost']}} / {{defaultStat['capa'] + deltaData['capa']}}</b></td>
                     </tr>
-                    <tr>
+                    <tr :class="finalData['slot'] < 0 ? 'over-cost' : (finalData['slot'] === 0 ? 'ok-cost' : '')">
                       <td class="text-center">{{$t('cat.slot')}}</td>
                       <td class="input-td" colspan="3" v-if="!hideStatDetails">
                         <b-form-input
@@ -206,15 +206,15 @@
               </div>
               <div v-else style="overflow: auto">
                 <table border="1">
-                  <tr>
-                    <td class="text-center">{{cat['cost']}}/{{$t('cat.capa')}}</td>
+                  <tr :class="partsStat['cost'] > partsStat['capa'] ? 'over-cost' : (partsStat['cost'] === partsStat['capa'] ? 'ok-cost' : '')">
+                    <td class="text-center">{{$t('cat.cost')}}/{{$t('cat.capa')}}</td>
                     <td class="text-center">{{partsStat['cost']}} / {{partsStat['capa']}}</td>
                   </tr>
-                  <tr>
+                  <tr :class="partsStat['modNo'] > partsStat['slot'] ? 'over-cost' : (partsStat['modNo'] === partsStat['slot'] ? 'ok-cost' : '')">
                     <td class="text-center">{{$t('cat.slot')}}</td>
                     <td class="text-center">{{partsStat['modNo']}} / {{partsStat['slot']}}</td>
                   </tr>
-                  <tr v-for="(key, i) in basicStatKeys" :key="i">
+                  <tr v-for="(key, i) in basicStatKeys" :key="i" :class="partsStat[key] > 40 || partsStat[key] <= 0 ? 'over-cost' : ''">
                     <td class="text-center">{{$t('cat.' + key, key)}}</td>
                     <td class="text-center">{{partsStat[key]}}</td>
                   </tr>
@@ -1295,7 +1295,7 @@ export default {
         data['slot'] = 0;
       }
       if(Array.isArray(part.mod)) {
-        data['modNo'] = parseInt(part.mod.length);
+        data['modNo'] = parseInt(part.mod.filter(m => m !== '').length);
       } else {
         data['modNo'] = 0;
       }
@@ -1563,5 +1563,13 @@ td {
     overflow: auto; 
     max-height: calc(100vh - 24px - 56px - 4px);
   }
+}
+.over-cost {
+  background-color: red;
+  color: white;
+}
+.ok-cost {
+  background-color: green;
+  color: white;
 }
 </style>
