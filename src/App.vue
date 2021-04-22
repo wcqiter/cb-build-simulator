@@ -24,7 +24,12 @@
         <small>{{row.date}}</small>
         <ul>
           <li v-for="(item, j) in row.content" :key="j">
+            <span v-if="typeof item === 'string'">
             {{item}}
+            </span>
+            <span v-else>
+              {{item[$i18n.locale()]}}
+            </span>
           </li>
         </ul>
       </div>

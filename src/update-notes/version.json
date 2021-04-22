@@ -1,5 +1,16 @@
 [
   {
+    "date": "2021/4/22",
+    "version": "v1.4.0",
+    "content": [
+      {
+        "zh": "增加多語言選項",
+        "en": "Add multi language support",
+        "jp": "多言語を追加する"
+      }
+    ]
+  },
+  {
     "date": "2021/4/21",
     "version": "v1.3.1",
     "content": [
