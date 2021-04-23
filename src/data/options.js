@@ -5,7 +5,7 @@ export default [
     display: {
       zh: "能量再生",
       en: "Life",
-      jp: ""
+      jp: "ライフ"
     },
     "cost": 10,
     "effect": {
@@ -18,7 +18,7 @@ export default [
     display: {
       zh: "強化能量再生",
       en: "High Life",
-      jp: ""
+      jp: "ハイライフ"
     },
     "cost": 20,
     "effect": {
@@ -31,7 +31,7 @@ export default [
     display: {
       zh: "進化能量再生",
       en: "Great Life",
-      jp: ""
+      jp: "グレートライフ"
     },
     "cost": 35,
     "effect": {
@@ -45,7 +45,7 @@ export default [
     display: {
       zh: "守衛",
       en: "Sentinel",
-      jp: ""
+      jp: "センチネル"
     },
     "cost": 15,
     "effect": {
@@ -59,7 +59,7 @@ export default [
     display: {
       zh: "野獸",
       en: "Beast",
-      jp: ""
+      jp: "ビースト"
     },
     "cost": 15,
     "effect": {
@@ -73,7 +73,7 @@ export default [
     display: {
       zh: "遊俠",
       en: "Ranger",
-      jp: ""
+      jp: "レンジャー"
     },
     "cost": 15,
     "effect": {
@@ -87,7 +87,7 @@ export default [
     display: {
       zh: "坦克",
       en: "Tank",
-      jp: ""
+      jp: "タンク"
     },
     "cost": 15,
     "effect": {
@@ -101,7 +101,7 @@ export default [
     display: {
       zh: "飛鷹",
       en: "Eagle",
-      jp: ""
+      jp: "イーグル"
     },
     "cost": 15,
     "effect": {
@@ -115,7 +115,7 @@ export default [
     display: {
       zh: "高級守衛",
       en: "High Sentinel",
-      jp: ""
+      jp: "ハイセンチネル"
     },
     "cost": 40,
     "effect": {
@@ -129,7 +129,7 @@ export default [
     display: {
       zh: "高級野獸",
       en: "High Beast",
-      jp: ""
+      jp: "ハイビースト"
     },
     "cost": 35,
     "effect": {
@@ -144,7 +144,7 @@ export default [
     display: {
       zh: "高級遊俠",
       en: "High Ranger",
-      jp: ""
+      jp: "ハイレンジャー"
     },
     "cost": 35,
     "effect": {
@@ -159,7 +159,7 @@ export default [
     display: {
       zh: "高級坦克",
       en: "High Tank",
-      jp: ""
+      jp: "ハイタンク"
     },
     "cost": 35,
     "effect": {
@@ -174,7 +174,7 @@ export default [
     display: {
       zh: "高級飛鷹",
       en: "High Eagle",
-      jp: ""
+      jp: "ハイイーグル"
     },
     "cost": 35,
     "effect": {
@@ -190,7 +190,7 @@ export default [
     display: {
       zh: "突擊",
       en: "Assault",
-      jp: ""
+      jp: "アサルト"
     },
     "cost": 15,
     "effect": {
@@ -204,7 +204,7 @@ export default [
     display: {
       zh: "高級突擊",
       en: "High Assault",
-      jp: ""
+      jp: "ハイアサルト"
     },
     "cost": 35,
     "effect": {
@@ -219,7 +219,7 @@ export default [
     display: {
       zh: "高速",
       en: "Speeder",
-      jp: ""
+      jp: "スピーダー"
     },
     "cost": 15,
     "effect": {
@@ -233,7 +233,7 @@ export default [
     display: {
       zh: "高級高速",
       en: "High Speeder",
-      jp: ""
+      jp: "ハイスピーダー"
     },
     "cost": 35,
     "effect": {
@@ -248,7 +248,7 @@ export default [
     display: {
       zh: "體質能源",
       en: "Tough",
-      jp: ""
+      jp: "スタミナ"
     },
     "cost": 5,
     "effect": {
@@ -261,7 +261,7 @@ export default [
     display: {
       zh: "高級體質能源",
       en: "High Tough",
-      jp: ""
+      jp: "ハイスタミナ"
     },
     "cost": 15,
     "effect": {
@@ -274,7 +274,7 @@ export default [
     display: {
       zh: "高級體質能源α",
       en: "High Tough Alpha",
-      jp: ""
+      jp: "ハイスタミナα"
     },
     "cost": 10,
     "effect": {
@@ -288,7 +288,7 @@ export default [
     display: {
       zh: "高級體質能源β",
       en: "High Tough Beta",
-      jp: ""
+      jp: "ハイスタミナβ"
     },
     "cost": 10,
     "effect": {
@@ -302,7 +302,7 @@ export default [
     display: {
       zh: "高級體質能源γ",
       en: "High Tough Gamma",
-      jp: ""
+      jp: "ハイスタミナγ"
     },
     "cost": 5,
     "effect": {
@@ -317,7 +317,7 @@ export default [
     display: {
       zh: "頂級體質能源",
       en: "Great Tough",
-      jp: ""
+      jp: "グレートスタミナ"
     },
     "cost": 30,
     "effect": {
@@ -330,7 +330,7 @@ export default [
     display: {
       zh: "頂級體質能源α",
       en: "Great Tough Alpha",
-      jp: ""
+      jp: "グレートスタミナα"
     },
     "cost": 20,
     "effect": {
@@ -345,7 +345,7 @@ export default [
     display: {
       zh: "頂級體質能源β",
       en: "Great Tough Beta",
-      jp: ""
+      jp: "グレートスタミナβ"
     },
     "cost": 10,
     "effect": {
@@ -363,7 +363,7 @@ export default [
     display: {
       zh: "力之能源",
       en: "Power",
-      jp: ""
+      jp: "パワー"
     },
     "cost": 5,
     "effect": {
@@ -376,7 +376,7 @@ export default [
     display: {
       zh: "高級力之能源",
       en: "High Power",
-      jp: ""
+      jp: "ハイパワー"
     },
     "cost": 15,
     "effect": {
@@ -389,7 +389,7 @@ export default [
     display: {
       zh: "高級力之能源α",
       en: "High Power Alpha",
-      jp: ""
+      jp: "ハイパワーα"
     },
     "cost": 10,
     "effect": {
@@ -403,7 +403,7 @@ export default [
     display: {
       zh: "高級力之能源β",
       en: "High Power Beta",
-      jp: ""
+      jp: "ハイパワーβ"
     },
     "cost": 5,
     "effect": {
@@ -418,7 +418,7 @@ export default [
     display: {
       zh: "高級力之能源γ",
       en: "High Power Gamma",
-      jp: ""
+      jp: "ハイパワーγ"
     },
     "cost": 5,
     "effect": {
@@ -433,7 +433,7 @@ export default [
     display: {
       zh: "頂級力之能源",
       en: "Great Power",
-      jp: ""
+      jp: "グレートパワー"
     },
     "cost": 30,
     "effect": {
@@ -446,7 +446,7 @@ export default [
     display: {
       zh: "頂級力之能源α",
       en: "Great Power Alpha",
-      jp: ""
+      jp: "グレートパワーα"
     },
     "cost": 20,
     "effect": {
@@ -461,7 +461,7 @@ export default [
     display: {
       zh: "頂級力之能源β",
       en: "Great Power Beta",
-      jp: ""
+      jp: "グレートパワーβ"
     },
     "cost": 20,
     "effect": {
@@ -476,7 +476,7 @@ export default [
     display: {
       zh: "頂級力之能源γ",
       en: "Great Power Gamma",
-      jp: ""
+      jp: "グレートパワーγ"
     },
     "cost": 10,
     "effect": {
@@ -494,7 +494,7 @@ export default [
     display: {
       zh: "技之能源",
       en: "Technique",
-      jp: ""
+      jp: "テク"
     },
     "cost": 5,
     "effect": {
@@ -507,7 +507,7 @@ export default [
     display: {
       zh: "高級技之能源",
       en: "Great Technique",
-      jp: ""
+      jp: "ハイテク"
     },
     "cost": 15,
     "effect": {
@@ -520,7 +520,7 @@ export default [
     display: {
       zh: "高級技之能源α",
       en: "Great Technique Alpha",
-      jp: ""
+      jp: "ハイテクα"
     },
     "cost": 10,
     "effect": {
@@ -534,7 +534,7 @@ export default [
     display: {
       zh: "高級技之能源β",
       en: "High Technique Beta",
-      jp: ""
+      jp: "ハイテクβ"
     },
     "cost": 5,
     "effect": {
@@ -549,7 +549,7 @@ export default [
     display: {
       zh: "高級技之能源γ",
       en: "High Technique Gamma",
-      jp: ""
+      jp: "ハイテクγ"
     },
     "cost": 5,
     "effect": {
@@ -564,7 +564,7 @@ export default [
     display: {
       zh: "頂級技之能源",
       en: "Great Technique",
-      jp: ""
+      jp: "グレートテク"
     },
     "cost": 30,
     "effect": {
@@ -577,7 +577,7 @@ export default [
     display: {
       zh: "頂級技之能源α",
       en: "Great Technique Alpha",
-      jp: ""
+      jp: "グレートテクα"
     },
     "cost": 20,
     "effect": {
@@ -592,7 +592,7 @@ export default [
     display: {
       zh: "頂級技之能源β",
       en: "Great Technique Beta",
-      jp: ""
+      jp: "グレートテクβ"
     },
     "cost": 20,
     "effect": {
@@ -607,7 +607,7 @@ export default [
     display: {
       zh: "頂級技之能源γ",
       en: "Great Technique Gamma",
-      jp: ""
+      jp: "グレートテクγ"
     },
     "cost": 10,
     "effect": {
@@ -625,7 +625,7 @@ export default [
     display: {
       zh: "動之能源",
       en: "Run",
-      jp: ""
+      jp: "ラン"
     },
     "cost": 5,
     "effect": {
@@ -638,7 +638,7 @@ export default [
     display: {
       zh: "高級動之能源",
       en: "High Run",
-      jp: ""
+      jp: "ハイラン"
     },
     "cost": 15,
     "effect": {
@@ -651,7 +651,7 @@ export default [
     display: {
       zh: "高級動之能源α",
       en: "High Run Alpha",
-      jp: ""
+      jp: "ハイランα"
     },
     "cost": 10,
     "effect": {
@@ -665,7 +665,7 @@ export default [
     display: {
       zh: "高級動之能源β",
       en: "High Run Beta",
-      jp: ""
+      jp: "ハイランβ"
     },
     "cost": 5,
     "effect": {
@@ -680,7 +680,7 @@ export default [
     display: {
       zh: "高級動之能源γ",
       en: "High Run Gamma",
-      jp: ""
+      jp: "ハイランγ"
     },
     "cost": 5,
     "effect": {
@@ -695,7 +695,7 @@ export default [
     display: {
       zh: "頂級動之能源",
       en: "Great Run",
-      jp: ""
+      jp: "グレートラン"
     },
     "cost": 30,
     "effect": {
@@ -708,7 +708,7 @@ export default [
     display: {
       zh: "頂級動之能源α",
       en: "Great Run Alpha",
-      jp: ""
+      jp: "グレートランα"
     },
     "cost": 20,
     "effect": {
@@ -723,7 +723,7 @@ export default [
     display: {
       zh: "頂級動之能源β",
       en: "Great Run Beta",
-      jp: ""
+      jp: "グレートランβ"
     },
     "cost": 20,
     "effect": {
@@ -738,7 +738,7 @@ export default [
     display: {
       zh: "頂級動之能源γ",
       en: "Great Run Gamma",
-      jp: ""
+      jp: "グレートランγ"
     },
     "cost": 10,
     "effect": {
@@ -756,7 +756,7 @@ export default [
     display: {
       zh: "飛行能源",
       en: "Boost",
-      jp: ""
+      jp: "ブースト"
     },
     "cost": 5,
     "effect": {
@@ -769,7 +769,7 @@ export default [
     display: {
       zh: "高級飛行能源",
       en: "High Boost",
-      jp: ""
+      jp: "ハイブースト"
     },
     "cost": 15,
     "effect": {
@@ -782,7 +782,7 @@ export default [
     display: {
       zh: "高級飛行能源α",
       en: "High Boost Alpha",
-      jp: ""
+      jp: "ハイブーストα"
     },
     "cost": 10,
     "effect": {
@@ -796,7 +796,7 @@ export default [
     display: {
       zh: "高級飛行能源β",
       en: "High Boost Beta",
-      jp: ""
+      jp: "ハイブーストβ"
     },
     "cost": 5,
     "effect": {
@@ -811,7 +811,7 @@ export default [
     display: {
       zh: "高級飛行能源γ",
       en: "High Boost Gamma",
-      jp: ""
+      jp: "ハイブーストγ"
     },
     "cost": 5,
     "effect": {
@@ -826,7 +826,7 @@ export default [
     display: {
       zh: "頂級飛行能源",
       en: "Great Boost",
-      jp: ""
+      jp: "グレートブースト"
     },
     "cost": 30,
     "effect": {
@@ -839,7 +839,7 @@ export default [
     display: {
       zh: "頂級飛行能源α",
       en: "Great Boost Alpha",
-      jp: ""
+      jp: "グレートブーストα"
     },
     "cost": 20,
     "effect": {
@@ -854,7 +854,7 @@ export default [
     display: {
       zh: "頂級飛行能源β",
       en: "Great Boost Beta",
-      jp: ""
+      jp: "グレートブーストβ"
     },
     "cost": 20,
     "effect": {
@@ -869,7 +869,7 @@ export default [
     display: {
       zh: "頂級飛行能源γ",
       en: "Great Boost Gamma",
-      jp: ""
+      jp: "グレートブーストγ"
     },
     "cost": 10,
     "effect": {
@@ -887,7 +887,7 @@ export default [
     display: {
       zh: "永恆之光",
       en: "Eternal",
-      jp: ""
+      jp: "エターナル"
     },
     "cost": 5,
     "effect": {}
@@ -898,7 +898,7 @@ export default [
     display: {
       zh: "高等永恆之光",
       en: "High Eternal",
-      jp: ""
+      jp: "ハイエターナル"
     },
     "cost": 15,
     "effect": {
@@ -912,7 +912,7 @@ export default [
     display: {
       zh: "強力",
       en: "Force",
-      jp: ""
+      jp: "フォース"
     },
     "cost": 10,
     "effect": {},
@@ -931,7 +931,7 @@ export default [
     display: {
       zh: "高級強力",
       en: "High Force",
-      jp: ""
+      jp: "ハイフォース"
     },
     "cost": 25,
     "effect": {},
@@ -950,7 +950,7 @@ export default [
     display: {
       zh: "高級強力α",
       en: "High Force Alpha",
-      jp: ""
+      jp: "ハイフォースα"
     },
     "cost": 20,
     "effect": {},
@@ -971,7 +971,7 @@ export default [
     display: {
       zh: "高級強力β",
       en: "High Force Beta",
-      jp: ""
+      jp: "ハイフォースβ"
     },
     "cost": 20,
     "effect": {},
@@ -992,7 +992,7 @@ export default [
     display: {
       zh: "高級強力γ",
       en: "High Force Gamma",
-      jp: ""
+      jp: "ハイフォースγ"
     },
     "cost": 20,
     "effect": {},
@@ -1013,7 +1013,7 @@ export default [
     display: {
       zh: "頂級強力",
       en: "Great Force",
-      jp: ""
+      jp: "グレートフォース"
     },
     "cost": 40,
     "effect": {},
@@ -1032,7 +1032,7 @@ export default [
     display: {
       zh: "頂級強力α",
       en: "Great Force Alpha",
-      jp: ""
+      jp: "グレートフォースα"
     },
     "cost": 30,
     "effect": {},
@@ -1053,7 +1053,7 @@ export default [
     display: {
       zh: "頂級強力β",
       en: "Great Force Beta",
-      jp: ""
+      jp: "グレートフォースβ"
     },
     "cost": 30,
     "effect": {},
@@ -1074,7 +1074,7 @@ export default [
     display: {
       zh: "頂級強力γ",
       en: "Great Force Gamma",
-      jp: ""
+      jp: "グレートフォースγ"
     },
     "cost": 30,
     "effect": {},
@@ -1096,7 +1096,7 @@ export default [
     display: {
       zh: "射程",
       en: "Reach",
-      jp: ""
+      jp: "リーチ"
     },
     "cost": 5,
     "effect": {},
@@ -1115,7 +1115,7 @@ export default [
     display: {
       zh: "高級射程",
       en: "High Reach",
-      jp: ""
+      jp: "ハイリーチ"
     },
     "cost": 15,
     "effect": {},
@@ -1134,7 +1134,7 @@ export default [
     display: {
       zh: "高級射程α",
       en: "High Reach Alpha",
-      jp: ""
+      jp: "ハイリーチα"
     },
     "cost": 10,
     "effect": {},
@@ -1155,7 +1155,7 @@ export default [
     display: {
       zh: "高級射程β",
       en: "High Reach Beta",
-      jp: ""
+      jp: "ハイリーチβ"
     },
     "cost": 10,
     "effect": {},
@@ -1176,7 +1176,7 @@ export default [
     display: {
       zh: "頂級射程",
       en: "Great Reach",
-      jp: ""
+      jp: "グレートリーチ"
     },
     "cost": 30,
     "effect": {},
@@ -1195,7 +1195,7 @@ export default [
     display: {
       zh: "頂級射程α",
       en: "Great Reach Alpha",
-      jp: ""
+      jp: "グレートリーチα"
     },
     "cost": 20,
     "effect": {},
@@ -1216,7 +1216,7 @@ export default [
     display: {
       zh: "頂級射程β",
       en: "Great Reach Beta",
-      jp: ""
+      jp: "グレートリーチβ"
     },
     "cost": 20,
     "effect": {},
@@ -1238,7 +1238,7 @@ export default [
     display: {
       zh: "疾速",
       en: "Rapid",
-      jp: ""
+      jp: "ラピッド"
     },
     "cost": 5,
     "effect": {},
@@ -1257,7 +1257,7 @@ export default [
     display: {
       zh: "高級疾速",
       en: "High Rapid",
-      jp: ""
+      jp: "ハイラピッド"
     },
     "cost": 15,
     "effect": {},
@@ -1276,7 +1276,7 @@ export default [
     display: {
       zh: "高級疾速α",
       en: "High Rapid Alpha",
-      jp: ""
+      jp: "ハイラピッドα"
     },
     "cost": 10,
     "effect": {},
@@ -1297,7 +1297,7 @@ export default [
     display: {
       zh: "高級疾速β",
       en: "High Rapid Beta",
-      jp: ""
+      jp: "ハイラピッドβ"
     },
     "cost": 10,
     "effect": {},
@@ -1318,7 +1318,7 @@ export default [
     display: {
       zh: "頂級疾速",
       en: "Great Rapid",
-      jp: ""
+      jp: "グレートラピッド"
     },
     "cost": 30,
     "effect": {},
@@ -1337,7 +1337,7 @@ export default [
     display: {
       zh: "頂級疾速α",
       en: "Great Rapid Alpha",
-      jp: ""
+      jp: "グレートラピッドα"
     },
     "cost": 20,
     "effect": {},
@@ -1358,7 +1358,7 @@ export default [
     display: {
       zh: "頂級疾速β",
       en: "Great Rapid Beta",
-      jp: ""
+      jp: "グレートラピッドβ"
     },
     "cost": 20,
     "effect": {},
@@ -1380,7 +1380,7 @@ export default [
     display: {
       zh: "補給",
       en: "Supply",
-      jp: ""
+      jp: "サプライ"
     },
     "cost": 5,
     "effect": {},
@@ -1399,7 +1399,7 @@ export default [
     display: {
       zh: "高級補給",
       en: "High Supply",
-      jp: ""
+      jp: "ハイサプライ"
     },
     "cost": 15,
     "effect": {},
@@ -1418,7 +1418,7 @@ export default [
     display: {
       zh: "高級補給α",
       en: "High Supply Alpha",
-      jp: ""
+      jp: "ハイサプライα"
     },
     "cost": 10,
     "effect": {},
@@ -1439,7 +1439,7 @@ export default [
     display: {
       zh: "高級補給β",
       en: "High Supply Beta",
-      jp: ""
+      jp: "ハイサプライβ"
     },
     "cost": 10,
     "effect": {},
@@ -1460,7 +1460,7 @@ export default [
     display: {
       zh: "頂級補給",
       en: "Great Supply",
-      jp: ""
+      jp: "グレートサプライ"
     },
     "cost": 30,
     "effect": {},
@@ -1479,7 +1479,7 @@ export default [
     display: {
       zh: "頂級補給α",
       en: "Great Supply Alpha",
-      jp: ""
+      jp: "グレートサプライα"
     },
     "cost": 20,
     "effect": {},
@@ -1500,7 +1500,7 @@ export default [
     display: {
       zh: "頂級補給β",
       en: "Great Supply Beta",
-      jp: ""
+      jp: "グレートサプライβ"
     },
     "cost": 20,
     "effect": {},
@@ -1522,7 +1522,7 @@ export default [
     display: {
       zh: "空戰",
       en: "Air Force",
-      jp: ""
+      jp: "エアフォース"
     },
     "cost": 20,
     "effect": {},
@@ -1543,7 +1543,7 @@ export default [
     display: {
       zh: "高級空戰",
       en: "High Air Force",
-      jp: ""
+      jp: "ハイエアフォース"
     },
     "cost": 45,
     "effect": {},
@@ -1565,7 +1565,7 @@ export default [
     display: {
       zh: "射手",
       en: "Shooter",
-      jp: ""
+      jp: "シューター"
     },
     "cost": 20,
     "effect": {},
@@ -1586,7 +1586,7 @@ export default [
     display: {
       zh: "高級射手",
       en: "High Shooter",
-      jp: ""
+      jp: "ハイシューター"
     },
     "cost": 45,
     "effect": {},
@@ -1608,7 +1608,7 @@ export default [
     display: {
       zh: "麻痺",
       en: "Paralyze",
-      jp: ""
+      jp: "パラライズ"
     },
     "cost": 25,
     "effect": {}
@@ -1620,7 +1620,7 @@ export default [
     display: {
       zh: "劍鬥士",
       en: "Gladiator",
-      jp: ""
+      jp: "グラディエーター"
     },
     "cost": 20,
     "effect": {},
@@ -1641,7 +1641,7 @@ export default [
     display: {
       zh: "高級劍鬥士",
       en: "High Gladiator",
-      jp: ""
+      jp: "ハイグラディエーター"
     },
     "cost": 45,
     "effect": {},
@@ -1663,7 +1663,7 @@ export default [
     display: {
       zh: "格鬥家",
       en: "Grappler",
-      jp: ""
+      jp: "グラップラー"
     },
     "cost": 10,
     "effect": {},
@@ -1682,7 +1682,7 @@ export default [
     display: {
       zh: "高級格鬥家",
       en: "High Grappler",
-      jp: ""
+      jp: "ハイグラップラー"
     },
     "cost": 25,
     "effect": {},
@@ -1701,7 +1701,7 @@ export default [
     display: {
       zh: "高級格鬥家α",
       en: "High Grappler Alpha",
-      jp: ""
+      jp: "ハイグラップラーα"
     },
     "cost": 20,
     "effect": {},
@@ -1722,7 +1722,7 @@ export default [
     display: {
       zh: "頂級格鬥家",
       en: "Great Grappler",
-      jp: ""
+      jp: "グレートグラップラー"
     },
     "cost": 40,
     "effect": {},
@@ -1741,7 +1741,7 @@ export default [
     display: {
       zh: "頂級格鬥家α",
       en: "Great Grappler Alpha",
-      jp: ""
+      jp: "グレートグラップラーα"
     },
     "cost": 30,
     "effect": {},

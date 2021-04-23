@@ -8,7 +8,10 @@
     <div class="ml-2 mr-2">
       <b-row no-gutters>
         <b-col>
-          <small><a href="javascript:void(0)" @click="modalShow = true;">{{latestVersion}}</a></small>
+          <small><a href="javascript:void(0)" @click="modalShow = true;"><i class="fas fa-code-branch"></i> {{latestVersion}}</a></small>
+        </b-col>
+        <b-col style="text-align: center">
+          <small><a href="javascript:void(0)" @click="creditModal = true;"><i class="fas fa-user-friends"></i> {{$t('credit')}}</a></small>
         </b-col>
         <b-col style="text-align: right">
           <small class="mr-2">Powered by 天虹@BRD</small>
@@ -33,6 +36,16 @@
           </li>
         </ul>
       </div>
+    </b-modal>
+    <b-modal v-model="creditModal" hide-footer :title="$t('credit')">
+      <ul>
+        <li>Japanese Translation: <a href="https://steamcommunity.com/id/halkeye777" target="_blank">halkeye-7</a></li>
+        <li>Suggestions from:</li>
+        <ul>
+          <li><a href="https://github.com/wcqiter/cb-build-simulator/issues?q=is%3Aissue+author%3AHC307" target="_blank">HC307</a></li>
+          <li><a href="https://github.com/wcqiter/cb-build-simulator/issues?q=is%3Aissue+author%3Areihunter360" target="_blank">reihunter360</a></li>
+        </ul>
+      </ul>
     </b-modal>
     <b-modal v-model="langModal" hide-footer hide-header no-close-on-backdrop no-close-on-esc>
       <div class="text-center">
@@ -78,6 +91,7 @@ export default {
     return {
       modalShow: false,
       langModal: false,
+      creditModal: false,
     }
   },
   computed: {

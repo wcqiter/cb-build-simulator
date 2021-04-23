@@ -346,7 +346,7 @@ export default [
     display: {
       zh: "水中步行",
       en: "Aqua Walk",
-      jp: "アクアウォーキング"
+      jp: "アクアウォーク"
     },
     effect: {
       lnd: {
@@ -746,7 +746,7 @@ export default [
     display: {
       zh: "必殺回復",
       en: "Growing Wonder",
-      jp: "Growing Wonder"
+      jp: "グローイングワンダー"
     },
     effect: {
       msc: {

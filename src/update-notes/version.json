@@ -1,5 +1,16 @@
 [
   {
+    "date": "2021/4/23",
+    "version": "v1.4.4",
+    "content": [
+      {
+        "zh": "完善日文翻譯，感謝halkeye-7",
+        "en": "Improve Japanese translation, credit to halkeye-7",
+        "jp": "日本語の翻訳を改善する、halkeye-7のクレジット"
+      }
+    ]
+  },
+  {
     "date": "2021/4/22",
     "version": "v1.4.3",
     "content": [

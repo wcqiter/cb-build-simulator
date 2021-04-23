@@ -227,7 +227,7 @@
                     <td class="text-center">{{$t('cat.slot')}}</td>
                     <td class="text-center">{{partsStat['modNo']}} / {{partsStat['slot']}}</td>
                   </tr>
-                  <tr v-for="(key, i) in basicStatKeys" :key="i" :class="partsStat[key] > 40 || partsStat[key] <= 0 ? 'over-cost' : ''">
+                  <tr v-for="(key, i) in basicStatKeys" :key="i" :class="key !== 'hp' && (partsStat[key] > 40 || partsStat[key] <= 0 )? 'over-cost' : ''">
                     <td class="text-center">{{$t('cat.' + key, key)}}</td>
                     <td class="text-center">{{partsStat[key]}}</td>
                   </tr>
