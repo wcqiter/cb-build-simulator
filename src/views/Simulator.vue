@@ -947,11 +947,12 @@ export default {
           let tmp = '';
           vars.forEach(function(v){
             tmp = v.split('=');
-            if(tmp.length == 2)
-            getVars[tmp[0]] = tmp[1];
+            var key = tmp.shift();
+            getVars[key] = tmp.join('=');
           });
           hasLinkData = true;
           data = getVars['build'];
+          console.log(getVars)
           decoded = JSON.parse(decodeURIComponent(window.atob(data)));
           this.onLoadData(decoded);
           window.localStorage.setItem('cb-build-' + decoded.id, JSON.stringify(decoded));
