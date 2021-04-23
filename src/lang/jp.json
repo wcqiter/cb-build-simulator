@@ -64,5 +64,9 @@
     "errorCopy": "クリップボードにコピーするときにエラーが発生しました。",
     "loaded": "{name} ロード済み。"
   },
-  "simpleMode": "Hide not used parts"
+  "simpleMode": "Hide not used parts",
+  "share": {
+    "title": "CBU 構成",
+    "description": "ビルドをシミュレートします、是非チェックしてください！"
+  }
 }

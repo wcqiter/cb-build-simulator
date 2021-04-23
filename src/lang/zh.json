@@ -64,5 +64,9 @@
     "errorCopy": "複製時出現錯誤。",
     "loaded": "已載入配置{name}。"
   },
-  "simpleMode": "隱藏沒有使用的零件"
+  "simpleMode": "隱藏沒有使用的零件",
+  "share": {
+    "title": "CBU 機體模擬",
+    "description": "我在CBU模擬器上模擬了一個機體，來看看吧！"
+  }
 }

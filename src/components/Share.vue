@@ -40,6 +40,7 @@
       :url="link"
       :title="title"
       class="mr-1"
+      hashtags="CBUNI"
       >
       <i class="fab fa-twitter"></i>
     </ShareNetwork>
@@ -68,11 +69,11 @@ export default {
     },
     title: {
       type: String,
-      default: "CBU Simulator Build"
+      default: this.$t('share.title')
     },
     description: {
       type: String,
-      default: ""
+      default: this.$t('share.description')
     }
   },
   data: function() {
