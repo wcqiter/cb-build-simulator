@@ -1,24 +1,28 @@
 <template>
   <div v-if="ready">
-    <b-navbar type="dark" variant="secondary">
+    <b-navbar toggleable="lg" type="dark" variant="secondary">
       <b-navbar-brand href="#">CBU Simulator</b-navbar-brand>
-      <b-navbar-nav v-if="storageUsed">
-        <b-nav-item 
-          v-for="(t, i) in tabs"
-          :key="'tab-' + i"
-          href="#" 
-          @click="onClickTab(t.id)"
-          :active="tab === t.id"
-          >
-          {{t.name}}
-        </b-nav-item>
-        <b-nav-item 
-          href="#" 
-          @click="onAddTab"
-          >
-          <i class="fa fa-plus" />
-        </b-nav-item>
-      </b-navbar-nav>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav v-if="storageUsed">
+          <b-nav-item 
+            v-for="(t, i) in tabs"
+            :key="'tab-' + i"
+            href="#" 
+            @click="onClickTab(t.id)"
+            :active="tab === t.id"
+            >
+            {{t.name}}
+          </b-nav-item>
+          <b-nav-item 
+            href="#" 
+            @click="onAddTab"
+            >
+            <i class="fa fa-plus" />
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
       <b-navbar-nav class="ml-auto">
 
         <b-nav-item-dropdown right>
