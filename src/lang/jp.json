@@ -60,8 +60,9 @@
   "toast": {
     "noLocalStorage": "お使いのブラウザはLocalStorageをサポートしておらず、ビルドを保存できません。",
     "saved": "保存されたビルド。",
-    "copied": "クリップボードにコピー",
-    "errorCopy": "クリップボードにコピーするときにエラーが発生しました"
+    "copied": "クリップボードにコピー。",
+    "errorCopy": "クリップボードにコピーするときにエラーが発生しました。",
+    "loaded": "{name} ロード済み。"
   },
   "simpleMode": "Hide not used parts"
 }

@@ -60,8 +60,9 @@
   "toast": {
     "noLocalStorage": "你的瀏覽器不支持LocalStorage，無法儲存配置。",
     "saved": "已儲存配置。",
-    "copied": "已複製鏈接",
-    "errorCopy": "複製時出現錯誤"
+    "copied": "已複製鏈接。",
+    "errorCopy": "複製時出現錯誤。",
+    "loaded": "已載入配置{name}。"
   },
   "simpleMode": "隱藏沒有使用的零件"
 }

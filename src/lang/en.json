@@ -60,8 +60,9 @@
   "toast": {
     "noLocalStorage": "Your browser does not support LocalStorage, cannot save build.",
     "saved": "Build Saved.",
-    "copied": "Copied to clipboard",
-    "errorCopy": "Error occurred when copy to clipboard"
+    "copied": "Copied to clipboard.",
+    "errorCopy": "Error occurred when copy to clipboard.",
+    "loaded": "Loaded build {name}."
   },
   "simpleMode": "Hide not used parts"
 }

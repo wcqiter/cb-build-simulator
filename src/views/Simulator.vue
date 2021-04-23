@@ -940,23 +940,20 @@ export default {
         
         var hasLinkData = false;
         var data, index, decoded;
-        let getVars = {};
-        let uri = window.location.href.split('?');
-        if (uri.length == 2) {
-          let vars = uri[1].split('&');
-          let tmp = '';
-          vars.forEach(function(v){
-            tmp = v.split('=');
-            var key = tmp.shift();
-            getVars[key] = tmp.join('=');
-          });
+        if(Object.prototype.hasOwnProperty.call(this.$route.query, 'build')) {
+          data = this.$route.query.build;
           hasLinkData = true;
-          data = getVars['build'];
-          console.log(getVars)
           decoded = JSON.parse(decodeURIComponent(window.atob(data)));
           this.onLoadData(decoded);
           window.localStorage.setItem('cb-build-' + decoded.id, JSON.stringify(decoded));
           console.log('Found build ' + decoded.name + ' from url');
+          
+          this.$bvToast.toast(this.$t('toast.loaded', { name: decoded.name }), {
+            variant: 'success',
+            solid: true,
+            "auto-hide-delay": 1000,
+            toaster: 'b-toaster-bottom-right'
+          })
         }
         if(keys.length > 0) {
           this.tabs = keys.map(key => {
@@ -1015,6 +1012,12 @@ export default {
             this.tabs = [{ id: uid, name: "New Build 1"}];
             this.tab = this.tabs[0].id;
           }
+        }
+        if(hasLinkData) {
+          var query = Object.assign({}, this.$route.query);
+          delete query.build;
+          this.$router.replace({ query })
+          console.log("Removed query string in url.");
         }
         
       } else {
@@ -1162,7 +1165,7 @@ export default {
           parts: this.parts
         }))
         this.$bvToast.toast(this.$t('toast.saved'), {
-          variant: 'primary',
+          variant: 'success',
           solid: true,
           "auto-hide-delay": 1000,
           toaster: 'b-toaster-bottom-right'

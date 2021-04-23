@@ -2,7 +2,7 @@
   <div id="app" style="height: 100vh; display: flex; flex-direction: column;">
     <div style="flex: 1">
       <div class="app-content">
-        <Simulator />
+        <router-view />
       </div>
     </div>
     <div class="ml-2 mr-2">
@@ -67,13 +67,12 @@
 import { common } from '@/mixins/common.js'
 
 import version from '@/update-notes/version.json'
-import Simulator from '@/views/Simulator.vue'
 
 export default {
   name: 'App',
   mixins: [common],
   components: {
-    Simulator,
+    
   },
   data: function() {
     return {
