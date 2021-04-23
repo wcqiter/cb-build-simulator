@@ -69,11 +69,11 @@ export default {
     },
     title: {
       type: String,
-      default: this.$t('share.title')
+      default: ''
     },
     description: {
       type: String,
-      default: this.$t('share.description')
+      default: ''
     }
   },
   data: function() {

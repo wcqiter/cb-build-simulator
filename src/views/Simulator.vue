@@ -71,7 +71,12 @@
               <div>
                 <b-form-group>
                   <template v-slot:label>
-                    <Share :link="exportLink" class="pull-right" />
+                    <Share 
+                      :link="exportLink" 
+                      class="pull-right"
+                      :title="$t('share.title')"
+                      :description="$t('share.description')"
+                      />
                     {{$t('exportLink')}}
                   </template>
                   <b-form-textarea
