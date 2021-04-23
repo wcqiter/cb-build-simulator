@@ -1013,12 +1013,12 @@ export default {
             this.tab = this.tabs[0].id;
           }
         }
-        if(hasLinkData) {
+        /*if(hasLinkData) {
           var query = Object.assign({}, this.$route.query);
           delete query.build;
           this.$router.replace({ query })
           console.log("Removed query string in url.");
-        }
+        }*/
         
       } else {
         this.storageUsed = false;
