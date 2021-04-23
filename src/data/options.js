@@ -188,8 +188,8 @@ export default [
     "cat": ["str", "tec"],
     "name": "突擊",
     display: {
-      zh: "遊俠",
-      en: "",
+      zh: "突擊",
+      en: "Assault",
       jp: ""
     },
     "cost": 15,
@@ -202,8 +202,8 @@ export default [
     "cat": ["str", "tec"],
     "name": "高級突擊",
     display: {
-      zh: "遊俠",
-      en: "",
+      zh: "高級突擊",
+      en: "High Assault",
       jp: ""
     },
     "cost": 35,
@@ -217,8 +217,8 @@ export default [
     "cat": ["wlk", "fly"],
     "name": "高速",
     display: {
-      zh: "遊俠",
-      en: "",
+      zh: "高速",
+      en: "Speeder",
       jp: ""
     },
     "cost": 15,
@@ -231,8 +231,8 @@ export default [
     "cat": ["wlk", "fly"],
     "name": "高級高速",
     display: {
-      zh: "遊俠",
-      en: "",
+      zh: "高級高速",
+      en: "High Speeder",
       jp: ""
     },
     "cost": 35,

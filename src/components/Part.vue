@@ -372,14 +372,14 @@ export default {
           if(!Object.prototype.hasOwnProperty.call(stat, 'cost')) {
             stat['cost'] = 0;
           }
+          if(Object.prototype.hasOwnProperty.call(modObj, 'cost')) {
+            stat['cost'] += modObj.cost;
+          }
           Object.keys(modObj.effect).forEach(key => {
             if(!Object.prototype.hasOwnProperty.call(stat, key)) {
               stat[key] = 0;
             }
             stat[key] += modObj.effect[key];
-            if(Object.prototype.hasOwnProperty.call(modObj, 'cost')) {
-              stat['cost'] += modObj.cost;
-            }
           })
         }
       })
