@@ -21,8 +21,7 @@ Vue.use(BootstrapVue)
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: Simulator },
-  { path: '', component: Simulator },
+  { path: '*', component: Simulator },
 ]
 
 const router = new VueRouter({
