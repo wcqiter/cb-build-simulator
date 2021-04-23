@@ -38,7 +38,6 @@
             {{item.text}}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-
       </b-navbar-nav>
     </b-navbar>
     <div class="whole-panel">
@@ -70,9 +69,11 @@
                 </b-form-group>
               </div>
               <div>
-                <b-form-group
-                  :label="$t('exportLink')"
-                  >
+                <b-form-group>
+                  <template v-slot:label>
+                    <Share :link="exportLink" class="pull-right" />
+                    {{$t('exportLink')}}
+                  </template>
                   <b-form-textarea
                     @focus="onFocusExportLink"
                     :value="exportLink"
@@ -534,12 +535,14 @@ import defaultPart from '@/data/part.json'
 import { common } from '@/mixins/common.js'
 
 import Part from '@/components/Part.vue'
+import Share from '@/components/Share.vue'
 
 export default {
   name: 'Simulator',
   mixins: [common],
   components: {
     Part,
+    Share,
   },
   data: function() {
     return {
