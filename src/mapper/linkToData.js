@@ -48,7 +48,7 @@ export default function parse(str) {
     cardsExcept: [],
     extraCardsExcept: [],
     parts: deepCopy(defaultPart)
-  }, deepCopy(JSON.parse(window.atob(str))));
+  }, deepCopy(JSON.parse(decodeURIComponent(window.atob(str)))));
   var statArray = data.stat;
   var stat = {};
   

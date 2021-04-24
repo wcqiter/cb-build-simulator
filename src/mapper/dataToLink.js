@@ -90,7 +90,6 @@ export default function parse(data) {
     }
   }
    
-  var str = window.btoa(JSON.stringify(data));
-  //var str = JSON.stringify(data);
+  var str = window.btoa(encodeURIComponent(JSON.stringify(data)));
   return str;
 }
