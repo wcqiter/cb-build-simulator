@@ -1,5 +1,16 @@
 [
   {
+    "date": "2021/4/24",
+    "version": "v1.4.5",
+    "content": [
+      {
+        "zh": "減少分享配置鏈接的長度",
+        "en": "Shorten share link length",
+        "jp": "共有リンクの長さを短くする"
+      }
+    ]
+  },
+  {
     "date": "2021/4/23",
     "version": "v1.4.4",
     "content": [

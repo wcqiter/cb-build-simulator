@@ -1,13 +1,11 @@
 {
   "type": "",
   "uid": "",
-  "required": true,
-  "root": true,
-  "name": "",
   "mod": [],
   "stat": {},
   "children": [],
   "tag": [],
+  "slot": 0,
   "main": {
     "force": 0,
     "ammo": 0,

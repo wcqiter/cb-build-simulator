@@ -537,6 +537,9 @@ import defaultModData from '@/data/mod.json'
 import defaultStat from '@/data/stat.json'
 import defaultPart from '@/data/part.json'
 
+import dataToLink from '@/mapper/dataToLink.js'
+import linkToData from '@/mapper/linkToData.js'
+
 import { common } from '@/mixins/common.js'
 
 import Part from '@/components/Part.vue'
@@ -602,7 +605,7 @@ export default {
       return process.env.VUE_APP_BASE_URL;
     },
     exportLink() {
-      var data = JSON.stringify({
+      var data = {
         stat: Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(this.defaultStat)),
         mod: this.mod,
         name: this.tabs[this.findTabIndexById(this.tab)].name,
@@ -616,9 +619,8 @@ export default {
         cardsExcept: this.cardsExcept,
         extraCardsExcept: this.extraCardsExcept,
         parts: this.parts
-      });
-      var encoded = btoa(encodeURIComponent(data));
-      return this.baseUrl + '?build=' + encoded;
+      };
+      return this.baseUrl + '?build=' + dataToLink(data);
     },
     cat() {
       return cat;
@@ -955,7 +957,7 @@ export default {
         if(Object.prototype.hasOwnProperty.call(this.$route.query, 'build')) {
           data = this.$route.query.build;
           hasLinkData = true;
-          decoded = JSON.parse(decodeURIComponent(window.atob(data)));
+          decoded = linkToData(data);
           this.onLoadData(decoded);
           window.localStorage.setItem('cb-build-' + decoded.id, JSON.stringify(decoded));
           console.log('Found build ' + decoded.name + ' from url');
@@ -1103,13 +1105,6 @@ export default {
     },
     onDeleteMod(index) {
       this.mod.splice(index, 1);
-    },
-    
-    onAddPart(parent = null) {
-      var data = this.deepCopy(defaultPart);
-      data['uid'] = this.uuid();
-      data['parent'] = parent;
-      this.parts.splice(this.parts.length, 0, data);
     },
     
     findOptionByName(name) {
