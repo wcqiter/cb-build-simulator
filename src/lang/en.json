@@ -69,5 +69,7 @@
     "title": "CBU Build",
     "description": "I simulate a build on CBU Simulator, come and check!"
   },
-  "credit": "Credit and Contribution"
+  "credit": "Credit and Contribution",
+  "translation": "Japanese Translation: ",
+  "suggestion": "Suggestions: "
 }

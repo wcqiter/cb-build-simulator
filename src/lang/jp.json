@@ -69,5 +69,7 @@
     "title": "CBU 機体構成",
     "description": "ビルドをシミュレートします、是非チェックしてください！"
   },
-  "credit": "クレジットと貢献者"
+  "credit": "クレジットと貢献者",
+  "translation": "日本語翻訳：",
+  "suggestion": "提案："
 }

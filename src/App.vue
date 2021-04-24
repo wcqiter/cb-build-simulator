@@ -39,8 +39,8 @@
     </b-modal>
     <b-modal v-model="creditModal" hide-footer :title="$t('credit')">
       <ul>
-        <li>Japanese Translation: <a href="https://steamcommunity.com/id/halkeye777" target="_blank">halkeye-7</a></li>
-        <li>Suggestions from:</li>
+        <li>{{$t('translation')}}<a href="https://steamcommunity.com/id/halkeye777" target="_blank">halkeye-7</a></li>
+        <li>{{$t('suggestion')}}</li>
         <ul>
           <li><a href="https://github.com/wcqiter/cb-build-simulator/issues?q=is%3Aissue+author%3AHC307" target="_blank">HC307</a></li>
           <li><a href="https://github.com/wcqiter/cb-build-simulator/issues?q=is%3Aissue+author%3Areihunter360" target="_blank">reihunter360</a></li>
