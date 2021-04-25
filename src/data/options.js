@@ -506,7 +506,7 @@ export default [
     "name": "高級技之能源",
     display: {
       zh: "高級技之能源",
-      en: "Great Technique",
+      en: "High Technique",
       jp: "ハイテク"
     },
     "cost": 15,
@@ -519,7 +519,7 @@ export default [
     "name": "高級技之能源α",
     display: {
       zh: "高級技之能源α",
-      en: "Great Technique Alpha",
+      en: "High Technique Alpha",
       jp: "ハイテクα"
     },
     "cost": 10,
