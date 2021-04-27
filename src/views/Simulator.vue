@@ -361,7 +361,7 @@
                     </b-button>
                   </div>
                   <b-checkbox
-                    v-if="!data.partsUsed"
+                    v-if="!defaultStat.partsUsed"
                     class="ml-2"
                     v-model="weaponCardsExcept[i - 1]"
                     :value="true"
@@ -393,7 +393,7 @@
                     </b-button>
                   </div>
                   <b-checkbox
-                    v-if="!data.partsUsed"
+                    v-if="!defaultStat.partsUsed"
                     class="ml-2"
                     v-model="weaponCardsExcept[i - 1]"
                     :value="true"
@@ -425,7 +425,7 @@
                     </b-button>
                   </div>
                   <b-checkbox
-                    v-if="!data.partsUsed"
+                    v-if="!defaultStat.partsUsed"
                     class="ml-2"
                     v-model="cardsExcept"
                     :value="card.name"
@@ -456,7 +456,7 @@
                     </b-button>
                   </div>
                   <b-checkbox
-                    v-if="!data.partsUsed"
+                    v-if="!defaultStat.partsUsed"
                     class="ml-2"
                     v-model="cardsExcept"
                     :value="card.name"
@@ -487,7 +487,7 @@
                     </b-button>
                   </div>
                   <b-checkbox
-                    v-if="!data.partsUsed"
+                    v-if="!defaultStat.partsUsed"
                     class="ml-2"
                     v-model="cardsExcept"
                     :value="card.name"
@@ -517,7 +517,7 @@
                     </b-button>
                   </div>
                   <b-checkbox
-                    v-if="!data.partsUsed"
+                    v-if="!defaultStat.partsUsed"
                     class="ml-2"
                     v-model="extraCardsExcept"
                     :value="card.name"
