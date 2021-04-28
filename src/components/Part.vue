@@ -111,7 +111,7 @@
               class="text-center"
               :class="Math.round(mainStat[key]) > data.main[key] ? 'buff' : (Math.round(mainStat[key]) < data.main[key] ? 'debuff' : '')"
               >
-              {{Math.round(mainStat[key])}}
+              {{mainStat[key]}}
             </td>
           </tr>
         </table>
@@ -161,7 +161,7 @@
               class="text-center"
               :class="Math.round(subStat[key]) > data.sub[key] ? 'buff' : (Math.round(subStat[key]) < data.sub[key] ? 'debuff' : '')"
               >
-              {{Math.round(subStat[key])}}
+              {{subStat[key]}}
             </td>
           </tr>
         </table>
@@ -398,7 +398,7 @@ export default {
           if(modObj.cat.includes('main')) {
             if(Object.prototype.hasOwnProperty.call(modObj, 'weaponStat') && Object.prototype.hasOwnProperty.call(modObj.weaponStat, 'effect')) {
               Object.keys(modObj.weaponStat.effect).forEach(statKey => {
-                stat[statKey] = stat[statKey] + this.data.main[statKey] * modObj.weaponStat.effect[statKey];
+                stat[statKey] = stat[statKey] + Math.ceil(this.data.main[statKey] * modObj.weaponStat.effect[statKey]);
               })
             }
           }
@@ -414,7 +414,7 @@ export default {
           if(modObj.cat.includes('sub')) {
             if(Object.prototype.hasOwnProperty.call(modObj, 'weaponStat') && Object.prototype.hasOwnProperty.call(modObj.weaponStat, 'effect')) {
               Object.keys(modObj.weaponStat.effect).forEach(statKey => {
-                stat[statKey] = stat[statKey] + this.data.sub[statKey] * modObj.weaponStat.effect[statKey];
+                stat[statKey] = stat[statKey] + Math.ceil(this.data.sub[statKey] * modObj.weaponStat.effect[statKey]);
               })
             }
           }

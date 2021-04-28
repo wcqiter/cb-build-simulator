@@ -1,5 +1,16 @@
 [
   {
+    "date": "2021/4/28",
+    "version": "v1.4.6",
+    "content": [
+      {
+        "zh": "修復主要武器強化數值錯誤",
+        "en": "Fix calculation of tuning of main weapon",
+        "jp": "メインウェポンのチューニングの計算を修正"
+      }
+    ]
+  },
+  {
     "date": "2021/4/24",
     "version": "v1.4.5",
     "content": [
