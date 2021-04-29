@@ -921,7 +921,7 @@ export default [
         force: "+3%"
       },
       effect: {
-        force: 1.03
+        force: 0.03
       }
     }
   },

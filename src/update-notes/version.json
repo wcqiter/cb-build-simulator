@@ -1,5 +1,16 @@
 [
   {
+    "date": "2021/4/29",
+    "version": "v1.4.6-rev1",
+    "content": [
+      {
+        "zh": "修復【強力】強化數值錯誤，感謝千飛（巴哈）提醒",
+        "en": "Fix [Force] tuning statistics, thanks to 千飛 on 巴哈",
+        "jp": "フォースのチューニングの計算を修正，千飛（巴哈）感謝します"
+      }
+    ]
+  },
+  {
     "date": "2021/4/28",
     "version": "v1.4.6",
     "content": [
