@@ -71,12 +71,6 @@
               <div>
                 <b-form-group>
                   <template v-slot:label>
-                    <Share 
-                      :link="exportLink" 
-                      class="pull-right"
-                      :title="$t('share.title')"
-                      :description="$t('share.description')"
-                      />
                     {{$t('exportLink')}}
                   </template>
                   <b-form-textarea
@@ -92,11 +86,6 @@
                   >
                   <i class="fa fa-save" /> {{$t('save')}}
                 </b-button>
-                <!--
-                <b-button variant="success" class="ml-2" @click.stop.prevent="onExportAsTxt()">
-                  <i class="fa fa-download" /> 儲存為TXT文件
-                </b-button>
-                !-->
                 <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(findTabIndexById(tab))" v-if="tabs.length > 1">
                   <i class="fa fa-trash" /> {{$t('delete')}}
                 </b-button>
@@ -244,14 +233,21 @@
                   >
                   {{$t('partsUsed')}}
                 </b-checkbox>
-                <b-checkbox
-                  class="pull-right"
-                  v-model="simpleMode"
-                  >
-                  {{$t('simpleMode')}}
-                </b-checkbox>
-                <div class="clearfix" />
                 <div v-if="defaultStat.partsUsed">
+                  <b-button
+                    class="pull-right mr-2"
+                    @click="onClearMod"
+                    size="sm"
+                    variant="danger"
+                    >
+                    <i class="fa fa-trash" /> {{$t('clearMod')}}
+                  </b-button>
+                  <b-checkbox
+                    v-model="simpleMode"
+                    >
+                    {{$t('simpleMode')}}
+                  </b-checkbox>
+                  <div class="clearfix" />
                   <Part v-model="parts" :simpleMode="simpleMode"/>
                 </div>
                 <div v-else>
@@ -548,15 +544,15 @@ import linkToData from '@/mapper/linkToData.js'
 
 import { common } from '@/mixins/common.js'
 
+import eventBus from '@/event-bus/main.js'
+
 import Part from '@/components/Part.vue'
-import Share from '@/components/Share.vue'
 
 export default {
   name: 'Simulator',
   mixins: [common],
   components: {
     Part,
-    Share,
   },
   data: function() {
     return {
@@ -1242,6 +1238,9 @@ export default {
       } else {
         this.extraCards.splice(this.extraCards.length, 0, name);
       }
+    },
+    onClearMod() {
+      eventBus.$emit('onClearMod');
     },
     
     onExportAsTxt() {

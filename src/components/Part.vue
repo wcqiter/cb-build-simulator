@@ -10,7 +10,7 @@
           v-if="data.root !== true"
           @click="onClickDelete"
           >
-          <i class="fa fa-trash" />
+          <i class="fa fa-minus-square" />
         </b-button>
         <small>
           {{statDisplay}}
@@ -26,6 +26,13 @@
           >
           
         </div>
+        <b-button
+          @click="onClearMod"
+          size="sm"
+          variant="transparent"
+          >
+          <i class="fa fa-trash" />
+        </b-button>
       </div>
       <div v-if="editing">
         <table border="1" width="100%">
@@ -251,6 +258,8 @@ import parts from '@/data/parts.js'
 import options from '@/data/options.js'
 import cat from '@/data/cat.js'
 
+import eventBus from '@/event-bus/main.js'
+
 export default {
   name: 'Part',
   mixins: [common],
@@ -424,6 +433,12 @@ export default {
     },
   },
   methods: {
+    initEvent() {
+      eventBus.$on('onClearMod', this.onClearMod);
+    },
+    onClearMod() {
+      this.data.mod = [];
+    },
     onClickNode() {
       this.editing = !this.editing;
     },
@@ -517,7 +532,10 @@ export default {
         return null;
       }
     },
-  }
+  },
+  mounted() {
+    this.initEvent();
+  },
 }
 </script>
 

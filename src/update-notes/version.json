@@ -1,6 +1,17 @@
 [
   {
     "date": "2021/4/29",
+    "version": "v1.4.7",
+    "content": [
+      {
+        "zh": "添加移除強化按鍵",
+        "en": "Add remove tuning button",
+        "jp": "チューンを外すのボタン追加"
+      }
+    ]
+  },
+  {
+    "date": "2021/4/29",
     "version": "v1.4.6-rev1",
     "content": [
       {
