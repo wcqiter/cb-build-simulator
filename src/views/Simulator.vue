@@ -234,20 +234,21 @@
                   {{$t('partsUsed')}}
                 </b-checkbox>
                 <div v-if="defaultStat.partsUsed">
-                  <b-button
-                    class="pull-right mr-2"
-                    @click="onClearMod"
-                    size="sm"
-                    variant="danger"
-                    >
-                    <i class="fa fa-trash" /> {{$t('clearMod')}}
-                  </b-button>
-                  <b-checkbox
-                    v-model="simpleMode"
-                    >
-                    {{$t('simpleMode')}}
-                  </b-checkbox>
-                  <div class="clearfix" />
+                  <div class="display-flex">
+                    <b-checkbox
+                      class="flex-item"
+                      v-model="simpleMode"
+                      >
+                      {{$t('simpleMode')}}
+                    </b-checkbox>
+                    <b-button
+                      @click="onClearMod"
+                      size="sm"
+                      variant="danger"
+                      >
+                      <i class="fa fa-trash" /> {{$t('clearMod')}}
+                    </b-button>
+                  </div>
                   <Part v-model="parts" :simpleMode="simpleMode"/>
                 </div>
                 <div v-else>
