@@ -6,6 +6,7 @@
   "remarks": "備註",
   "info": "機體基本資料",
   "type": {
+    "display": "類別",
     "lnd": "陸",
     "air": "空",
     "art": "炮",
@@ -34,6 +35,7 @@
     "main": "主武器",
     "sub": "副武器"
   },
+  "summary": "配置總結",
   "showStatDetails": "顯示詳細",
   "hideStatDetails": "隱藏詳細",
   "capaType": "戰力卡類別",

@@ -83,11 +83,15 @@
                 <b-button
                   @click="onSave"
                   variant="primary"
+                  class="mb-2"
                   >
                   <i class="fa fa-save" /> {{$t('save')}}
                 </b-button>
-                <b-button variant="danger" class="ml-2" @click.stop.prevent="onDeleteTab(findTabIndexById(tab))" v-if="tabs.length > 1">
+                <b-button variant="danger" class="ml-2 mb-2" @click.stop.prevent="onDeleteTab(findTabIndexById(tab))" v-if="tabs.length > 1">
                   <i class="fa fa-trash" /> {{$t('delete')}}
+                </b-button>
+                <b-button variant="success" class="ml-2 mb-2" @click.stop.prevent="modalSummary = true">
+                  <i class="fa fa-file-alt" /> {{$t('summary')}}
                 </b-button>
               </div>
             </b-card>
@@ -228,11 +232,13 @@
             <div>
               <b-card>
                 <h5 class="mb-2">{{$t('mod')}}</h5>
+                <!--
                 <b-checkbox 
                   v-model="defaultStat.partsUsed"
                   >
                   {{$t('partsUsed')}}
                 </b-checkbox>
+                !-->
                 <div v-if="defaultStat.partsUsed">
                   <div class="display-flex">
                     <b-checkbox
@@ -526,6 +532,39 @@
         </b-row>
       </b-container>
     </div>
+    <b-modal size="xl" v-model="modalSummary" hide-footer :title="tabs[findTabIndexById(tab)].name">
+      <b-row>
+        <div class="col-md-4">
+          <div>{{$t('type.display')}}: {{typeOptions.find(t => t.value === defaultStat.type).text}}</div>
+          <br />
+          <div v-if="defaultStat.partsUsed">
+            {{$t('cat.cost')}}/{{$t('cat.capa')}}: {{partsStat['cost']}} / {{partsStat['capa']}}
+            <div v-for="(key, i) in basicStatKeys" :key="i">
+              {{$t('cat.' + key, key)}}: {{partsStat[key]}}
+            </div>
+          </div>
+          <div v-else>
+          
+          </div>
+          <br />
+          <div v-if="capaCards.filter(c => c === true).length > 0">
+            {{cardOptions.find(t => t.type === 'capa').display[$i18n.locale()]}} × {{capaCards.filter(c => c === true).length}}
+          </div>
+          <div v-if="defaultStat.weaponUsed && weaponCards.filter(c => c === true).length">
+            {{cardOptions.find(t => t.type === 'weapon').display[$i18n.locale()]}} × {{weaponCards.filter(c => c === true).length}}
+          </div>
+          <div v-for="(card, index) in cards" :key="index">
+            {{cardOptions.find(t => t.type !== 'extra-move' && t.name === card).display[$i18n.locale()]}}
+          </div>
+          <div v-for="(card, index) in extraCards" :key="index">
+            {{cardOptions.find(t => t.type === 'extra-move' && t.name === card).display[$i18n.locale()]}}
+          </div>
+        </div>
+        <div class="col-md-8">
+          <SimplePart v-model="parts" :simpleMode="true" v-if="defaultStat.partsUsed"/>
+        </div>
+      </b-row>
+    </b-modal>
   </div>
 </template>
 
@@ -548,12 +587,14 @@ import { common } from '@/mixins/common.js'
 import eventBus from '@/event-bus/main.js'
 
 import Part from '@/components/Part.vue'
+import SimplePart from '@/components/SimplePart.vue'
 
 export default {
   name: 'Simulator',
   mixins: [common],
   components: {
     Part,
+    SimplePart,
   },
   data: function() {
     return {
@@ -576,6 +617,7 @@ export default {
       
       hideStatDetails: false,
       simpleMode: false,
+      modalSummary: false,
     }
   },
   watch: {

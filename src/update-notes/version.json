@@ -1,5 +1,16 @@
 [
   {
+    "date": "2021/5/7",
+    "version": "v1.4.8",
+    "content": [
+      {
+        "zh": "添加配置總結",
+        "en": "Add build summary",
+        "jp": "構成概要追加"
+      }
+    ]
+  },
+  {
     "date": "2021/4/29",
     "version": "v1.4.7",
     "content": [

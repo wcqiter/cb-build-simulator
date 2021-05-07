@@ -6,6 +6,7 @@
   "remarks": "Remarks",
   "info": "Build Information",
   "type": {
+    "display": "Type",
     "lnd": "Land",
     "air": "Air",
     "art": "Art",
@@ -34,6 +35,7 @@
     "main": "Main Weapon",
     "sub": "Sub Weapon"
   },
+  "summary": "Build Summary",
   "showStatDetails": "Show Details",
   "hideStatDetails": "Hide Details",
   "capaType": "Capacity Cartridge Type",

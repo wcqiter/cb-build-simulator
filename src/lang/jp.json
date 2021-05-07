@@ -6,6 +6,7 @@
   "remarks": "備考",
   "info": "基本情報",
   "type": {
+    "display": "タイプ",
     "lnd": "陸",
     "air": "空",
     "art": "砲",
@@ -34,6 +35,7 @@
     "main": "メインウェポン",
     "sub": "サブウェポン"
   },
+  "summary": "構成概要を表示",
   "showStatDetails": "詳細を表示",
   "hideStatDetails": "詳細を非表示",
   "capaType": "キャパカートリッジの種類",
