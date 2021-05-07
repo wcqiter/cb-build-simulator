@@ -497,7 +497,7 @@
                   :key="'card-' + i"
                   class="display-flex"
                   >
-                  <div class="flex-item mb-2" v-if="isLevelMaxed ? extraCards.includes(card.name) : true">
+                  <div class="flex-item mb-2" v-if="extraCards.length > 0 ? extraCards.includes(card.name) : true">
                     <b-button
                       size="sm"
                       class="mr-1 mb-1 card-all"
