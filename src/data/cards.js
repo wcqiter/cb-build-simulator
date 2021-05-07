@@ -85,6 +85,11 @@ export default [
         cost: 35,
         capa: 70,
         hp: 15
+      },
+      type5: {
+        cost: 30,
+        capa: 70,
+        hp: 15
       }
     },
     effectKey: 'weaponType',

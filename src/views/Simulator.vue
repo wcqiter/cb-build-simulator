@@ -334,13 +334,13 @@
                 <small>{{$t('exceptCard')}}</small>
               </div>
               <div class="clearfix" />
-              <div class="mb-2">
+              <div>
                 <div
                   v-for="i in findCardByType('capa').num"
                   :key="'capa-' + i"
                   class="display-flex"
                   >
-                  <div class="flex-item">
+                  <div class="flex-item mb-2" v-if="isLevelMaxed ? capaCards[i - 1] : true">
                     <b-button
                       size="sm"
                       class="mr-1 mb-1 card-all"
@@ -366,13 +366,13 @@
                     />
                 </div>
               </div>
-              <div v-if="defaultStat.weaponUsed" class="mb-2">
+              <div v-if="defaultStat.weaponUsed">
                 <div
                   v-for="i in findCardByType('weapon').num"
                   :key="'weapon-' + i"
                   class="display-flex"
                   >
-                  <div class="flex-item">
+                  <div class="flex-item mb-2" v-if="isLevelMaxed ? weaponCards[i - 1] : true">
                     <b-button
                       size="sm"
                       class="mr-1 mb-1 card-all"
@@ -398,13 +398,13 @@
                     />
                 </div>
               </div>
-              <div class="mb-2">
+              <div>
                 <div
                   v-for="(card, i) in defenseCardOptions"
                   :key="'card-' + i"
                   class="display-flex"
                   >
-                  <div class="flex-item">
+                  <div class="flex-item mb-2" v-if="isLevelMaxed ? cards.includes(card.name) : true">
                     <b-button
                       size="sm"
                       class="mr-1 mb-1 card-all"
@@ -429,13 +429,13 @@
                     />
                 </div>
               </div>
-              <div class="mb-2">
+              <div>
                 <div
                   v-for="(card, i) in moveCardOptions"
                   :key="'card-' + i"
                   class="display-flex"
                   >
-                  <div class="flex-item">
+                  <div class="flex-item mb-2" v-if="isLevelMaxed ? cards.includes(card.name) : true">
                     <b-button
                       size="sm"
                       class="mr-1 mb-1 card-all"
@@ -460,13 +460,13 @@
                     />
                 </div>
               </div>
-              <div class="mb-2">
+              <div>
                 <div
                   v-for="(card, i) in otherCardOptions"
                   :key="'card-' + i"
                   class="display-flex"
                   >
-                  <div class="flex-item">
+                  <div class="flex-item mb-2" v-if="isLevelMaxed ? cards.includes(card.name) : true">
                     <b-button
                       size="sm"
                       class="mr-1 mb-1 card-all"
@@ -491,13 +491,13 @@
                     />
                 </div>
               </div>
-              <div class="mb-2">
+              <div>
                 <div
                   v-for="(card, i) in extraMoveCardOptions"
                   :key="'card-' + i"
                   class="display-flex"
                   >
-                  <div class="flex-item">
+                  <div class="flex-item mb-2" v-if="isLevelMaxed ? extraCards.includes(card.name) : true">
                     <b-button
                       size="sm"
                       class="mr-1 mb-1 card-all"
