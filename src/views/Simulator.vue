@@ -1393,7 +1393,7 @@ export default {
       part.children.forEach(child => {
         var childStat = this.recursiveStat(child);
         Object.keys(childStat).forEach(statKey => {
-          if(typeof data[statKey] === 'undefined') {
+          if(!Number.isInteger(data[statKey])) {
             data[statKey] = 0;
           }
           data[statKey] = data[statKey] + childStat[statKey];

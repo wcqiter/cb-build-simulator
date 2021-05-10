@@ -1,5 +1,21 @@
 [
   {
+    "date": "2021/5/10",
+    "version": "v1.4.9",
+    "content": [
+      {
+        "zh": "更正武器強化計算的數值，基於 github 議題 #15, #16, #18",
+        "en": "Fixed weapons tunes calculation based on github issue #15, #16, #18",
+        "jp": "githubの問題（#15, #16, #18）に基づく武器の調整の計算を修正しました"
+      },
+      {
+        "zh": "更正當輸入空白時顯示數值的問題，基於 github 議題 #14",
+        "en": "Fixed Display Bug On Stat Configuration (Github Issue #14)",
+        "jp": "統計設定の表示バグを修正しました（githubの問題 #14）"
+      }
+    ]
+  },
+  {
     "date": "2021/5/7",
     "version": "v1.4.8",
     "content": [

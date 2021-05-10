@@ -375,6 +375,11 @@ export default {
     },
     statDisplay() {
       var stat = this.deepCopy(this.data.stat);
+      Object.keys(stat).forEach(key => {
+        if(!Number.isInteger(stat[key])) {
+          stat[key] = 0;
+        }
+      })
       this.data.mod.forEach(mod => {
         var modObj = this.findModByName(mod);
         if(modObj) {
@@ -388,7 +393,9 @@ export default {
             if(!Object.prototype.hasOwnProperty.call(stat, key)) {
               stat[key] = 0;
             }
-            stat[key] += modObj.effect[key];
+            if(Number.isInteger(modObj.effect[key])) {
+              stat[key] += modObj.effect[key];
+            }
           })
         }
       })
@@ -401,33 +408,47 @@ export default {
     },
     mainStat() {
       var stat = this.deepCopy(this.data.main);
+      var weaponStat = {};
       this.data.mod.forEach(mod => {
         var modObj = this.findModByName(mod);
         if(modObj) {
           if(modObj.cat.includes('main')) {
             if(Object.prototype.hasOwnProperty.call(modObj, 'weaponStat') && Object.prototype.hasOwnProperty.call(modObj.weaponStat, 'effect')) {
               Object.keys(modObj.weaponStat.effect).forEach(statKey => {
-                stat[statKey] = stat[statKey] + Math.ceil(this.data.main[statKey] * modObj.weaponStat.effect[statKey]);
+                if(!Object.prototype.hasOwnProperty.call(weaponStat, statKey)) {
+                  weaponStat[statKey] = 0;
+                }
+                weaponStat[statKey] += modObj.weaponStat.effect[statKey]
               })
             }
           }
         }
       })
+      Object.keys(weaponStat).forEach(statKey => {
+        stat[statKey] = Math.ceil(stat[statKey] + this.data.main[statKey] * weaponStat[statKey]);
+      })
       return stat;
     },
     subStat() {
       var stat = this.deepCopy(this.data.sub);
+      var weaponStat = {};
       this.data.mod.forEach(mod => {
         var modObj = this.findModByName(mod);
         if(modObj) {
           if(modObj.cat.includes('sub')) {
             if(Object.prototype.hasOwnProperty.call(modObj, 'weaponStat') && Object.prototype.hasOwnProperty.call(modObj.weaponStat, 'effect')) {
               Object.keys(modObj.weaponStat.effect).forEach(statKey => {
-                stat[statKey] = stat[statKey] + Math.ceil(this.data.sub[statKey] * modObj.weaponStat.effect[statKey]);
+                if(!Object.prototype.hasOwnProperty.call(weaponStat, statKey)) {
+                  weaponStat[statKey] = 0;
+                }
+                weaponStat[statKey] += modObj.weaponStat.effect[statKey]
               })
             }
           }
         }
+      })
+      Object.keys(weaponStat).forEach(statKey => {
+        stat[statKey] = Math.ceil(stat[statKey] + this.data.sub[statKey] * weaponStat[statKey]);
       })
       return stat;
     },

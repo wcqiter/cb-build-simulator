@@ -1039,11 +1039,11 @@ export default [
     weaponStat: {
       display: {
         force: "+9%",
-        speed: "-10%"
+        ammo: "-10%"
       },
       effect: {
         force: 0.09,
-        speed: -0.10
+        ammo: -0.10
       }
     }
   },
