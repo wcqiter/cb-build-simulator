@@ -64,7 +64,8 @@
     "saved": "已儲存配置。",
     "copied": "已複製鏈接。",
     "errorCopy": "複製時出現錯誤。",
-    "loaded": "已載入配置{name}。"
+    "loaded": "已載入配置{name}。",
+    "cannotApplyQuickTune": "無法在此零件套用已選擇的強化項目。"
   },
   "simpleMode": "隱藏沒有使用的零件",
   "share": {

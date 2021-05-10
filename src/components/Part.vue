@@ -489,7 +489,36 @@ export default {
     },
     onClickMod(index) {
       if(this.quickTune !== '') {
-        this.data.mod.splice(index, 1, this.quickTune);
+        var mod = this.findModByName(this.quickTune);
+        if(mod) {
+          if(mod.cat.includes('other') && this.findPartByType(this.data.type).exceptCat.includes('other')) {
+            this.$bvToast.toast(this.$t('toast.cannotApplyQuickTune'), {
+              variant: 'danger',
+              solid: true,
+              "auto-hide-delay": 1000,
+              toaster: 'b-toaster-bottom-right'
+            })
+          } else if(mod.cat.includes('main') && !this.data.tag.includes('main')) {
+            this.$bvToast.toast(this.$t('toast.cannotApplyQuickTune'), {
+              variant: 'danger',
+              solid: true,
+              "auto-hide-delay": 1000,
+              toaster: 'b-toaster-bottom-right'
+            })
+          } else if(mod.cat.includes('sub') && !this.data.tag.includes('sub')) {
+            this.$bvToast.toast(this.$t('toast.cannotApplyQuickTune'), {
+              variant: 'danger',
+              solid: true,
+              "auto-hide-delay": 1000,
+              toaster: 'b-toaster-bottom-right'
+            })
+          } else {
+            this.data.mod.splice(index, 1, this.quickTune);
+          }
+        } else {
+          this.modIndex = index;
+          this.modalMod = true;
+        }
       } else {
         this.modIndex = index;
         this.modalMod = true;

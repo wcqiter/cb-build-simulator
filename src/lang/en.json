@@ -64,7 +64,8 @@
     "saved": "Build Saved.",
     "copied": "Copied to clipboard.",
     "errorCopy": "Error occurred when copy to clipboard.",
-    "loaded": "Loaded build {name}."
+    "loaded": "Loaded build {name}.",
+    "cannotApplyQuickTune": "Cannot apply selected tuning on this part."
   },
   "simpleMode": "Hide not used parts",
   "share": {

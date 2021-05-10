@@ -64,7 +64,8 @@
     "saved": "ビルドを保存しました！",
     "copied": "クリップボードにコピーしました！",
     "errorCopy": "クリップボードにコピーする際にエラーが発生しました",
-    "loaded": "{name} ロード済み。"
+    "loaded": "{name} ロード済み。",
+    "cannotApplyQuickTune": "この部分に選択したチューニングを適用することはできません。"
   },
   "simpleMode": "つかわないパーツを隠す",
   "share": {
