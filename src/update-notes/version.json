@@ -1,6 +1,17 @@
 [
   {
     "date": "2021/5/10",
+    "version": "v1.5.0",
+    "content": [
+      {
+        "zh": "快速強化，基於 github 議題 #17",
+        "en": "Quick tuning feature based on github issue #17",
+        "jp": "githubの問題＃17に基づくクイックチューニング機能"
+      }
+    ]
+  },
+  {
+    "date": "2021/5/10",
     "version": "v1.4.9",
     "content": [
       {

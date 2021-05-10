@@ -229,9 +229,29 @@
             </b-card>
           </div>
           <div class="col-md-5 content-panel">
+            <div class="mb-4">
+              <b-card>
+                <b-button
+                  class="pull-right" 
+                  v-b-tooltip.hover 
+                  :title="$t('quickTuning.des')"
+                  variant="link"
+                  >
+                  <i class="fa fa-info-circle" />
+                </b-button>
+                <h5 class="mb-2">{{$t('quickTuning.title')}}</h5>
+                <QuickTune v-model="quickTune" />
+              </b-card>
+            </div>
             <div>
               <b-card>
+                <div class="pull-right">
+                  <b v-if="quickTune !== ''">
+                    {{$t('quickTuning.on')}}
+                  </b>
+                </div>
                 <h5 class="mb-2">{{$t('mod')}}</h5>
+                <div class="clearfix" />
                 <!--
                 <b-checkbox 
                   v-model="defaultStat.partsUsed"
@@ -255,7 +275,11 @@
                       <i class="fa fa-trash" /> {{$t('clearMod')}}
                     </b-button>
                   </div>
-                  <Part v-model="parts" :simpleMode="simpleMode"/>
+                  <Part 
+                    v-model="parts" 
+                    :simpleMode="simpleMode"
+                    :quickTune="quickTune"
+                    />
                 </div>
                 <div v-else>
                   <div class="mb-2 mt-2">
@@ -336,7 +360,7 @@
               </div>
               <h5 class="mb-2">{{$t('card')}}</h5>
               <div class="clearfix" />
-              <div class="pull-right">
+              <div class="pull-right" v-if="!defaultStat.partsUsed">
                 <small>{{$t('exceptCard')}}</small>
               </div>
               <div class="clearfix" />
@@ -588,6 +612,7 @@ import eventBus from '@/event-bus/main.js'
 
 import Part from '@/components/Part.vue'
 import SimplePart from '@/components/SimplePart.vue'
+import QuickTune from '@/components/QuickTune.vue'
 
 export default {
   name: 'Simulator',
@@ -595,6 +620,7 @@ export default {
   components: {
     Part,
     SimplePart,
+    QuickTune,
   },
   data: function() {
     return {
@@ -618,12 +644,15 @@ export default {
       hideStatDetails: false,
       simpleMode: false,
       modalSummary: false,
+      
+      quickTune: '',
     }
   },
   watch: {
     tab(newValue) {
       if(this.storageUsed) {
         this.ready = false;
+        this.quickTune = '';
         // Load newValue
         var storageData = window.localStorage.getItem('cb-build-' + newValue);
         if(storageData) {
@@ -1284,72 +1313,6 @@ export default {
     },
     onClearMod() {
       eventBus.$emit('onClearMod');
-    },
-    
-    onExportAsTxt() {
-      var content = '機體名稱：' + this.tabs[this.findTabIndexById(this.tab)].name + '\n';
-      
-      content += '=================================\n機體類別：';
-      var index = this.typeOptions.findIndex(t => t.value === this.defaultStat.type);
-      if(index != -1) {
-        content += this.typeOptions[index].text;
-      }
-      content += '\n機體等級：' + this.level + '/10\n';
-      
-      content += '\n戰力卡類別：';
-      index = this.capaTypeOptions.findIndex(t => t.value === this.defaultStat.capaType);
-      if(index != -1) {
-        content += this.capaTypeOptions[index].text;
-      }
-      
-      if(this.defaultStat.weaponUsed) {
-        content += '\n核心卡類別：';
-        index = this.weaponTypeOptions.findIndex(t => t.value === this.defaultStat.weaponType);
-        if(index != -1) {
-          content += this.weaponTypeOptions[index].text;
-        }
-        content += '\n';
-      }
-      content += '\n\n';
-      
-      var capaCardsCount = this.capaCards.filter(c => c === true).length;
-      var weaponCardsCount = this.weaponCards.filter(c => c === true).length;
-      content += '機體強化卡片\n=================================\n';
-      if(capaCardsCount > 0) {
-        content += this.findCardByType('capa').name + ' × ' + capaCardsCount + '\n';
-      }
-      if(this.defaultStat.weaponUsed) {
-        if(weaponCardsCount > 0) {
-          content += this.findCardByType('weapon').name + ' × ' + weaponCardsCount + '\n';
-        }
-      }
-      this.cards.forEach(card => {
-        content += this.findCardByName(card).name + '\n';
-      });
-      this.extraCards.forEach(card => {
-        content += this.findExtraCardByName(card).name + '（外置插卡）\n';
-      });
-      content += '\n\n';
-      
-      content += '機體數值\n=================================\n';
-      this.basicStatKeys.forEach(key => {
-        content += this.cat[key] + '：' + this.finalData[key] + '\n';
-      })
-      content += 'CAPA：' + (this.defaultStat['cost'] + this.deltaData['cost']) + '/' + (this.defaultStat['capa'] + this.deltaData['capa']) + '\n';
-      content += '\n\n';
-      
-      content += '機體強化項目\n=================================\n';
-      this.mod.forEach(m => {
-        content += m.key + ' × ' + m.num + '\n';
-      })
-      
-      var a = document.createElement("a");
-      var blob = new Blob([content], {type: "text/plain"}),
-        url = window.URL.createObjectURL(blob);
-      a.href = url;
-      a.download = this.tabs[this.findTabIndexById(this.tab)].name;
-      a.click();
-      window.URL.revokeObjectURL(url);
     },
     
     recursiveStat(part) {

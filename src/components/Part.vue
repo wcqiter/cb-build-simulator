@@ -194,6 +194,7 @@
             v-else
             @delete="onDelete(index)"
             :simpleMode="simpleMode"
+            :quickTune="quickTune"
             />
         </div>
       </div>
@@ -271,7 +272,11 @@ export default {
     simpleMode: {
       type: Boolean,
       default: false
-    }
+    },
+    quickTune: {
+      type: String,
+      default: ''
+    },
   },
   data: function() {
     return {
@@ -483,8 +488,12 @@ export default {
       this.data.children.splice(index, 1, this.deepCopy(defaultPart));
     },
     onClickMod(index) {
-      this.modIndex = index;
-      this.modalMod = true;
+      if(this.quickTune !== '') {
+        this.data.mod.splice(index, 1, this.quickTune);
+      } else {
+        this.modIndex = index;
+        this.modalMod = true;
+      }
     },
     onClickModOption(option) {
       this.modalMod = false;

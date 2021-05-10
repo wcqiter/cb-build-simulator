@@ -74,5 +74,12 @@
   "credit": "Credit and Contribution",
   "translation": "Japanese Translation: ",
   "suggestion": "Suggestions: ",
-  "clearMod": "Clear Tuning"
+  "clearMod": "Clear Tuning",
+  "quickTuning": {
+    "on": "Quick Tune is On",
+    "title": "Quick Tuning",
+    "select": "Selected tune: ",
+    "unselect": "Click on tune to unselect",
+    "des": "Quick Tuning is a feature that allow you select a tuning first, and then you can directly put this tuning in the slot without the need of duplicate selecting."
+  }
 }

@@ -74,5 +74,12 @@
   "credit": "參與人員",
   "translation": "日文翻譯：",
   "suggestion": "建議：",
-  "clearMod": "移除全部強化"
+  "clearMod": "移除全部強化",
+  "quickTuning": {
+    "on": "快速強化已啟用",
+    "title": "快速強化",
+    "select": "已選擇強化：",
+    "unselect": "再按一次以取消選擇",
+    "des": "快速強化是當你選擇了一個強化項目後，可以直接加進零件的SLOT中而不需要重新選擇強化項目。"
+  }
 }
