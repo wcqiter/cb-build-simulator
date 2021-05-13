@@ -81,6 +81,6 @@
     "title": "Quick Tuning",
     "select": "Selected tune: ",
     "unselect": "Click on tune to unselect",
-    "des": "Quick Tuning is a feature that allow you select a tuning first, and then you can directly put this tuning in the slot without the need of duplicate selecting."
+    "des": "Quick Tuning is a feature that allow you select a tuning first, and then you can directly put this tuning in the slot without the need for repeated selecting. With the Quick Tuning System you can quickly apply a single Tune Up to multiple slots. Select the Tune Up first and then click on any slot you want the tune up to be in."
   }
 }
