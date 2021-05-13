@@ -66,7 +66,7 @@ export default {
           var index = arr.findIndex(k => k.value === c);
           if(index === -1) {
             arr.push({
-              text: this.cat[c],
+              text: this.$t('cat.' + c),
               value: c
             })
           }
@@ -95,7 +95,7 @@ export default {
         }
         op.cat.forEach(cat => {
           obj[cat].push({
-            text: op.name + ' (' + arr.join(' ,') + ')',
+            text: op.display[this.$i18n.locale()] + ' (' + arr.join(' ,') + ')',
             value: op.name
           });
         })
