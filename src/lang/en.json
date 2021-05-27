@@ -2,6 +2,7 @@
   "lang": "Language",
   "save": "Save Build",
   "delete": "Delete Build",
+  "clone": "Clone Build",
   "name": "Build Name",
   "remarks": "Remarks",
   "info": "Build Information",

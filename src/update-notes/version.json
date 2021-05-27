@@ -1,5 +1,16 @@
 [
   {
+    "date": "2021/5/27",
+    "version": "v1.5.1",
+    "content": [
+      {
+        "zh": "添加複製配置",
+        "en": "Added Clone Build",
+        "jp": "構成のコピー追加"
+      }
+    ]
+  },
+  {
     "date": "2021/5/10",
     "version": "v1.5.0",
     "content": [

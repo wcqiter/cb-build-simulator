@@ -90,6 +90,9 @@
                 <b-button variant="danger" class="ml-2 mb-2" @click.stop.prevent="onDeleteTab(findTabIndexById(tab))" v-if="tabs.length > 1">
                   <i class="fa fa-trash" /> {{$t('delete')}}
                 </b-button>
+                <b-button variant="warning" class="ml-2 mb-2" @click.stop.prevent="onCloneBuild">
+                  <i class="fa fa-copy" /> {{$t('clone')}}
+                </b-button>
                 <b-button variant="success" class="ml-2 mb-2" @click.stop.prevent="modalSummary = true">
                   <i class="fa fa-file-alt" /> {{$t('summary')}}
                 </b-button>
@@ -1363,6 +1366,31 @@ export default {
         })
       });
       return data;
+    },
+    onCloneBuild() {
+      var id = this.uuid();
+      var data = {
+        stat: Object.assign({}, this.deepCopy(defaultStat), this.deepCopy(this.defaultStat)),
+        mod: this.mod,
+        name: this.tabs[this.findTabIndexById(this.tab)].name,
+        id: id,
+        capaCards: this.capaCards,
+        weaponCards: this.weaponCards,
+        cards: this.cards,
+        extraCards: this.extraCards,
+        capaCardsExcept: this.capaCardsExcept,
+        weaponCardsExcept: this.weaponCardsExcept,
+        cardsExcept: this.cardsExcept,
+        extraCardsExcept: this.extraCardsExcept,
+        parts: this.parts
+      }
+      window.localStorage.setItem('cb-build-' + id, JSON.stringify(data));
+      this.onLoadData(data);
+      this.tabs.splice(this.tabs.length, 0, {
+        id: id,
+        name: data.name
+      })
+      this.tab = id;
     },
   },
   mounted() {
