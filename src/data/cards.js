@@ -698,7 +698,7 @@ export default [
         cost: 15
       },
       msc: {
-        cost: 20
+        cost: 10
       }
     },
     effectKey: "type"
