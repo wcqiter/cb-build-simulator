@@ -21,6 +21,7 @@
           class="mod-slot ml-1"
           :class="(typeof data.mod[i - 1] === 'undefined' || data.mod[i - 1] === '') ? 'mod-slot-empty' : findModClass(data.mod[i - 1])"
           @click="onClickMod(i - 1)"
+          v-b-tooltip.hover :title="data.mod[i - 1]"
           >
           
         </div>
